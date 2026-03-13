@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="project_csharp_sgu.Views.ScannerPage"
+             Title="Scanner Page">
+
+
+    <VerticalStackLayout
+        Padding="20"
+        Spacing="20"
+        VerticalOptions="Center">
+
+        <Label
+            Text="Scan QR Code"
+            FontSize="28"
+            HorizontalOptions="Center"/>
+
+        <!-- Camera placeholder -->
+        <Border
+            HeightRequest="300"
+            WidthRequest="300"
+            BackgroundColor="Black"
+            HorizontalOptions="Center">
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20"/>
+            </Border.StrokeShape>
+
+        </Border>
+
+        <Label
+            Text="Point your camera at a QR code to hear narration."
+            HorizontalTextAlignment="Center"/>
+
+    </VerticalStackLayout>
+
+
+</ContentPage>

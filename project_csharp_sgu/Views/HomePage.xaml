@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="project_csharp_sgu.Views.HomePage"
+             Title="Home Page">
+
+    <ScrollView>
+
+        <VerticalStackLayout Padding="20"
+                             Spacing="20">
+
+            <Label
+                Text="Home Page"
+                FontSize="32"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"/>
+
+            <!-- Location card -->
+
+            <Border
+                BackgroundColor="#2E7D32"
+                Padding="20">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20"/>
+                </Border.StrokeShape>
+
+                <VerticalStackLayout>
+
+                    <Label
+                        Text="📍 Your Location"
+                        FontSize="18"
+                        TextColor="White"/>
+
+                    <Label
+                        x:Name="latLabel"
+                        Text="Latitude: --"
+                        TextColor="White"/>
+
+                    <Label
+                        x:Name="lngLabel"
+                        Text="Longitude: --"
+                        TextColor="White"/>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!-- Narration -->
+
+            <Border
+                BackgroundColor="#FF9800"
+                Padding="20">
+
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20"/>
+                </Border.StrokeShape>
+
+                <VerticalStackLayout>
+
+                    <Label
+                        Text="🎧 Current Narration"
+                        FontSize="18"
+                        TextColor="White"/>
+
+                    <Label
+                        Text="Waiting for nearby POI..."
+                        TextColor="White"/>
+
+                </VerticalStackLayout>
+
+            </Border>
+
+            <!-- Quick action -->
+<!-- 
+            <Button
+                Text="Scan QR Code"
+                HeightRequest="60"
+                BackgroundColor="#1976D2"
+                TextColor="White"
+                CornerRadius="15"/> -->
+
+        </VerticalStackLayout>
+
+    </ScrollView>
+
+</ContentPage>

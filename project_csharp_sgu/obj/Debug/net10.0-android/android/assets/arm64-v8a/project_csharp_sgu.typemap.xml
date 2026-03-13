@@ -1,0 +1,10 @@
+<api type="debug" assembly-name="project_csharp_sgu" mvid="343e09b77c2240589bac6270c31974aa">
+  <java-to-managed>
+    <entry java-name="crc640e15717cd9de2ffe/MainActivity" managed-name="project_csharp_sgu.MainActivity, project_csharp_sgu" managed-type-token-id="33554440" />
+    <entry java-name="crc640e15717cd9de2ffe/MainApplication" managed-name="project_csharp_sgu.MainApplication, project_csharp_sgu" managed-type-token-id="33554441" />
+  </java-to-managed>
+  <managed-to-java>
+    <entry java-name="crc640e15717cd9de2ffe/MainActivity" managed-name="project_csharp_sgu.MainActivity, project_csharp_sgu" managed-type-token-id="33554440" />
+    <entry java-name="crc640e15717cd9de2ffe/MainApplication" managed-name="project_csharp_sgu.MainApplication, project_csharp_sgu" managed-type-token-id="33554441" />
+  </managed-to-java>
+</api>
