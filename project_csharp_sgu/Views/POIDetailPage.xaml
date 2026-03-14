@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="project_csharp_sgu.Views.POIDetailPage"
+    Title="POI Details">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- Image -->
+            <Image 
+                x:Name="PoiImage"
+                HeightRequest="220"
+                Aspect="AspectFill"
+                BackgroundColor="#CCC"
+                />
+
+            <!-- Title -->
+            <Label 
+                x:Name="PoiTitle"
+                FontSize="26"
+                FontAttributes="Bold"/>
+
+            <!-- Description -->
+            <Label 
+                x:Name="PoiDescription"
+                FontSize="18"
+                TextColor="Gray"/>
+
+            <!-- Buttons -->
+            <Button 
+                Text="Nghe thuyết minh"
+                BackgroundColor="#2E7D32"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="50"
+                Clicked="PlayAudio"/>
+
+            <Button 
+                Text="Xem trên Google Maps"
+                BackgroundColor="#1565C0"
+                TextColor="White"
+                CornerRadius="10"
+                HeightRequest="50"
+                Clicked="OpenMap"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

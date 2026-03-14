@@ -4,25 +4,24 @@
              x:Class="project_csharp_sgu.Views.NearbyPage"
              Title="Nearby Page">
 
-    <CollectionView x:Name="nearbyCollection">
+    <CollectionView x:Name="nearbyCollection"
+                    SelectionMode="None">
 
         <CollectionView.EmptyView>
-
             <Label
                 Text="No nearby places yet"
                 HorizontalOptions="Center"
-                VerticalOptions="Center"/>
-
+                VerticalOptions="Center"
+                FontSize="18"/>
         </CollectionView.EmptyView>
 
         <CollectionView.ItemTemplate>
-
             <DataTemplate>
 
                 <Border
                     Margin="10"
                     Padding="15"
-                    BackgroundColor="#F5F5F5">
+                    BackgroundColor="pink">
 
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="15"/>
@@ -30,33 +29,34 @@
 
                     <Grid ColumnDefinitions="*,Auto">
 
+                        <!-- Info -->
                         <VerticalStackLayout>
 
                             <Label
-                                Text="{Binding Name}"
+                                Text="{Binding Title}"
                                 FontSize="18"
                                 FontAttributes="Bold"/>
 
                             <Label
-                                Text="{Binding Distance}"
+                                Text="{Binding DistanceText}"
                                 FontSize="14"
                                 TextColor="Gray"/>
-
                         </VerticalStackLayout>
 
+                        <!-- ACTION BUTTON -->
                         <Button
                             Grid.Column="1"
                             Text="Listen"
                             BackgroundColor="#2E7D32"
                             TextColor="White"
-                            CornerRadius="10"/>
+                            CornerRadius="10"
+                            Clicked="OnListenClicked"/>
 
                     </Grid>
 
                 </Border>
 
             </DataTemplate>
-
         </CollectionView.ItemTemplate>
 
     </CollectionView>
