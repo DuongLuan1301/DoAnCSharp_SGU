@@ -1,4 +1,4 @@
-<api type="debug" assembly-name="project_csharp_sgu" mvid="6f39b06f5e834113826eb090c6606bf0">
+<api type="debug" assembly-name="project_csharp_sgu" mvid="713e3d355825481dbf0c5a57a96dcebd">
   <java-to-managed>
     <entry java-name="crc640e15717cd9de2ffe/MainActivity" managed-name="project_csharp_sgu.MainActivity, project_csharp_sgu" managed-type-token-id="33554441" />
     <entry java-name="crc640e15717cd9de2ffe/MainApplication" managed-name="project_csharp_sgu.MainApplication, project_csharp_sgu" managed-type-token-id="33554442" />
