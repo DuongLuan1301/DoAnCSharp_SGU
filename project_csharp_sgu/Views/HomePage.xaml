@@ -24,26 +24,25 @@
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="20"/>
                 </Border.StrokeShape>
-
+                
                 <VerticalStackLayout>
-
                     <Label
-                        Text="📍 Your Location"
+                        Text="📍 Your location"
                         FontSize="18"
                         TextColor="White"/>
-
                     <Label
-                        x:Name="latLabel"
-                        Text="Latitude: --"
+                        x:Name="locationNameLabel"
+                        Text="Đang xác định vị trí..."
                         TextColor="White"/>
-
                     <Label
-                        x:Name="lngLabel"
-                        Text="Longitude: --"
+                        x:Name="locationDetailLabel"
+                        Text=""
                         TextColor="White"/>
-
+                    <Label
+                        x:Name="lastUpdateLabel"
+                        Text="Update time: --"
+                        TextColor="White"/>
                 </VerticalStackLayout>
-
             </Border>
 
             <!-- Narration -->
@@ -72,7 +71,7 @@
             </Border>
 
             <!-- Quick action -->
-<!-- 
+            <!-- 
             <Button
                 Text="Scan QR Code"
                 HeightRequest="60"

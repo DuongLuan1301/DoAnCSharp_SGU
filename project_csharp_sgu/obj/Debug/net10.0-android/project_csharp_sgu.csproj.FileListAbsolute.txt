@@ -2679,3 +2679,15 @@ D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-android\Microsoft.VisualS
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-android\Microsoft.VisualStudio.DesignTools.TapContract.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-android\Microsoft.VisualStudio.DesignTools.XamlTapContract.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-android\project_.ACDE0EC8.Up2Date
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-android\android\assets\arm64-v8a\Microsoft.Maui.Controls.HotReload.Forms.dll
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-android\android\assets\arm64-v8a\Microsoft.Maui.Controls.HotReload.Forms.jlo.xml
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-android\android\assets\arm64-v8a\Microsoft.Maui.Controls.HotReload.Forms.typemap.xml
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-android\android\assets\arm64-v8a\Microsoft.VisualStudio.DesignTools.MobileTapContracts.dll
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-android\android\assets\arm64-v8a\Microsoft.VisualStudio.DesignTools.MobileTapContracts.jlo.xml
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-android\android\assets\arm64-v8a\Microsoft.VisualStudio.DesignTools.MobileTapContracts.typemap.xml
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-android\android\assets\arm64-v8a\Microsoft.VisualStudio.DesignTools.TapContract.dll
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-android\android\assets\arm64-v8a\Microsoft.VisualStudio.DesignTools.TapContract.jlo.xml
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-android\android\assets\arm64-v8a\Microsoft.VisualStudio.DesignTools.TapContract.typemap.xml
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-android\android\assets\arm64-v8a\Microsoft.VisualStudio.DesignTools.XamlTapContract.dll
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-android\android\assets\arm64-v8a\Microsoft.VisualStudio.DesignTools.XamlTapContract.jlo.xml
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-android\android\assets\arm64-v8a\Microsoft.VisualStudio.DesignTools.XamlTapContract.typemap.xml
