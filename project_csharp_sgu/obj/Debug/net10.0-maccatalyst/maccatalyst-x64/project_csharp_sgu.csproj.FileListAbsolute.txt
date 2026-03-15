@@ -18,6 +18,7 @@ D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-maccatalyst\maccatalyst-x
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-maccatalyst\maccatalyst-x64\Microsoft.Maui.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-maccatalyst\maccatalyst-x64\Microsoft.Maui.Essentials.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-maccatalyst\maccatalyst-x64\Microsoft.Maui.Graphics.dll
+D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-maccatalyst\maccatalyst-x64\Plugin.Maui.Audio.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-maccatalyst\maccatalyst-x64\ar\Microsoft.Maui.Controls.resources.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-maccatalyst\maccatalyst-x64\ca\Microsoft.Maui.Controls.resources.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-maccatalyst\maccatalyst-x64\cs\Microsoft.Maui.Controls.resources.dll
@@ -262,9 +263,11 @@ D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\mauifont.inputs
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\mauisplash.inputs
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\mauisplash.stamp
-D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\resizetizer\r\dotnet_bot@3x.png
-D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\resizetizer\r\dotnet_bot@2x.png
-D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\resizetizer\r\dotnet_bot.png
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\resizetizer\r\Resources\poi3.jpg
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\resizetizer\r\Resources\poi4.jpg
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\resizetizer\r\Resources\poi1.jpg
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\resizetizer\r\Resources\poi2.jpg
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\resizetizer\r\Resources\poi5.jpg
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appiconItunesArtwork.png
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon83.5x83.5@2x.png
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon76x76@2x.png
@@ -277,6 +280,7 @@ D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon20x20@3x.png
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon20x20@2x.png
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\Contents.json
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\resizetizer\r\Resources\dotnet_bot.png
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\mauiimage.stamp
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\mauiimage.outputs
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-maccatalyst\maccatalyst-x64\resizetizer\f\MauiInfo.plist

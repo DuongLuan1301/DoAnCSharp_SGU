@@ -24,4 +24,9 @@
 
     </TabBar>
 
+    <!-- Route cần để mở trang chi tiết -->
+    <ShellContent
+        Route="POIDetailPage"
+        ContentTemplate="{DataTemplate views:POIDetailPage}" />
+
 </Shell>
