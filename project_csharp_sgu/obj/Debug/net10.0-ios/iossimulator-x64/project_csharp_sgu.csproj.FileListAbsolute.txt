@@ -263,6 +263,7 @@ D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-ios\iossimulator-x64\libx
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-ios\iossimulator-x64\libxamarin-dotnet-nativeaot.a
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-ios\iossimulator-x64\libxamarin-dotnet.a
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-ios\iossimulator-x64\libxamarin-dotnet.dylib
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\build-signature\signature
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\project_csharp_sgu.csproj.AssemblyReference.cache
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\partialappmanifest\_PartialAppManifests.items
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\unpack\Microsoft.Maui.Essentials\BundleResource\xml\microsoft_maui_essentials_fileprovider_file_paths.xml
@@ -275,11 +276,6 @@ D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resi
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\sp\splash_12DC6028E9449275AEC0BFBAA74E49B273C96140B71D99EB4FAB0E6C08F5018F@2x.png
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\sp\splash_12DC6028E9449275AEC0BFBAA74E49B273C96140B71D99EB4FAB0E6C08F5018F@3x.png
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\mauisplash.stamp
-D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Resources\poi5.jpg
-D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Resources\poi4.jpg
-D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Resources\poi1.jpg
-D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Resources\poi2.jpg
-D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Resources\dotnet_bot.png
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appiconItunesArtwork.png
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon83.5x83.5@2x.png
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon76x76@2x.png
@@ -292,7 +288,12 @@ D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resi
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon20x20@3x.png
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\appicon20x20@2x.png
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Assets.xcassets\appicon.appiconset\Contents.json
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Resources\dotnet_bot.png
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Resources\poi3.jpg
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Resources\poi4.jpg
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Resources\poi1.jpg
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Resources\poi5.jpg
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\r\Resources\poi2.jpg
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\mauiimage.stamp
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\mauiimage.outputs
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-ios\iossimulator-x64\resizetizer\f\MauiInfo.plist

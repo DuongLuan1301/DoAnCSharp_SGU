@@ -114,23 +114,23 @@ target triple = "x86_64-unknown-linux-android21"
 	i32 3, ; uint32_t package_naming_policy
 	i32 6, ; uint32_t environment_variable_count
 	i32 0, ; uint32_t system_property_count
-	i32 334, ; uint32_t number_of_assemblies_in_apk
+	i32 330, ; uint32_t number_of_assemblies_in_apk
 	i32 66, ; uint32_t bundled_assembly_name_width
-	i32 44, ; uint32_t number_of_dso_cache_entries
+	i32 40, ; uint32_t number_of_dso_cache_entries
 	i32 0, ; uint32_t number_of_aot_cache_entries
-	i32 11, ; uint32_t number_of_shared_libraries
+	i32 10, ; uint32_t number_of_shared_libraries
 	i32 u0x02001416, ; uint32_t android_runtime_jnienv_class_token
 	i32 u0x06014f5e, ; uint32_t jnienv_initialize_method_token
 	i32 u0x06014f5a, ; uint32_t jnienv_registerjninatives_method_token
 	i32 0, ; uint32_t jni_remapping_replacement_type_count
 	i32 0, ; uint32_t jni_remapping_replacement_method_index_entry_count
-	i32 u0x00000007, ; uint32_t mono_components_mask
+	i32 u0x00000003, ; uint32_t mono_components_mask
 	ptr @.ApplicationConfig.0_android_package_name, ; char* android_package_name
 	i1 false; bool managed_marshal_methods_lookup_enabled
 }, align 16
 
 ; DSO cache entries
-@dso_cache = dso_local local_unnamed_addr global [44 x %struct.DSOCacheEntry] [
+@dso_cache = dso_local local_unnamed_addr global [40 x %struct.DSOCacheEntry] [
 	%struct.DSOCacheEntry {
 		i64 u0x01848c0093f0afd8, ; from name: libSystem.Security.Cryptography.Native.Android
 		i64 u0x4818e42ca66bbd75, ; uint64_t real_name_hash
@@ -152,7 +152,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i64 u0x0582d422de762780, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 false, ; bool is_jni_library
-		ptr @.DSOCacheEntry.7_name, ; name: libmono-component-marshal-ilgen.so
+		ptr @.DSOCacheEntry.6_name, ; name: libmono-component-marshal-ilgen.so
 		ptr null; void* handle
 	}, ; 2
 	%struct.DSOCacheEntry {
@@ -168,7 +168,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i64 u0x1a1918dd01662b19, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 false, ; bool is_jni_library
-		ptr @.DSOCacheEntry.8_name, ; name: libmonosgen-2.0.so
+		ptr @.DSOCacheEntry.7_name, ; name: libmonosgen-2.0.so
 		ptr null; void* handle
 	}, ; 4
 	%struct.DSOCacheEntry {
@@ -176,7 +176,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i64 u0x641102ea13f025b2, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 true, ; bool is_jni_library
-		ptr @.DSOCacheEntry.10_name, ; name: libxamarin-debug-app-helper.so
+		ptr @.DSOCacheEntry.9_name, ; name: libxamarin-debug-app-helper.so
 		ptr null; void* handle
 	}, ; 5
 	%struct.DSOCacheEntry {
@@ -192,7 +192,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i64 u0x4434c7fd110c8d8b, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 true, ; bool is_jni_library
-		ptr @.DSOCacheEntry.9_name, ; name: libmonodroid.so
+		ptr @.DSOCacheEntry.8_name, ; name: libmonodroid.so
 		ptr null; void* handle
 	}, ; 7
 	%struct.DSOCacheEntry {
@@ -200,7 +200,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i64 u0x4434c7fd110c8d8b, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 true, ; bool is_jni_library
-		ptr @.DSOCacheEntry.9_name, ; name: libmonodroid.so
+		ptr @.DSOCacheEntry.8_name, ; name: libmonodroid.so
 		ptr null; void* handle
 	}, ; 8
 	%struct.DSOCacheEntry {
@@ -216,7 +216,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i64 u0x4434c7fd110c8d8b, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 true, ; bool is_jni_library
-		ptr @.DSOCacheEntry.9_name, ; name: libmonodroid.so
+		ptr @.DSOCacheEntry.8_name, ; name: libmonodroid.so
 		ptr null; void* handle
 	}, ; 10
 	%struct.DSOCacheEntry {
@@ -232,7 +232,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i64 u0xb9c2fcad5704a3c9, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 false, ; bool is_jni_library
-		ptr @.DSOCacheEntry.6_name, ; name: libmono-component-hot_reload.so
+		ptr @.DSOCacheEntry.5_name, ; name: libmono-component-hot_reload.so
 		ptr null; void* handle
 	}, ; 12
 	%struct.DSOCacheEntry {
@@ -240,7 +240,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i64 u0x641102ea13f025b2, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 true, ; bool is_jni_library
-		ptr @.DSOCacheEntry.10_name, ; name: libxamarin-debug-app-helper.so
+		ptr @.DSOCacheEntry.9_name, ; name: libxamarin-debug-app-helper.so
 		ptr null; void* handle
 	}, ; 13
 	%struct.DSOCacheEntry {
@@ -256,7 +256,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i64 u0x1a1918dd01662b19, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 false, ; bool is_jni_library
-		ptr @.DSOCacheEntry.8_name, ; name: libmonosgen-2.0.so
+		ptr @.DSOCacheEntry.7_name, ; name: libmonosgen-2.0.so
 		ptr null; void* handle
 	}, ; 15
 	%struct.DSOCacheEntry {
@@ -264,25 +264,9 @@ target triple = "x86_64-unknown-linux-android21"
 		i64 u0x641102ea13f025b2, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 true, ; bool is_jni_library
-		ptr @.DSOCacheEntry.10_name, ; name: libxamarin-debug-app-helper.so
+		ptr @.DSOCacheEntry.9_name, ; name: libxamarin-debug-app-helper.so
 		ptr null; void* handle
 	}, ; 16
-	%struct.DSOCacheEntry {
-		i64 u0x644e64e35cf1db73, ; from name: libmono-component-diagnostics_tracing
-		i64 u0x8ad0d04070d5c449, ; uint64_t real_name_hash
-		i1 false, ; bool ignore
-		i1 false, ; bool is_jni_library
-		ptr @.DSOCacheEntry.5_name, ; name: libmono-component-diagnostics_tracing.so
-		ptr null; void* handle
-	}, ; 17
-	%struct.DSOCacheEntry {
-		i64 u0x675f94d7f2cbce63, ; from name: mono-component-diagnostics_tracing
-		i64 u0x8ad0d04070d5c449, ; uint64_t real_name_hash
-		i1 false, ; bool ignore
-		i1 false, ; bool is_jni_library
-		ptr @.DSOCacheEntry.5_name, ; name: libmono-component-diagnostics_tracing.so
-		ptr null; void* handle
-	}, ; 18
 	%struct.DSOCacheEntry {
 		i64 u0x6f9c86874c77b639, ; from name: libmono-component-debugger.so
 		i64 u0x6f9c86874c77b639, ; uint64_t real_name_hash
@@ -290,7 +274,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i1 false, ; bool is_jni_library
 		ptr @.DSOCacheEntry.4_name, ; name: libmono-component-debugger.so
 		ptr null; void* handle
-	}, ; 19
+	}, ; 17
 	%struct.DSOCacheEntry {
 		i64 u0x74b568291c419777, ; from name: libSystem.Globalization.Native.so
 		i64 u0x74b568291c419777, ; uint64_t real_name_hash
@@ -298,15 +282,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i1 false, ; bool is_jni_library
 		ptr @.DSOCacheEntry.0_name, ; name: libSystem.Globalization.Native.so
 		ptr null; void* handle
-	}, ; 20
-	%struct.DSOCacheEntry {
-		i64 u0x80e5211faa7c53e3, ; from name: mono-component-diagnostics_tracing.so
-		i64 u0x8ad0d04070d5c449, ; uint64_t real_name_hash
-		i1 false, ; bool ignore
-		i1 false, ; bool is_jni_library
-		ptr @.DSOCacheEntry.5_name, ; name: libmono-component-diagnostics_tracing.so
-		ptr null; void* handle
-	}, ; 21
+	}, ; 18
 	%struct.DSOCacheEntry {
 		i64 u0x81bc2b0b52670f30, ; from name: System.Security.Cryptography.Native.Android
 		i64 u0x4818e42ca66bbd75, ; uint64_t real_name_hash
@@ -314,15 +290,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i1 true, ; bool is_jni_library
 		ptr @.DSOCacheEntry.3_name, ; name: libSystem.Security.Cryptography.Native.Android.so
 		ptr null; void* handle
-	}, ; 22
-	%struct.DSOCacheEntry {
-		i64 u0x8ad0d04070d5c449, ; from name: libmono-component-diagnostics_tracing.so
-		i64 u0x8ad0d04070d5c449, ; uint64_t real_name_hash
-		i1 false, ; bool ignore
-		i1 false, ; bool is_jni_library
-		ptr @.DSOCacheEntry.5_name, ; name: libmono-component-diagnostics_tracing.so
-		ptr null; void* handle
-	}, ; 23
+	}, ; 19
 	%struct.DSOCacheEntry {
 		i64 u0x9190f4cb761b1d3c, ; from name: libSystem.IO.Compression.Native
 		i64 u0xc3cb80650fe5a0ab, ; uint64_t real_name_hash
@@ -330,23 +298,23 @@ target triple = "x86_64-unknown-linux-android21"
 		i1 false, ; bool is_jni_library
 		ptr @.DSOCacheEntry.1_name, ; name: libSystem.IO.Compression.Native.so
 		ptr null; void* handle
-	}, ; 24
+	}, ; 20
 	%struct.DSOCacheEntry {
 		i64 u0x936d971cc035eac2, ; from name: mono-component-marshal-ilgen
 		i64 u0x0582d422de762780, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 false, ; bool is_jni_library
-		ptr @.DSOCacheEntry.7_name, ; name: libmono-component-marshal-ilgen.so
+		ptr @.DSOCacheEntry.6_name, ; name: libmono-component-marshal-ilgen.so
 		ptr null; void* handle
-	}, ; 25
+	}, ; 21
 	%struct.DSOCacheEntry {
 		i64 u0x9c62065cdbdf43a5, ; from name: monosgen-2.0
 		i64 u0x1a1918dd01662b19, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 false, ; bool is_jni_library
-		ptr @.DSOCacheEntry.8_name, ; name: libmonosgen-2.0.so
+		ptr @.DSOCacheEntry.7_name, ; name: libmonosgen-2.0.so
 		ptr null; void* handle
-	}, ; 26
+	}, ; 22
 	%struct.DSOCacheEntry {
 		i64 u0x9ff54ae8a9311b68, ; from name: System.Native
 		i64 u0xa337ccc8aef94267, ; uint64_t real_name_hash
@@ -354,7 +322,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i1 false, ; bool is_jni_library
 		ptr @.DSOCacheEntry.2_name, ; name: libSystem.Native.so
 		ptr null; void* handle
-	}, ; 27
+	}, ; 23
 	%struct.DSOCacheEntry {
 		i64 u0xa337ccc8aef94267, ; from name: libSystem.Native.so
 		i64 u0xa337ccc8aef94267, ; uint64_t real_name_hash
@@ -362,7 +330,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i1 false, ; bool is_jni_library
 		ptr @.DSOCacheEntry.2_name, ; name: libSystem.Native.so
 		ptr null; void* handle
-	}, ; 28
+	}, ; 24
 	%struct.DSOCacheEntry {
 		i64 u0xa76ab5a3894f5a01, ; from name: System.Globalization.Native
 		i64 u0x74b568291c419777, ; uint64_t real_name_hash
@@ -370,15 +338,15 @@ target triple = "x86_64-unknown-linux-android21"
 		i1 false, ; bool is_jni_library
 		ptr @.DSOCacheEntry.0_name, ; name: libSystem.Globalization.Native.so
 		ptr null; void* handle
-	}, ; 29
+	}, ; 25
 	%struct.DSOCacheEntry {
 		i64 u0xab177aa6a32873ac, ; from name: monodroid.so
 		i64 u0x4434c7fd110c8d8b, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 true, ; bool is_jni_library
-		ptr @.DSOCacheEntry.9_name, ; name: libmonodroid.so
+		ptr @.DSOCacheEntry.8_name, ; name: libmonodroid.so
 		ptr null; void* handle
-	}, ; 30
+	}, ; 26
 	%struct.DSOCacheEntry {
 		i64 u0xb5c2ff9910024930, ; from name: libmono-component-debugger
 		i64 u0x6f9c86874c77b639, ; uint64_t real_name_hash
@@ -386,31 +354,31 @@ target triple = "x86_64-unknown-linux-android21"
 		i1 false, ; bool is_jni_library
 		ptr @.DSOCacheEntry.4_name, ; name: libmono-component-debugger.so
 		ptr null; void* handle
-	}, ; 31
+	}, ; 27
 	%struct.DSOCacheEntry {
 		i64 u0xb9c2fcad5704a3c9, ; from name: libmono-component-hot_reload.so
 		i64 u0xb9c2fcad5704a3c9, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 false, ; bool is_jni_library
-		ptr @.DSOCacheEntry.6_name, ; name: libmono-component-hot_reload.so
+		ptr @.DSOCacheEntry.5_name, ; name: libmono-component-hot_reload.so
 		ptr null; void* handle
-	}, ; 32
+	}, ; 28
 	%struct.DSOCacheEntry {
 		i64 u0xb9c4d8821da5c5de, ; from name: mono-component-hot_reload.so
 		i64 u0xb9c2fcad5704a3c9, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 false, ; bool is_jni_library
-		ptr @.DSOCacheEntry.6_name, ; name: libmono-component-hot_reload.so
+		ptr @.DSOCacheEntry.5_name, ; name: libmono-component-hot_reload.so
 		ptr null; void* handle
-	}, ; 33
+	}, ; 29
 	%struct.DSOCacheEntry {
 		i64 u0xc20cd752ee7ce28d, ; from name: libxamarin-debug-app-helper
 		i64 u0x641102ea13f025b2, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 true, ; bool is_jni_library
-		ptr @.DSOCacheEntry.10_name, ; name: libxamarin-debug-app-helper.so
+		ptr @.DSOCacheEntry.9_name, ; name: libxamarin-debug-app-helper.so
 		ptr null; void* handle
-	}, ; 34
+	}, ; 30
 	%struct.DSOCacheEntry {
 		i64 u0xc3cb80650fe5a0ab, ; from name: libSystem.IO.Compression.Native.so
 		i64 u0xc3cb80650fe5a0ab, ; uint64_t real_name_hash
@@ -418,7 +386,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i1 false, ; bool is_jni_library
 		ptr @.DSOCacheEntry.1_name, ; name: libSystem.IO.Compression.Native.so
 		ptr null; void* handle
-	}, ; 35
+	}, ; 31
 	%struct.DSOCacheEntry {
 		i64 u0xc7bf0aae66d69fe4, ; from name: mono-component-debugger.so
 		i64 u0x6f9c86874c77b639, ; uint64_t real_name_hash
@@ -426,7 +394,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i1 false, ; bool is_jni_library
 		ptr @.DSOCacheEntry.4_name, ; name: libmono-component-debugger.so
 		ptr null; void* handle
-	}, ; 36
+	}, ; 32
 	%struct.DSOCacheEntry {
 		i64 u0xd334d108d628ab4f, ; from name: System.IO.Compression.Native
 		i64 u0xc3cb80650fe5a0ab, ; uint64_t real_name_hash
@@ -434,15 +402,15 @@ target triple = "x86_64-unknown-linux-android21"
 		i1 false, ; bool is_jni_library
 		ptr @.DSOCacheEntry.1_name, ; name: libSystem.IO.Compression.Native.so
 		ptr null; void* handle
-	}, ; 37
+	}, ; 33
 	%struct.DSOCacheEntry {
 		i64 u0xd565cc57ed541a90, ; from name: monosgen-2.0.so
 		i64 u0x1a1918dd01662b19, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 false, ; bool is_jni_library
-		ptr @.DSOCacheEntry.8_name, ; name: libmonosgen-2.0.so
+		ptr @.DSOCacheEntry.7_name, ; name: libmonosgen-2.0.so
 		ptr null; void* handle
-	}, ; 38
+	}, ; 34
 	%struct.DSOCacheEntry {
 		i64 u0xde69d0ab38ed00d3, ; from name: mono-component-debugger
 		i64 u0x6f9c86874c77b639, ; uint64_t real_name_hash
@@ -450,31 +418,31 @@ target triple = "x86_64-unknown-linux-android21"
 		i1 false, ; bool is_jni_library
 		ptr @.DSOCacheEntry.4_name, ; name: libmono-component-debugger.so
 		ptr null; void* handle
-	}, ; 39
+	}, ; 35
 	%struct.DSOCacheEntry {
 		i64 u0xde6fb4b955d66724, ; from name: libmono-component-marshal-ilgen
 		i64 u0x0582d422de762780, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 false, ; bool is_jni_library
-		ptr @.DSOCacheEntry.7_name, ; name: libmono-component-marshal-ilgen.so
+		ptr @.DSOCacheEntry.6_name, ; name: libmono-component-marshal-ilgen.so
 		ptr null; void* handle
-	}, ; 40
+	}, ; 36
 	%struct.DSOCacheEntry {
 		i64 u0xe02ec096c271894c, ; from name: libmono-component-hot_reload
 		i64 u0xb9c2fcad5704a3c9, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 false, ; bool is_jni_library
-		ptr @.DSOCacheEntry.6_name, ; name: libmono-component-hot_reload.so
+		ptr @.DSOCacheEntry.5_name, ; name: libmono-component-hot_reload.so
 		ptr null; void* handle
-	}, ; 41
+	}, ; 37
 	%struct.DSOCacheEntry {
 		i64 u0xe0d15587b4505ecd, ; from name: mono-component-marshal-ilgen.so
 		i64 u0x0582d422de762780, ; uint64_t real_name_hash
 		i1 false, ; bool ignore
 		i1 false, ; bool is_jni_library
-		ptr @.DSOCacheEntry.7_name, ; name: libmono-component-marshal-ilgen.so
+		ptr @.DSOCacheEntry.6_name, ; name: libmono-component-marshal-ilgen.so
 		ptr null; void* handle
-	}, ; 42
+	}, ; 38
 	%struct.DSOCacheEntry {
 		i64 u0xecb906ed9649ed1c, ; from name: System.Native.so
 		i64 u0xa337ccc8aef94267, ; uint64_t real_name_hash
@@ -482,7 +450,7 @@ target triple = "x86_64-unknown-linux-android21"
 		i1 false, ; bool is_jni_library
 		ptr @.DSOCacheEntry.2_name, ; name: libSystem.Native.so
 		ptr null; void* handle
-	} ; 43
+	} ; 39
 ], align 16
 
 @dso_jni_preloads_idx_stride = dso_local local_unnamed_addr constant i32 4, align 4
@@ -494,9 +462,9 @@ target triple = "x86_64-unknown-linux-android21"
 	i32 11, ; libSystem.Security.Cryptography.Native.Android.so
 	i32 0, ; libSystem.Security.Cryptography.Native.Android
 	i32 1, ; System.Security.Cryptography.Native.Android.so
-	i32 22, ; System.Security.Cryptography.Native.Android
+	i32 19, ; System.Security.Cryptography.Native.Android
 	i32 16, ; libxamarin-debug-app-helper.so
-	i32 34, ; libxamarin-debug-app-helper
+	i32 30, ; libxamarin-debug-app-helper
 	i32 5, ; xamarin-debug-app-helper.so
 	i32 13 ; xamarin-debug-app-helper
 ], align 16
@@ -504,7 +472,7 @@ target triple = "x86_64-unknown-linux-android21"
 ; AOT DSO cache entries
 @aot_dso_cache = dso_local local_unnamed_addr global [0 x %struct.DSOCacheEntry] zeroinitializer, align 8
 
-@dso_apk_entries = dso_local local_unnamed_addr global [11 x %struct.DSOApkEntry] zeroinitializer, align 16
+@dso_apk_entries = dso_local local_unnamed_addr global [10 x %struct.DSOApkEntry] zeroinitializer, align 16
 
 @_XamarinAndroidBundledAssembly_file_name_0_0 = internal dso_local global [74 x i8] zeroinitializer, align 16
 @_XamarinAndroidBundledAssembly_name_0_0 = internal dso_local global [66 x i8] zeroinitializer, align 16
@@ -1166,17 +1134,9 @@ target triple = "x86_64-unknown-linux-android21"
 @_XamarinAndroidBundledAssembly_name_148_148 = internal dso_local global [66 x i8] zeroinitializer, align 16
 @_XamarinAndroidBundledAssembly_file_name_149_149 = internal dso_local global [74 x i8] zeroinitializer, align 16
 @_XamarinAndroidBundledAssembly_name_149_149 = internal dso_local global [66 x i8] zeroinitializer, align 16
-@_XamarinAndroidBundledAssembly_file_name_14a_14a = internal dso_local global [74 x i8] zeroinitializer, align 16
-@_XamarinAndroidBundledAssembly_name_14a_14a = internal dso_local global [66 x i8] zeroinitializer, align 16
-@_XamarinAndroidBundledAssembly_file_name_14b_14b = internal dso_local global [74 x i8] zeroinitializer, align 16
-@_XamarinAndroidBundledAssembly_name_14b_14b = internal dso_local global [66 x i8] zeroinitializer, align 16
-@_XamarinAndroidBundledAssembly_file_name_14c_14c = internal dso_local global [74 x i8] zeroinitializer, align 16
-@_XamarinAndroidBundledAssembly_name_14c_14c = internal dso_local global [66 x i8] zeroinitializer, align 16
-@_XamarinAndroidBundledAssembly_file_name_14d_14d = internal dso_local global [74 x i8] zeroinitializer, align 16
-@_XamarinAndroidBundledAssembly_name_14d_14d = internal dso_local global [66 x i8] zeroinitializer, align 16
 
 ; Bundled assembly name buffers, all 66 bytes long
-@bundled_assemblies = dso_local local_unnamed_addr global [334 x %struct.XamarinAndroidBundledAssembly] [
+@bundled_assemblies = dso_local local_unnamed_addr global [330 x %struct.XamarinAndroidBundledAssembly] [
 	%struct.XamarinAndroidBundledAssembly {
 		i32 -1, ; int32_t file_fd
 		ptr @_XamarinAndroidBundledAssembly_file_name_0_0, ; char* file_name
@@ -4146,43 +4106,7 @@ target triple = "x86_64-unknown-linux-android21"
 		ptr null, ; uint8_t* data
 		i32 66, ; uint32_t name_length
 		ptr @_XamarinAndroidBundledAssembly_name_149_149; char* name
-	}, ; 329
-	%struct.XamarinAndroidBundledAssembly {
-		i32 -1, ; int32_t file_fd
-		ptr @_XamarinAndroidBundledAssembly_file_name_14a_14a, ; char* file_name
-		i32 0, ; uint32_t data_offset
-		i32 0, ; uint32_t data_size
-		ptr null, ; uint8_t* data
-		i32 66, ; uint32_t name_length
-		ptr @_XamarinAndroidBundledAssembly_name_14a_14a; char* name
-	}, ; 330
-	%struct.XamarinAndroidBundledAssembly {
-		i32 -1, ; int32_t file_fd
-		ptr @_XamarinAndroidBundledAssembly_file_name_14b_14b, ; char* file_name
-		i32 0, ; uint32_t data_offset
-		i32 0, ; uint32_t data_size
-		ptr null, ; uint8_t* data
-		i32 66, ; uint32_t name_length
-		ptr @_XamarinAndroidBundledAssembly_name_14b_14b; char* name
-	}, ; 331
-	%struct.XamarinAndroidBundledAssembly {
-		i32 -1, ; int32_t file_fd
-		ptr @_XamarinAndroidBundledAssembly_file_name_14c_14c, ; char* file_name
-		i32 0, ; uint32_t data_offset
-		i32 0, ; uint32_t data_size
-		ptr null, ; uint8_t* data
-		i32 66, ; uint32_t name_length
-		ptr @_XamarinAndroidBundledAssembly_name_14c_14c; char* name
-	}, ; 332
-	%struct.XamarinAndroidBundledAssembly {
-		i32 -1, ; int32_t file_fd
-		ptr @_XamarinAndroidBundledAssembly_file_name_14d_14d, ; char* file_name
-		i32 0, ; uint32_t data_offset
-		i32 0, ; uint32_t data_size
-		ptr null, ; uint8_t* data
-		i32 66, ; uint32_t name_length
-		ptr @_XamarinAndroidBundledAssembly_name_14d_14d; char* name
-	} ; 333
+	} ; 329
 ], align 16
 
 @assembly_store_bundled_assemblies = dso_local local_unnamed_addr global [0 x %struct.AssemblyStoreSingleAssemblyRuntimeData] zeroinitializer, align 8
@@ -4214,19 +4138,18 @@ target triple = "x86_64-unknown-linux-android21"
 @.DSOCacheEntry.2_name = private unnamed_addr constant [20 x i8] c"libSystem.Native.so\00", align 16
 @.DSOCacheEntry.3_name = private unnamed_addr constant [50 x i8] c"libSystem.Security.Cryptography.Native.Android.so\00", align 16
 @.DSOCacheEntry.4_name = private unnamed_addr constant [30 x i8] c"libmono-component-debugger.so\00", align 16
-@.DSOCacheEntry.5_name = private unnamed_addr constant [41 x i8] c"libmono-component-diagnostics_tracing.so\00", align 16
-@.DSOCacheEntry.6_name = private unnamed_addr constant [32 x i8] c"libmono-component-hot_reload.so\00", align 16
-@.DSOCacheEntry.7_name = private unnamed_addr constant [35 x i8] c"libmono-component-marshal-ilgen.so\00", align 16
-@.DSOCacheEntry.8_name = private unnamed_addr constant [19 x i8] c"libmonosgen-2.0.so\00", align 16
-@.DSOCacheEntry.9_name = private unnamed_addr constant [16 x i8] c"libmonodroid.so\00", align 16
-@.DSOCacheEntry.10_name = private unnamed_addr constant [31 x i8] c"libxamarin-debug-app-helper.so\00", align 16
+@.DSOCacheEntry.5_name = private unnamed_addr constant [32 x i8] c"libmono-component-hot_reload.so\00", align 16
+@.DSOCacheEntry.6_name = private unnamed_addr constant [35 x i8] c"libmono-component-marshal-ilgen.so\00", align 16
+@.DSOCacheEntry.7_name = private unnamed_addr constant [19 x i8] c"libmonosgen-2.0.so\00", align 16
+@.DSOCacheEntry.8_name = private unnamed_addr constant [16 x i8] c"libmonodroid.so\00", align 16
+@.DSOCacheEntry.9_name = private unnamed_addr constant [31 x i8] c"libxamarin-debug-app-helper.so\00", align 16
 
 ; Metadata
 !llvm.module.flags = !{!0, !1}
 !0 = !{i32 1, !"wchar_size", i32 4}
 !1 = !{i32 7, !"PIC Level", i32 2}
 !llvm.ident = !{!2}
-!2 = !{!".NET for Android remotes/origin/release/10.0.1xx @ 9a2d211ba972d3a0c4c108e043def432f3ec2620"}
+!2 = !{!".NET for Android remotes/origin/release/10.0.1xx @ 350a375fc202f0072ac4191624986d8c642b93fa"}
 !3 = !{!4, !4, i64 0}
 !4 = !{!"any pointer", !5, i64 0}
 !5 = !{!"omnipotent char", !6, i64 0}
