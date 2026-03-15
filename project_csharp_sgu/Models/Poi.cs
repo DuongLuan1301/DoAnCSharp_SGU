@@ -9,6 +9,7 @@ namespace project_csharp_sgu.Models
         public string AudioPath { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public double Distance { get; set; }
 
         // 🟢 BẮT BUỘC THÊM
         public string DistanceText { get; set; }

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("project_csharp_sgu")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+e61e8d236011ce6f8f7ec6a3ba8b4841f61de4a8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+2743da635ea8d62c4b8318e9657a0bcb26671c50")]
 [assembly: System.Reflection.AssemblyProductAttribute("project_csharp_sgu")]
 [assembly: System.Reflection.AssemblyTitleAttribute("project_csharp_sgu")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

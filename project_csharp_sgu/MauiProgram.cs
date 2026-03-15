@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Maui.Controls.Maps;
+using Microsoft.Extensions.Logging;
 using project_csharp_sgu.Services;
 
 namespace project_csharp_sgu;
@@ -11,13 +12,14 @@ public static class MauiProgram
 
         builder
             .UseMauiApp<App>()
+            .UseMauiMaps()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-        // ⭐ Đăng ký toàn bộ Service
+        // Đăng ký Service (AddSingleton: tạo một instance duy nhất)
         builder.Services.AddSingleton<POIService>();
         builder.Services.AddSingleton<LocationService>();
         builder.Services.AddSingleton<AudioService>();

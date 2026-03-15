@@ -1,56 +1,60 @@
 ﻿using Microsoft.Maui.Devices.Sensors;
+using project_csharp_sgu.Services;
 
 namespace project_csharp_sgu.Views;
 
 public partial class HomePage : ContentPage
 {
-    public HomePage()
+    //Biến lưu tọa độ lấy từ LocationService.cs
+    private readonly LocationService _locationService;
+
+    public HomePage(LocationService locationService)
     {
         InitializeComponent();
-        StartLocationTracking();
+
+        _locationService = locationService;
+
+        _locationService.StartTracking();
+
+        StartUIUpdate();
     }
 
-    private void StartLocationTracking()
+    //Mỗi 10s chạy một lần
+    void StartUIUpdate()
     {
         Dispatcher.StartTimer(TimeSpan.FromSeconds(10), () =>
         {
-            _ = GetLocation();
+            _ = UpdateLocationUI();
             return true;
-            // true = timer tiếp tục chạy
         });
     }
 
-    private async Task GetLocation()
+    //Cập nhật location cho homepage
+    async Task UpdateLocationUI()
     {
-        try
+        //Biến lưu location hiện tại 
+        var location = _locationService.CurrentLocation;
+
+        if (location == null)
+            return;
+
+        //Lưu tọa độ
+        var placemarks = await Geocoding.GetPlacemarksAsync(location.Latitude, location.Longitude);
+
+        var place = placemarks?.FirstOrDefault();
+
+        if (place != null)
         {
-            var location = await Geolocation.GetLocationAsync(
-                new GeolocationRequest
-                {
-                    DesiredAccuracy = GeolocationAccuracy.High,
-                    Timeout = TimeSpan.FromSeconds(10)
-                });
-
-            if (location != null)
-            {
-                var placemarks = await Geocoding.GetPlacemarksAsync(
-                    location.Latitude,
-                    location.Longitude);
-
-                var place = placemarks?.FirstOrDefault();
-
-                if (place != null)
-                {
-                    locationNameLabel.Text = place.FeatureName ?? "Current location";
-                    locationDetailLabel.Text =
-                        $"{place.SubAdminArea}, {place.AdminArea}";
-                }
-                lastUpdateLabel.Text = $"Update time: {DateTime.Now:HH:mm:ss}";
-            }
+            string street = place.Thoroughfare;
+            locationNameLabel.IsVisible = false;
+            locationDetailLabel.Text =
+                $"Latitude: {location.Latitude}\n" +
+                $"Longitude: {location.Longitude}\n" +
+                $"{(string.IsNullOrEmpty(street) ? "" : street + "\n")}" +
+                $"{place.SubAdminArea}, {place.AdminArea}";
         }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
+
+        lastUpdateLabel.Text =
+            $"Update time: {DateTime.Now:HH:mm:ss}";
     }
 }

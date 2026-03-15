@@ -5,8 +5,8 @@
         "Description": "Điểm POI 1 dùng để test trong phạm vi 5 mét.",
         "ImagePath": "poi1.jpg",
         "AudioPath": "poi1.mp3",
-        "Latitude": 10.785950,
-        "Longitude": 106.800760
+        "Latitude": 10.806578,
+        "Longitude": 106.626333
     },
     {
         "Id": "poi2",
@@ -14,8 +14,8 @@
         "Description": "POI số 2 ở khoảng cách ~20 mét.",
         "ImagePath": "poi2.jpg",
         "AudioPath": "poi2.mp3",
-        "Latitude": 10.785965,
-        "Longitude": 106.800740
+        "Latitude": 10.806707,
+        "Longitude": 106.625797
     },
     {
         "Id": "poi3",
@@ -32,8 +32,8 @@
         "Description": "POI số 4 ở cách bạn khoảng 50 mét.",
         "ImagePath": "poi4.jpg",
         "AudioPath": "poi4.mp3",
-        "Latitude": 10.786010,
-        "Longitude": 106.800690
+        "Latitude": 10.807735,
+        "Longitude": 106.625949
     },
     {
         "Id": "poi5",

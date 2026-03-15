@@ -62,9 +62,9 @@ D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\poi1.scale-100.jpg
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\poi2.scale-100.jpg
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\poi5.scale-100.jpg
-D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\poi3.scale-100.jpg
-D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\poi4.scale-100.jpg
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\dotnet_bot.scale-100.png
+D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\poi4.scale-100.jpg
+D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\poi3.scale-100.jpg
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\CoreMessagingXP.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\dcompi.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\dwmcorei.dll
@@ -351,11 +351,13 @@ D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Microsoft.Graphics.Canvas.Interop.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Microsoft.IO.RecyclableMemoryStream.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Microsoft.Maui.Controls.dll
+D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Microsoft.Maui.Controls.Maps.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Microsoft.Maui.Controls.Xaml.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Microsoft.Maui.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Microsoft.Maui.Essentials.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Microsoft.Maui.Graphics.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Microsoft.Maui.Graphics.Win2D.WinUI.Desktop.dll
+D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Microsoft.Maui.Maps.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Microsoft.Graphics.Imaging.Projection.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Microsoft.InteractiveExperiences.Projection.dll
 D:\DoAnCSharp_SGU\project_csharp_sgu\bin\Debug\net10.0-windows10.0.19041.0\win-x64\Microsoft.Security.Authentication.OAuth.Projection.dll
@@ -495,9 +497,9 @@ D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-windows10.0.19041.0\win-x
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-windows10.0.19041.0\win-x64\resizetizer\r\poi1.scale-100.jpg
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-windows10.0.19041.0\win-x64\resizetizer\r\poi2.scale-100.jpg
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-windows10.0.19041.0\win-x64\resizetizer\r\poi5.scale-100.jpg
-D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-windows10.0.19041.0\win-x64\resizetizer\r\poi3.scale-100.jpg
-D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-windows10.0.19041.0\win-x64\resizetizer\r\poi4.scale-100.jpg
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-windows10.0.19041.0\win-x64\resizetizer\r\dotnet_bot.scale-100.png
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-windows10.0.19041.0\win-x64\resizetizer\r\poi4.scale-100.jpg
+D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-windows10.0.19041.0\win-x64\resizetizer\r\poi3.scale-100.jpg
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-windows10.0.19041.0\win-x64\mauiimage.stamp
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-windows10.0.19041.0\win-x64\mauiimage.outputs
 D:\DoAnCSharp_SGU\project_csharp_sgu\obj\Debug\net10.0-windows10.0.19041.0\win-x64\project_csharp_sgu.AssemblyInfoInputs.cache

@@ -4,6 +4,7 @@
              x:Class="project_csharp_sgu.Views.NearbyPage"
              Title="Nearby Page">
 
+    <!-- Control hiển thị danh sách POIs -->
     <CollectionView x:Name="nearbyCollection"
                     SelectionMode="None">
 

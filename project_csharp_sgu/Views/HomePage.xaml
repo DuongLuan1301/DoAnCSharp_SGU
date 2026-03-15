@@ -7,15 +7,13 @@
     <ScrollView>
 
         <VerticalStackLayout Padding="20"
-                             Spacing="20">
+                Spacing="20">
 
             <Label
                 Text="Home Page"
                 FontSize="32"
                 FontAttributes="Bold"
                 HorizontalOptions="Center"/>
-
-            <!-- Location card -->
 
             <Border
                 BackgroundColor="#2E7D32"
@@ -24,7 +22,7 @@
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="20"/>
                 </Border.StrokeShape>
-                
+
                 <VerticalStackLayout>
                     <Label
                         Text="📍 Your location"
@@ -42,6 +40,7 @@
                         x:Name="lastUpdateLabel"
                         Text="Update time: --"
                         TextColor="White"/>
+
                 </VerticalStackLayout>
             </Border>
 
