@@ -1,8 +1,7 @@
-# DoAnCSharp_SGU
-Đồ án môn học ngôn ngữ lập trình C# - 841423
+# Đồ án môn học ngôn ngữ lập trình C# - 841423
 
 Danh sách thành viên:
-Nhữ Dương Luân - 3123411184
+Nhữ Dương Luân - 3123411184,
 Huỳnh Tuấn Tài - 
 
 Tên đồ án: Ứng dụng thuyết minh tự động quảng bá sản phẩm cho du khách du nước ngoài.

@@ -1,0 +1,38 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="project_csharp_sgu.Pages.PoiDetailPage">
+
+    <Grid BackgroundColor="#80000000">
+
+        <Frame Margin="30"
+               Padding="20"
+               CornerRadius="20"
+               BackgroundColor="White"
+               VerticalOptions="Center">
+
+            <VerticalStackLayout Spacing="10">
+
+                <Image Source="food.jpg"
+                       HeightRequest="150"
+                       Aspect="AspectFill"/>
+
+                <Label Text="Bún bò Huế"
+                       FontSize="20"
+                       FontAttributes="Bold"/>
+
+                <Label Text="123 Nguyễn Huệ, Q1"
+                       TextColor="Gray"/>
+
+                <Label Text="Món ăn truyền thống Việt Nam, đậm đà hương vị..."
+                       FontSize="14"/>
+
+                <Button Text="▶ Play Audio"
+                Clicked="OnPlayAudioClicked"/>
+
+            </VerticalStackLayout>
+
+        </Frame>
+
+    </Grid>
+
+</ContentPage>

@@ -3,12 +3,23 @@
     x:Class="project_csharp_sgu.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:project_csharp_sgu"
-    Title="project_csharp_sgu">
+    xmlns:local="clr-namespace:project_csharp_sgu.Pages">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <!-- TAB BAR -->
+    <TabBar>
+
+        <ShellContent
+            Title="Home"
+            ContentTemplate="{DataTemplate local:HomePage}" />
+
+        <ShellContent
+            Title="Places"
+            ContentTemplate="{DataTemplate local:PoiListPage}" />
+
+        <ShellContent
+            Title="QR"
+            ContentTemplate="{DataTemplate local:QrPage}" />
+
+    </TabBar>
 
 </Shell>
