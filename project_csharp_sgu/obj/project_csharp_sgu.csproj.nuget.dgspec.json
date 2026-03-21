@@ -10,7 +10,7 @@
         "projectUniqueName": "D:\\DoAnCSharp_SGU\\project_csharp_sgu\\project_csharp_sgu.csproj",
         "projectName": "project_csharp_sgu",
         "projectPath": "D:\\DoAnCSharp_SGU\\project_csharp_sgu\\project_csharp_sgu.csproj",
-        "packagesPath": "C:\\Users\\huynh\\.nuget\\packages\\",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
         "outputPath": "D:\\DoAnCSharp_SGU\\project_csharp_sgu\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
@@ -18,7 +18,7 @@
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\huynh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -75,19 +75,11 @@
               "target": "Package",
               "version": "[10.0.20, )"
             },
-            "Microsoft.Maui.Controls.Maps": {
-              "target": "Package",
-              "version": "[10.0.50, )"
-            },
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.4, )",
+              "version": "[10.0.5, )",
               "autoReferenced": true
-            },
-            "Plugin.Maui.Audio": {
-              "target": "Package",
-              "version": "[2.1.0, )"
             }
           },
           "imports": [
@@ -101,12 +93,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[10.0.5, 10.0.5]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.Android": {
               "privateAssets": "all"
@@ -118,7 +104,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.200/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -405,19 +391,11 @@
               "target": "Package",
               "version": "[10.0.20, )"
             },
-            "Microsoft.Maui.Controls.Maps": {
-              "target": "Package",
-              "version": "[10.0.50, )"
-            },
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.4, )",
+              "version": "[10.0.5, )",
               "autoReferenced": true
-            },
-            "Plugin.Maui.Audio": {
-              "target": "Package",
-              "version": "[2.1.0, )"
             }
           },
           "imports": [
@@ -431,12 +409,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[10.0.5, 10.0.5]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.iOS": {
               "privateAssets": "all"
@@ -448,7 +420,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.200/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -735,19 +707,11 @@
               "target": "Package",
               "version": "[10.0.20, )"
             },
-            "Microsoft.Maui.Controls.Maps": {
-              "target": "Package",
-              "version": "[10.0.50, )"
-            },
             "Microsoft.NET.ILLink.Tasks": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[10.0.4, )",
+              "version": "[10.0.5, )",
               "autoReferenced": true
-            },
-            "Plugin.Maui.Audio": {
-              "target": "Package",
-              "version": "[2.1.0, )"
             }
           },
           "imports": [
@@ -762,12 +726,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[10.0.5, 10.0.5]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.MacCatalyst": {
               "privateAssets": "all"
@@ -779,7 +737,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.200/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -1065,14 +1023,6 @@
             "Microsoft.Maui.Controls": {
               "target": "Package",
               "version": "[10.0.20, )"
-            },
-            "Microsoft.Maui.Controls.Maps": {
-              "target": "Package",
-              "version": "[10.0.50, )"
-            },
-            "Plugin.Maui.Audio": {
-              "target": "Package",
-              "version": "[2.1.0, )"
             }
           },
           "imports": [
@@ -1100,7 +1050,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.200/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
