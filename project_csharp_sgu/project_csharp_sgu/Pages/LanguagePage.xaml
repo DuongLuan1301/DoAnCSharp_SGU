@@ -9,10 +9,8 @@
                HorizontalOptions="Center"/>
 
         <Button Text="English" Clicked="OnLanguageSelected"/>
-        <Button Text="Deutsch" Clicked="OnLanguageSelected"/>
         <Button Text="日本語" Clicked="OnLanguageSelected"/>
         <Button Text="中文" Clicked="OnLanguageSelected"/>
-        <Button Text="Русский" Clicked="OnLanguageSelected"/>
 
     </VerticalStackLayout>
 </ContentPage>

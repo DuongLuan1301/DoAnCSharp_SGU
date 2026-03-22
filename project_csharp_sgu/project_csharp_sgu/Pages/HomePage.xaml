@@ -4,7 +4,8 @@
              Title="Home"
              BackgroundColor="#F5F5F5">
 
-    <VerticalStackLayout Spacing="15" Padding="15,10,15,20">
+    <VerticalStackLayout Spacing="15"
+                         Padding="15,10,15,20">
 
         <!-- 🔹 ROW 1: LANGUAGE BUTTON -->
         <Grid>
@@ -21,7 +22,6 @@
                              Clicked="OnLanguageClicked"/>
             </Frame>
         </Grid>
-
         <!-- 🔹 ROW 2: MAP -->
         <Frame CornerRadius="20"
                BackgroundColor="#EAEAEA"
@@ -35,20 +35,20 @@
                        TextColor="Gray"/>
             </Grid>
         </Frame>
-
         <!-- 🔹 ROW 3: INFO PANEL -->
         <Frame Padding="15"
                CornerRadius="20"
                BackgroundColor="White"
                HasShadow="True">
-
             <VerticalStackLayout Spacing="5">
-                <Label Text="📍 Tọa độ: 10.7769, 106.7009"
-                       FontAttributes="Bold"/>
-
-                <Label Text="📌 Nguyễn Huệ, Quận 1, TP.HCM"
-                       FontSize="13"
+                <Label x:Name="LocationLabel"
+                       FontSize="16"
                        TextColor="Gray"/>
+
+                <Label x:Name="AddressLabel"
+                       FontSize="16"
+                       TextColor="Gray"/>
+
             </VerticalStackLayout>
         </Frame>
 
