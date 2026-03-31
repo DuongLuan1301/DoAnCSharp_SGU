@@ -11,11 +11,11 @@
                        HasShadow="True">
 
                     <VerticalStackLayout>
-                        <Label Text="{Binding Name}"
+                        <Label Text="{Binding name}"
                                FontSize="18"
                                FontAttributes="Bold"/>
 
-                        <Label Text="{Binding Distance}"
+                        <Label Text="{Binding distance}"
                                TextColor="Gray"/>
 
                         <Button Text="Xem chi tiết"

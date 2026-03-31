@@ -4,7 +4,7 @@ namespace project_csharp_sgu.Services;
 
 public class LanguageService : ILanguageService
 {
-    private const string LANG_KEY = "app_language";
+    private const string LANG_KEY = "";
 
     public void SetLanguage(string langCode)
     {
@@ -13,6 +13,7 @@ public class LanguageService : ILanguageService
 
     public string GetLanguage()
     {
-        return Preferences.Get(LANG_KEY, "en"); // default English
+        //CurrentLanguage nếu chưa có thì gán mặc định là "en"
+        return Preferences.Get(LANG_KEY, "en");
     }
 }

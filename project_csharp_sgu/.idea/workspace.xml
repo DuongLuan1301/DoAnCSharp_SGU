@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b67ecdf3-58e0-4f2e-adb3-18aa07124a7e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deviceManager.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/05D34BA5CA8637CF.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/2E7FD15AFA9B216B.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/623E6E29E2058512.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/659D48BEBA477FDD.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/8956669C0037225B.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/95D547F40BE4687C.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/A1A754E9E8693F85.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/B71CFF5D5A0B3AEB.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/B7446A23346A729D.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/DCFB018199B59345.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/ED64959F88B22E6D.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/F01C7EADE990A004.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/F6DB49E0CC905A9A.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/F91D79B39A269A7E.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/F975D0960055A5E3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/bin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/classes.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/classes2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/classes3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/classes4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/classes5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl11.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl12.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl13.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl14.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl15.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl16.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl17.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl18.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl19.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl20.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl21.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl22.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl23.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl24.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl25.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl26.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl27.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl28.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl29.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl30.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl31.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl32.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl33.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl34.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl35.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl36.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl37.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl38.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl39.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl40.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl41.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl42.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl43.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl44.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl45.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl46.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl47.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl48.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl49.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl50.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl51.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl52.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl53.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl7.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jl9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/repackaged.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/res.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/res2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/res3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu.slnx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/App.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/App.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/AppShell.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/AppShell.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/MauiProgram.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Models/AppState.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Models/Poi.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Pages/HomePage.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Pages/HomePage.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Pages/LanguagePage.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Pages/LanguagePage.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Pages/PoiDetailPage.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Pages/PoiDetailPage.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Pages/PoiListPage.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Pages/PoiListPage.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Pages/QrPage.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Pages/QrPage.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Platforms/Android/AndroidManifest.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Platforms/Android/MainActivity.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Platforms/Android/MainApplication.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Platforms/Android/Resources/values/colors.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Platforms/MacCatalyst/AppDelegate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Platforms/MacCatalyst/Entitlements.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Platforms/MacCatalyst/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Platforms/MacCatalyst/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Platforms/Windows/App.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Platforms/Windows/App.xaml.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Platforms/Windows/Package.appxmanifest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Platforms/Windows/app.manifest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Platforms/iOS/AppDelegate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Platforms/iOS/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Platforms/iOS/Program.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Platforms/iOS/Resources/PrivacyInfo.xcprivacy" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Properties/launchSettings.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Resources/AppIcon/appicon.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Resources/AppIcon/appiconfg.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Resources/Fonts/OpenSans-Regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Resources/Fonts/OpenSans-Semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Resources/Images/language.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Resources/Raw/AboutAssets.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Resources/Splash/splash.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Resources/Styles/Colors.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Resources/Styles/Styles.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Services/ILanguageService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/Services/LanguageService.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/project_csharp_sgu.csproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_csharp_sgu/project_csharp_sgu.csproj.user" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../~$PRD.docx" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="3BF8SgwplGS7CUDYGfTNMVXtNFt" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;
+  }
+}</component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b67ecdf3-58e0-4f2e-adb3-18aa07124a7e" name="Changes" comment="" />
+      <created>1774073459691</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1774073459691</updated>
+    </task>
+    <servers />
+  </component>
+</project>

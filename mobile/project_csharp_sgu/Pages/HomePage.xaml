@@ -32,7 +32,8 @@
                 <Label Text="MAP VIEW (GPS)"
                        HorizontalOptions="Center"
                        VerticalOptions="Center"
-                       TextColor="Gray"/>
+                       TextColor="Gray"
+                       FontFamily="OpenSansSemibold"/>
             </Grid>
         </Frame>
         <!-- 🔹 ROW 3: INFO PANEL -->
@@ -43,11 +44,13 @@
             <VerticalStackLayout Spacing="5">
                 <Label x:Name="LocationLabel"
                        FontSize="16"
-                       TextColor="Gray"/>
+                       TextColor="Gray"
+                       FontFamily="OpenSansRegular"/>
 
                 <Label x:Name="AddressLabel"
                        FontSize="16"
-                       TextColor="Gray"/>
+                       TextColor="Gray"
+                       FontFamily="OpenSansRegular"/>
 
             </VerticalStackLayout>
         </Frame>

@@ -1,18 +1,21 @@
-﻿using project_csharp_sgu.Services;
+﻿using project_csharp_sgu.Services; // ILanguageService, LanguageService
 
 namespace project_csharp_sgu;
 
 public partial class App : Application
 {
+    //Constructor của App, chạy khi app khởi động
     public App()
     {
         InitializeComponent();
 
         //Khởi tạo dịch vụ langauge serice
         ILanguageService languageService = new LanguageService();
-        //lấy ngôn ngữ đã lưu trong local, nếu chưa thì mặc định là english
+
+        //lấy ngôn ngữ đã lưu trong local
         AppState.CurrentLanguage = languageService.GetLanguage();
 
+        //Kiểm tra CurrentLanguage
         if (string.IsNullOrEmpty(AppState.CurrentLanguage))
         {
             AppState.CurrentLanguage = "en";
