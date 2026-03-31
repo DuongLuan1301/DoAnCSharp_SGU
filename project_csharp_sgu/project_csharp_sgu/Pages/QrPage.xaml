@@ -1,11 +1,88 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="project_csharp_sgu.Pages.QrPage">
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             x:Class="project_csharp_sgu.Pages.QrPage"
+             Title="Dịch vụ QR">
 
-    <Grid>
-        <Label Text="QR Scanner"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"/>
-    </Grid>
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+            
+            <Label Text="QUÉT MÃ CỬA HÀNG" 
+                   FontAttributes="Bold" 
+                   FontSize="18" 
+                   HorizontalOptions="Center" 
+                   TextColor="#8B7CF6" />
+            
+            <Frame HeightRequest="300" 
+                   Padding="0" 
+                   CornerRadius="15" 
+                   IsClippedToBounds="True" 
+                   HasShadow="True"
+                   BorderColor="#8B7CF6">
+                <Grid>
+                    <zxing:CameraBarcodeReaderView
+                        x:Name="barcodeReader"
+                        BarcodesDetected="BarcodeReader_BarcodesDetected" />
+                    
+                    <Border Stroke="White" 
+                            StrokeThickness="2" 
+                            StrokeShape="RoundRectangle 10"
+                            WidthRequest="180" 
+                            HeightRequest="180" 
+                            HorizontalOptions="Center" 
+                            VerticalOptions="Center" 
+                            BackgroundColor="Transparent"/>
+                </Grid>
+            </Frame>
+            <Label Text="Hướng camera vào mã QR để nghe thuyết minh" 
+                   FontSize="12" 
+                   HorizontalOptions="Center" 
+                   TextColor="Gray" />
 
+            <BoxView HeightRequest="1" Color="#E0E0E0" Margin="0,5" />
+
+            <Label Text="TẠO MÃ QR QUẢNG BÁ" 
+                   FontAttributes="Bold" 
+                   FontSize="16"
+                   HorizontalOptions="Center" />
+            
+            <Entry x:Name="IdGeneratorEntry" 
+                   Placeholder="Nhập ID (Ví dụ: POI_1)" 
+                   Text="POI_1"
+                   HorizontalOptions="Fill" />
+            
+            <Button Text="Tạo mã QR" 
+                    Clicked="OnGenerateClicked" 
+                    BackgroundColor="#8B7CF6" 
+                    TextColor="White" 
+                    CornerRadius="8" 
+                    HeightRequest="45"/>
+
+            <Frame HorizontalOptions="Center" 
+                   Padding="10" 
+                   BorderColor="#F0F0F0" 
+                   HasShadow="False"
+                   WidthRequest="160"
+                   HeightRequest="160">
+                
+                <zxing:BarcodeGeneratorView
+                    x:Name="qrGenerator"
+                    Format="QrCode"
+                    Value="POI_1"
+                    ForegroundColor="Black"
+                    BackgroundColor="White"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    HeightRequest="140" 
+                    WidthRequest="140" />
+            </Frame>
+            
+            <Label Text="Mã định danh cho hàng quán" 
+                   FontSize="11" 
+                   HorizontalOptions="Center" 
+                   TextColor="Gray" 
+                   Margin="0,-10,0,10"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

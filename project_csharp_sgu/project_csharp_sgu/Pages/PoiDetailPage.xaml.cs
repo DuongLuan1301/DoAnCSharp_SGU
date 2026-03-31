@@ -1,32 +1,40 @@
-using Microsoft.Maui.Controls;
 using Microsoft.Maui.Media;
-using project_csharp_sgu.Models;
+using project_csharp_sgu.Models; // QUAN TRỌNG: Phải có dòng này
 
 namespace project_csharp_sgu.Pages;
 
 public partial class PoiDetailPage : ContentPage
 {
     private Poi _poi;
+    private bool _shouldAutoPlay;
 
-    // ✅ constructor nhận dữ liệu
-    public PoiDetailPage(Poi poi)
+    // Đảm bảo kiểu dữ liệu ở đây là Poi (đã được nhận diện từ namespace Models)
+    public PoiDetailPage(Poi poi, bool autoPlay = false)
     {
-        InitializeComponent(); // ⚠️ dòng này phải có
-
+        InitializeComponent();
         _poi = poi;
+        _shouldAutoPlay = autoPlay;
         BindingContext = _poi;
     }
 
-    // ✅ nút play audio
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (_shouldAutoPlay && _poi != null && !string.IsNullOrEmpty(_poi.Description))
+        {
+            await TextToSpeech.Default.SpeakAsync(_poi.Description);
+        }
+    }
+
     private async void OnPlayAudioClicked(object sender, EventArgs e)
     {
         if (_poi != null)
         {
-            await TextToSpeech.SpeakAsync(_poi.Description);
+            await TextToSpeech.Default.SpeakAsync(_poi.Description);
         }
     }
 
-    // ✅ nút đóng
     private async void OnCloseClicked(object sender, EventArgs e)
     {
         await Navigation.PopAsync();
