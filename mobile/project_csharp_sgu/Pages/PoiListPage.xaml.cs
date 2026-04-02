@@ -2,6 +2,7 @@ using Microsoft.Maui.Controls;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
 using project_csharp_sgu.Models;
+using project_csharp_sgu.Services;
 
 namespace project_csharp_sgu.Pages;
 
@@ -9,9 +10,18 @@ public partial class PoiListPage : ContentPage
 {
     public ObservableCollection<Poi> Pois { get; set; } = new ObservableCollection<Poi>();
 
+    private readonly IAudioService _audioService;
+
     public PoiListPage()
     {
         InitializeComponent();
+
+        _audioService = Application.Current
+            .Handler
+            .MauiContext
+            .Services
+            .GetService<IAudioService>();
+
         PoiList.ItemsSource = Pois; // bind ngay từ đầu
     }
 
@@ -50,16 +60,9 @@ public partial class PoiListPage : ContentPage
 
     private async void OnDetailClicked(object sender, EventArgs e)
     {
-        try
+        if (sender is Button button && button.BindingContext is Poi selectedPoi)
         {
-            if (sender is Button button && button.BindingContext is Poi selectedPoi)
-            {
-                await Navigation.PushAsync(new PoiDetailPage(selectedPoi));
-            }
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Navigation Error", ex.Message, "OK");
+            await Navigation.PushAsync(new PoiDetailPage(selectedPoi));
         }
     }
 }

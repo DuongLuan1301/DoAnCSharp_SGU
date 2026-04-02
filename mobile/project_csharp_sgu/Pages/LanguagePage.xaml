@@ -1,16 +1,23 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="project_csharp_sgu.Pages.LanguagePage">
-    <VerticalStackLayout Padding="20" Spacing="15">
+    <VerticalStackLayout Padding="20"
+            Spacing="15">
 
         <Label Text="Choose Language"
                FontSize="22"
                FontAttributes="Bold"
                HorizontalOptions="Center"/>
 
-        <Button Text="English" Clicked="OnLanguageSelected"/>
-        <Button Text="日本語" Clicked="OnLanguageSelected"/>
-        <Button Text="中文" Clicked="OnLanguageSelected"/>
+        <Button x:Name="enButton"
+                Text="🦅English🦅"
+                Clicked="OnLanguageSelected"/>
+        <Button x:Name="jpButton"
+                Text="🇯🇵日本語🇯🇵"
+                Clicked="OnLanguageSelected"/>
+        <Button x:Name="cnButton"
+                Text="🇨🇳中文🇨🇳"
+                Clicked="OnLanguageSelected"/>
 
     </VerticalStackLayout>
 </ContentPage>

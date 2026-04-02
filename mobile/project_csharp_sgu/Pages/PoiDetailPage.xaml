@@ -30,7 +30,8 @@
                                    Text="{Binding description}"
                                    FontSize="14"/>
 
-                            <Button Text="▶ Play Audio"
+                            <Button x:Name="AudioButton"
+                                    Text="▶️ Play Audio"
                                     Clicked="OnPlayAudioClicked"/>
 
                      </VerticalStackLayout>

@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using project_csharp_sgu.Pages;
+using project_csharp_sgu.Services;
 
 namespace project_csharp_sgu;
 
@@ -19,6 +20,9 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
+        
+        // Register Services
+        builder.Services.AddSingleton<IAudioService, AudioService>();
 
         // Register Pages
         builder.Services.AddSingleton<HomePage>();

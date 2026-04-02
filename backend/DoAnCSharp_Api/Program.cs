@@ -18,7 +18,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-// 🔥 API thật
+//API
 app.MapGet("/api/poi", async (string lang) =>
 {
     var pois = await poiCollection.Find(_ => true).ToListAsync();
