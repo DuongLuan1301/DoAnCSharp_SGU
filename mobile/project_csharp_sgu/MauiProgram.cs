@@ -23,6 +23,7 @@ public static class MauiProgram
         
         // Register Services
         builder.Services.AddSingleton<IAudioService, AudioService>();
+        builder.Services.AddSingleton<LocationService>();
 
         // Register Pages
         builder.Services.AddSingleton<HomePage>();

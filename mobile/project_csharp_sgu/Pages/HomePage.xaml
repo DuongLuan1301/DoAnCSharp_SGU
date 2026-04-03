@@ -17,7 +17,7 @@
                    HasShadow="True"
                    HorizontalOptions="Start">
 
-                <ImageButton Source="language.jpg"
+                <ImageButton Source="language.png"
                              BackgroundColor="Transparent"
                              Clicked="OnLanguageClicked"/>
             </Frame>

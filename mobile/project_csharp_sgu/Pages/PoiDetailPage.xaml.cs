@@ -8,7 +8,6 @@ namespace project_csharp_sgu.Pages;
 public partial class PoiDetailPage : ContentPage
 {
     private Poi _poi;
-
     private readonly IAudioService _audioService;
 
     //constructor

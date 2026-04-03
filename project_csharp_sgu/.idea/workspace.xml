@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b67ecdf3-58e0-4f2e-adb3-18aa07124a7e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/PoiListPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/PoiListPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobile/project_csharp_sgu/MauiProgram.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/project_csharp_sgu/MauiProgram.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Models/Poi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Models/Poi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/HomePage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/HomePage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/HomePage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/HomePage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/PoiDetailPage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/PoiDetailPage.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/PoiListPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/PoiListPage.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Resources/Images/language.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

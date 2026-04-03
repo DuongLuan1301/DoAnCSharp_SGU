@@ -12,10 +12,8 @@ public partial class HomePage : ContentPage
     public HomePage()
     {
         InitializeComponent();
-        // 🔥 load UI từ XAML → tạo ra LocationLabel, AddressLabel
 
         LoadLanguage();
-        // 🔥 set text theo ngôn ngữ (lúc mới vào app)
     }
 
     // 🔹 nút chuyển sang trang chọn ngôn ngữ
@@ -190,21 +188,27 @@ public partial class HomePage : ContentPage
         string lang = AppState.CurrentLanguage;
 
         // 🔹 fallback (khi chưa có GPS)
-        string latlng = "Loading...";
-        string address = "Loading...";
+        string latlng;
+        string address;
 
         if (lang == "ja")
         {
+            latlng = "読み込み中...";
+            address = "読み込み中...";
             LocationLabel.Text = $"📍 位置: {latlng}";
             AddressLabel.Text = $"📌 住所: {address}";
         }
         else if (lang == "zh")
         {
+            latlng = "加载中...";
+            address = "加载中...";
             LocationLabel.Text = $"📍 位置: {latlng}";
             AddressLabel.Text = $"📌 地址: {address}";
         }
         else
         {
+            latlng = "loading...";
+            address = "loading...";
             LocationLabel.Text = $"📍 Location: {latlng}";
             AddressLabel.Text = $"📌 Address: {address}";
         }

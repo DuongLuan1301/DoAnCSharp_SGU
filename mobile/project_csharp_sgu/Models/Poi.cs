@@ -6,5 +6,6 @@ public class Poi
     public string address { get; set; }
     public double lat { get; set; }
     public double lng { get; set; }
-    public string description { get; set; } // đây là description đã được backend lọc theo lang
+    public string description { get; set; }
+    public string distance { get; set; }
 }
