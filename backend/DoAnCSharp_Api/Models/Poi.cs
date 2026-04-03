@@ -1,37 +1,37 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace DoAnCSharp_Api.Models
+namespace DoAnCSharp_Api.Models;
+
+[BsonIgnoreExtraElements] // CỰC KỲ QUAN TRỌNG: Để lờ đi cột _id của MongoDB
+public class Poi
 {
-    public class Poi
-    {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+    // Đổi tên thành QrId để C# không tự ý ép nó về kiểu ObjectId (24 hex)
+    // Nhưng dùng [BsonElement("Id")] để nó vẫn lấy dữ liệu từ cột "Id" bạn đã nhập trong Compass
+    [BsonElement("Id")]
+    public string QrId { get; set; } = null!;
 
-        [BsonElement("name")]
-        public string Name { get; set; }
+    [BsonElement("Name")]
+    public string Name { get; set; } = null!;
 
-        [BsonElement("address")]
-        public string Address { get; set; }
+    [BsonElement("Address")]
+    public string Address { get; set; } = null!;
 
-        [BsonElement("lat")]
-        public double Lat { get; set; }
+    [BsonElement("Lat")]
+    public double Lat { get; set; }
 
-        [BsonElement("lng")]
-        public double Lng { get; set; }
+    [BsonElement("Lng")]
+    public double Lng { get; set; }
 
-        [BsonElement("localizations")]
-        public List<Localization>? Localizations { get; set; } // nullable
-    }
-
-    public class Localization
-    {
-        [BsonElement("lang")]
-        public string? Lang { get; set; }  // nullable
-
-        [BsonElement("description")]
-        public string? Description { get; set; } // nullable
-    }
+    [BsonElement("Localizations")]
+    public List<Localization>? Localizations { get; set; }
 }
 
+public class Localization
+{
+    [BsonElement("Lang")]
+    public string? Lang { get; set; }
+
+    [BsonElement("Description")]
+    public string? Description { get; set; }
+}

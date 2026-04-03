@@ -8,10 +8,12 @@ namespace project_csharp_sgu.Pages;
 public partial class PoiDetailPage : ContentPage
 {
     private Poi _poi;
+    private Poi selectedPoi;
+
     // private string _translatedDescription = null;
 
     //constructor
-    public PoiDetailPage(Poi poi)
+    public PoiDetailPage(Poi poi, bool v)
     {
         InitializeComponent();
 
@@ -20,6 +22,12 @@ public partial class PoiDetailPage : ContentPage
         // bind dữ liệu sang UI
         BindingContext = _poi;
     }
+
+    public PoiDetailPage(Poi selectedPoi)
+    {
+        this.selectedPoi = selectedPoi;
+    }
+
     //lấy ngôn ngữ hiện tại và format sang định dạng khác để gọi voice phù hợp
     private static string GetSpeechLocale(string lang)
     {
@@ -65,6 +73,6 @@ public partial class PoiDetailPage : ContentPage
     // ĐÓNG POPUP
     private async void OnCloseClicked(object sender, EventArgs e)
     {
-        await Navigation.PopAsync();
+        _ = await Navigation.PopAsync();
     }
 }

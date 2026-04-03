@@ -1,11 +1,95 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="project_csharp_sgu.Pages.QrPage">
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             x:Class="project_csharp_sgu.Pages.QrPage"
+             Title="Quét mã địa điểm"
+             BackgroundColor="Black">
 
-    <Grid>
-        <Label Text="QR Scanner"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"/>
+    <Grid RowDefinitions="*, Auto">
+
+        <Grid Grid.Row="0">
+            <zxing:CameraBarcodeReaderView
+                x:Name="barcodeReader"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill"
+                IsDetecting="False" 
+                BarcodesDetected="BarcodeReader_BarcodesDetected" />
+
+            <Border Stroke="White" 
+                    StrokeThickness="3" 
+                    StrokeShape="RoundRectangle 25"
+                    WidthRequest="240" 
+                    HeightRequest="240" 
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center"
+                    BackgroundColor="Transparent"
+                    InputTransparent="True">
+                
+                <BoxView Color="Red" 
+                         HeightRequest="2" 
+                         WidthRequest="220" 
+                         VerticalOptions="Center" 
+                         Opacity="0.7"
+                         InputTransparent="True">
+                    <BoxView.Shadow>
+                        <Shadow Brush="Red" Offset="0,0" Radius="10" Opacity="0.8" />
+                    </BoxView.Shadow>
+                </BoxView>
+            </Border>
+            
+            <Label Text="Vui lòng đưa mã QR vào trung tâm khung hình" 
+                   TextColor="White" 
+                   FontSize="14"
+                   FontAttributes="Italic"
+                   VerticalOptions="End" 
+                   HorizontalOptions="Center" 
+                   Margin="0,0,0,40" 
+                   InputTransparent="True" />
+        </Grid>
+
+        <Frame Grid.Row="1" 
+               CornerRadius="20" 
+               Margin="10" 
+               Padding="15" 
+               HasShadow="True"
+               BackgroundColor="White"
+               BorderColor="#E0E0E0">
+            
+            <VerticalStackLayout Spacing="12">
+                <Label Text="TẠO MÃ QR ĐỊA ĐIỂM" 
+                       TextColor="#04010F"
+                       FontAttributes="Bold" 
+                       FontSize="16"
+                       HorizontalOptions="Center"/>
+
+                <Entry x:Name="IdGeneratorEntry" 
+                       Placeholder="Nhập ID (Ví dụ: SGU_01)" 
+                       TextColor="Black"
+                       PlaceholderColor="Gray"
+                       Keyboard="Default"
+                       HeightRequest="45" />
+
+                <Grid ColumnDefinitions="*, Auto" ColumnSpacing="15">
+                    <Button Grid.Column="0"
+                            Text="Tạo QR" 
+                            Clicked="OnGenerateClicked" 
+                            BackgroundColor="#512BD4" 
+                            TextColor="White"
+                            CornerRadius="10"
+                            HeightRequest="45" />
+                    
+                    <zxing:BarcodeGeneratorView
+                        Grid.Column="1"
+                        x:Name="qrGenerator"
+                        Format="QrCode"
+                        Value="SGU_01"
+                        HeightRequest="80" 
+                        WidthRequest="80"
+                        BackgroundColor="Transparent" />
+                </Grid>
+            </VerticalStackLayout>
+        </Frame>
+
     </Grid>
-
 </ContentPage>
