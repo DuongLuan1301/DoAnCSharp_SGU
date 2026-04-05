@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Add POI</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f4f6f9;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 6px 0 12px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        textarea {
+            min-height: 120px;
+        }
+
+        button {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+
+        #dropZone {
+            border: 2px dashed #aaa;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            transition: 0.2s;
+        }
+
+        #preview {
+            display: none;
+            width: 160px;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        #fileName {
+            font-size: 14px;
+            color: #555;
+            margin-top: 5px;
+        }
+
+        .back {
+            background: #777;
+            margin-left: 10px;
+        }
+
+        .back:hover {
+            background: #555;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>➕ Add POI</h2>
+
+        <input id="name" placeholder="Name">
+        <input id="address" placeholder="Address">
+        <input id="lat" placeholder="Latitude">
+        <input id="lng" placeholder="Longitude">
+
+        <h3>📷 Image</h3>
+        <div id="dropZone">Drag & Drop Image Here</div>
+        <div id="fileName"></div>
+        <img id="preview">
+
+        <h3>🇻🇳 Description</h3>
+        <textarea id="vi"></textarea>
+
+        <button onclick="save()">Save</button>
+        <button class="back" onclick="goBack()">Back</button>
+    </div>
+
+    <script>
+        const API = "http://localhost:5188/admin/poi";
+        const UPLOAD_API = "http://localhost:5188/upload-image";
+
+        let uploadedImage = "";
+
+        const dropZone = document.getElementById("dropZone");
+        const preview = document.getElementById("preview");
+        const fileNameText = document.getElementById("fileName");
+
+        // 🔥 DRAG OVER
+        dropZone.addEventListener("dragover", e => {
+            e.preventDefault();
+            dropZone.style.background = "#eee";
+        });
+
+        // 🔥 DRAG LEAVE
+        dropZone.addEventListener("dragleave", () => {
+            dropZone.style.background = "";
+        });
+
+        // 🔥 DROP
+        dropZone.addEventListener("drop", async (e) => {
+            e.preventDefault();
+            dropZone.style.background = "";
+
+            console.log("DROP TRIGGERED");
+
+            const file = e.dataTransfer.files[0];
+            console.log("FILE:", file);
+
+            if (!file) {
+                alert("❌ No file detected!");
+                return;
+            }
+
+            // 🔥 HIỂN THỊ TÊN FILE
+            fileNameText.innerText = file.name;
+
+            // 🔥 PREVIEW NGAY (KHÔNG CHỜ UPLOAD)
+            preview.src = URL.createObjectURL(file);
+            preview.style.display = "block";
+
+            // 🔥 UPLOAD ẢNH
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const res = await fetch(UPLOAD_API, {
+                method: "POST",
+                body: formData
+            });
+
+            console.log("UPLOAD STATUS:", res.status);
+
+            const data = await res.json();
+            console.log("UPLOAD RESPONSE:", data);
+
+            uploadedImage = data.fileName;
+        });
+
+        // 🔥 SAVE
+        async function save() {
+
+            if (!uploadedImage) {
+                alert("⚠️ Please upload image first!");
+                return;
+            }
+
+            const poi = {
+                name: document.getElementById("name").value,
+                address: document.getElementById("address").value,
+                lat: parseFloat(document.getElementById("lat").value),
+                lng: parseFloat(document.getElementById("lng").value),
+                image: uploadedImage,
+
+                localizations: [
+                    {
+                        lang: "vi",
+                        description: document.getElementById("vi").value
+                    }
+                ]
+            };
+
+            console.log("SENDING:", poi);
+
+            await fetch(API, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(poi)
+            });
+
+            alert("✅ Added successfully!");
+            window.location.href = "index.html";
+        }
+        function goBack() {
+            window.location.href = "index.html";
+        }
+    </script>
+
+</body>
+
+</html>

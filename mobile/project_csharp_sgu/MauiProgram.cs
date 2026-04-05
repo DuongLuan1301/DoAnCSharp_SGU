@@ -15,7 +15,7 @@ public static class MauiProgram
         //Register fonts
         builder
             .UseMauiApp<App>()
-            .UseSkiaSharp() // 🔥 QUAN TRỌNG
+            .UseSkiaSharp()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
