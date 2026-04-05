@@ -1,6 +1,12 @@
 ﻿using Microsoft.Maui.Controls;
 using Microsoft.Maui.Devices.Sensors;   // 🔹 dùng Geolocation, Geocoding
 using Microsoft.Maui.ApplicationModel; // 🔹 dùng Permissions, MainThread
+using Mapsui;
+using Mapsui.Tiling;
+using Mapsui.UI.Maui;
+using Mapsui.Layers;
+using Mapsui.Styles;
+using Mapsui.Projections;
 
 namespace project_csharp_sgu.Pages;
 
@@ -8,6 +14,7 @@ public partial class HomePage : ContentPage
 {
     // 🔹 dùng để dừng timer khi rời trang (tránh leak)
     private CancellationTokenSource _cts;
+    private bool isFirst = true;
 
     public HomePage()
     {
@@ -27,8 +34,12 @@ public partial class HomePage : ContentPage
     {
         base.OnAppearing();
 
+        isFirst = true;
+
         LoadLanguage();
         // 🔥 đảm bảo UI luôn đúng ngôn ngữ
+
+        InitMap();
 
         await RequestLocationPermission();
         // 🔥 xin quyền GPS
@@ -44,6 +55,16 @@ public partial class HomePage : ContentPage
 
         _cts?.Cancel();
         // 🔥 dừng timer → tránh chạy ngầm
+    }
+
+    private void InitMap()
+    {
+        var map = new Mapsui.Map();
+
+        // load map từ OpenStreetMap
+        map.Layers.Add(OpenStreetMap.CreateTileLayer());
+
+        MyMap.Map = map;
     }
 
     // =====================================================
@@ -103,6 +124,8 @@ public partial class HomePage : ContentPage
                 double lat = location.Latitude;
                 double lon = location.Longitude;
 
+                MainThread.BeginInvokeOnMainThread(() => { UpdateMapLocation(lat, lon); });
+
                 // 🔥 REVERSE GEOCODING → từ tọa độ ra địa chỉ
                 var placemarks = await Geocoding.Default.GetPlacemarksAsync(lat, lon);
 
@@ -155,6 +178,51 @@ public partial class HomePage : ContentPage
         }
     }
 
+    private void UpdateMapLocation(double lat, double lon)
+    {
+        if (MyMap == null || MyMap.Map == null)
+            return;
+
+        var (x, y) = SphericalMercator.FromLonLat(lon, lat);
+        var point = new MPoint(x, y);
+
+        // 🔥 chỉ zoom lần đầu
+        if (isFirst)
+        {
+            MyMap.Map.Navigator.CenterOn(point);
+            MyMap.Map.Navigator.ZoomTo(1);
+            isFirst = false;
+        }
+        else
+        {
+            MyMap.Map.Navigator.CenterOn(point);
+        }
+
+        // ===== giữ nguyên phần marker của bạn =====
+        var feature = new PointFeature(point)
+        {
+            Styles = new[]
+            {
+            new SymbolStyle { SymbolScale = 0.8 }
+        }
+        };
+
+        var layer = new MemoryLayer
+        {
+            Features = new[] { feature }
+        };
+
+        var oldLayers = MyMap.Map.Layers
+            .Where(l => l is MemoryLayer)
+            .ToList();
+
+        foreach (var l in oldLayers)
+            MyMap.Map.Layers.Remove(l);
+
+        MyMap.Map.Layers.Add(layer);
+
+        MyMap.Refresh();
+    }
     // =====================================================
     // 🔥 4. UPDATE UI THEO NGÔN NGỮ
     // =====================================================

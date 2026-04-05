@@ -15,6 +15,9 @@ namespace DoAnCSharp_Api.Models
         [BsonElement("address")]
         public string Address { get; set; }
 
+        [BsonElement("image")]
+        public string Image { get; set; }
+
         [BsonElement("lat")]
         public double Lat { get; set; }
 

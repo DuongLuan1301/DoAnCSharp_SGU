@@ -27,6 +27,7 @@ app.MapGet("/api/poi", async (string lang) =>
     {
         p.Name,
         p.Address,
+        image = $"http://10.0.2.2:5188/images/{p.Image}",
         p.Lat,
         p.Lng,
         Description = p.Localizations?
@@ -36,5 +37,5 @@ app.MapGet("/api/poi", async (string lang) =>
 
     return Results.Ok(result);
 });
-
+app.UseStaticFiles();
 app.Run();

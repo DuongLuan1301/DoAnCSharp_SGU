@@ -1,26 +1,26 @@
 ﻿using Microsoft.Extensions.Logging;
 using project_csharp_sgu.Pages;
 using project_csharp_sgu.Services;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace project_csharp_sgu;
 
 public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
-    {   
+    {
         //Tạo builder
         var builder = MauiApp.CreateBuilder();
 
         //Register fonts
         builder
             .UseMauiApp<App>()
+            .UseSkiaSharp() // 🔥 QUAN TRỌNG
             .ConfigureFonts(fonts =>
-            {                 
-                //fonts.AddFont("fileName", "alias");
+            {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
-        
+
         // Register Services
         builder.Services.AddSingleton<IAudioService, AudioService>();
         builder.Services.AddSingleton<LocationService>();

@@ -12,7 +12,7 @@
 
                      <VerticalStackLayout Spacing="10">
 
-                            <Image Source="food.jpg"
+                            <Image Source="{Binding image}"
                                    HeightRequest="150"
                                    Aspect="AspectFill"/>
 

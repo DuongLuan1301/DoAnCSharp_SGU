@@ -4,6 +4,7 @@ public class Poi
 {
     public string name { get; set; }
     public string address { get; set; }
+    public string image {get; set; }
     public double lat { get; set; }
     public double lng { get; set; }
     public string description { get; set; }

@@ -1,4 +1,4 @@
-﻿using project_csharp_sgu.Services; // ILanguageService, LanguageService
+﻿using project_csharp_sgu.Services;
 
 namespace project_csharp_sgu;
 

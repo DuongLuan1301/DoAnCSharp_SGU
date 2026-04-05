@@ -1,5 +1,6 @@
 ﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mapsui="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
              x:Class="project_csharp_sgu.Pages.HomePage"
              Title="Home"
              BackgroundColor="#F5F5F5">
@@ -27,14 +28,7 @@
                BackgroundColor="#EAEAEA"
                HasShadow="True"
                HeightRequest="350">
-
-            <Grid>
-                <Label Text="MAP VIEW (GPS)"
-                       HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       TextColor="Gray"
-                       FontFamily="OpenSansSemibold"/>
-            </Grid>
+            <mapsui:MapControl x:Name="MyMap"/>
         </Frame>
         <!-- 🔹 ROW 3: INFO PANEL -->
         <Frame Padding="15"
