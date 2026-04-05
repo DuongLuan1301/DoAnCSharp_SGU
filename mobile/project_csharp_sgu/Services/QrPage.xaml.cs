@@ -1,12 +1,9 @@
 using project_csharp_sgu.Models;
 using project_csharp_sgu.Services;
 using ZXing.Net.Maui;
-<<<<<<< Updated upstream
-=======
 using ZXing.Net.Maui.Controls;
 using System.Diagnostics;
 using System.Net.Http.Json;
->>>>>>> Stashed changes
 
 namespace project_csharp_sgu.Pages;
 
@@ -52,11 +49,7 @@ public partial class QrPage : ContentPage
         }
         catch (Exception ex)
         {
-<<<<<<< Updated upstream
-            System.Diagnostics.Debug.WriteLine($"Lỗi khởi động Camera: {ex.Message}");
-=======
             Debug.WriteLine($"Lỗi khởi động Camera: {ex.Message}");
->>>>>>> Stashed changes
         }
     }
 
@@ -75,15 +68,6 @@ public partial class QrPage : ContentPage
 
         _isProcessing = true;
 
-<<<<<<< Updated upstream
-        Dispatcher.Dispatch(async () =>
-        {
-            string scannedId = firstResult.Value.Trim();
-
-            try 
-            {
-                // 1. Gọi Backend lấy thông tin gian hàng (bao gồm Lat, Lng)
-=======
         // Sử dụng Dispatcher để chạy tác vụ UI và Async
         _ = Dispatcher.Dispatch(async () =>
         {
@@ -92,98 +76,59 @@ public partial class QrPage : ContentPage
             try
             {
                 // 1. Gọi Backend lấy thông tin (Biến lang lấy từ AppState của bạn)
->>>>>>> Stashed changes
                 var poi = await _apiService.GetPoiByIdFromApiAsync(scannedId, AppState.CurrentLanguage);
 
                 if (poi != null)
                 {
-<<<<<<< Updated upstream
-                    // 2. Kiểm tra nếu có tọa độ thì hỏi người dùng
-                    if (poi.Lat != 0 && poi.Lng != 0)
-                    {
-                        string action = await DisplayActionSheet($"Tìm thấy: {poi.Name}", "Hủy", null, "Dẫn đường đến đây", "Xem thông tin chi tiết");
-=======
                     // 2. Kiểm tra nếu có tọa độ (sử dụng tên biến viết thường lat, lng)
                     if (poi.lat != 0 && poi.lng != 0)
                     {
                         string action = await DisplayActionSheet($"Tìm thấy: {poi.name}", "Hủy", null, "Dẫn đường đến đây", "Xem thông tin chi tiết");
->>>>>>> Stashed changes
 
                         if (action == "Dẫn đường đến đây")
                         {
                             await OpenMapAsync(poi);
-<<<<<<< Updated upstream
-                            _isProcessing = false; // Reset để có thể quét mã khác sau khi quay lại
-=======
                             _isProcessing = false;
->>>>>>> Stashed changes
                         }
                         else if (action == "Xem thông tin chi tiết")
                         {
                             await Navigation.PushAsync(new PoiDetailPage(poi, true));
-<<<<<<< Updated upstream
-                        }
-                        else
-                        {
-                            _isProcessing = false; // Nhấn Hủy thì cho quét lại
-=======
                             _isProcessing = false;
                         }
                         else
                         {
                             _isProcessing = false; // Nhấn Hủy hoặc bấm ra ngoài
->>>>>>> Stashed changes
                         }
                     }
                     else
                     {
                         // Nếu không có tọa độ thì vào thẳng trang chi tiết
                         await Navigation.PushAsync(new PoiDetailPage(poi, true));
-<<<<<<< Updated upstream
-=======
                         _isProcessing = false;
->>>>>>> Stashed changes
                     }
                 }
                 else
                 {
-<<<<<<< Updated upstream
-                    await DisplayAlert("Thông báo", $"Mã QR '{scannedId}' không tồn tại.", "OK");
-=======
                     await DisplayAlert("Thông báo", $"Mã QR '{scannedId}' không tồn tại trong hệ thống.", "OK");
->>>>>>> Stashed changes
                     _isProcessing = false;
                 }
             }
             catch (Exception ex)
             {
-<<<<<<< Updated upstream
-                await DisplayAlert("Lỗi kết nối", "Không thể lấy dữ liệu tọa độ. Kiểm tra API!", "OK");
-=======
                 await DisplayAlert("Lỗi kết nối", "Không thể lấy dữ liệu từ API. Vui lòng kiểm tra IP và Server!", "OK");
                 Debug.WriteLine($"Lỗi: {ex.Message}");
->>>>>>> Stashed changes
                 _isProcessing = false;
             }
         });
     }
 
-<<<<<<< Updated upstream
-    // Hàm mở ứng dụng bản đồ (Google Maps) trên điện thoại
-=======
->>>>>>> Stashed changes
     private async Task OpenMapAsync(Poi poi)
     {
         try
         {
-<<<<<<< Updated upstream
-            var location = new Location(poi.Lat, poi.Lng);
-            var options = new MapLaunchOptions { Name = poi.Name, NavigationMode = NavigationMode.Driving };
-=======
             // Sử dụng biến viết thường poi.lat, poi.lng và poi.name
             var location = new Location(poi.lat, poi.lng);
             var options = new MapLaunchOptions { Name = poi.name, NavigationMode = NavigationMode.Driving };
->>>>>>> Stashed changes
 
             await Map.Default.OpenAsync(location, options);
         }
@@ -193,18 +138,12 @@ public partial class QrPage : ContentPage
         }
     }
 
-<<<<<<< Updated upstream
-    private void OnGenerateClicked(object sender, EventArgs e)
-=======
    private void OnGenerateClicked(object? sender, EventArgs e) // Thêm dấu ? ở đây
->>>>>>> Stashed changes
     {
         if (IdGeneratorEntry != null && !string.IsNullOrEmpty(IdGeneratorEntry.Text))
         {
             qrGenerator.Value = IdGeneratorEntry.Text.Trim();
         }
-<<<<<<< Updated upstream
-=======
     }
 }
 
@@ -240,6 +179,5 @@ public class ApiService
         }
 
         throw new Exception("Lỗi hệ thống: " + response.StatusCode);
->>>>>>> Stashed changes
     }
 }

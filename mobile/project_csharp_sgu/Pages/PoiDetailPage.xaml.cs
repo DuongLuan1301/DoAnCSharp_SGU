@@ -13,15 +13,30 @@ public partial class PoiDetailPage : ContentPage
     // private string _translatedDescription = null;
 
     //constructor
+<<<<<<< Updated upstream
     public PoiDetailPage(Poi poi, bool v)
     {
         InitializeComponent();
+=======
+   public PoiDetailPage(Poi poi, bool isFromQr = false) // Mặc định là false nếu không truyền
+{
+    InitializeComponent();
+>>>>>>> Stashed changes
 
-        _poi = poi;
+    _poi = poi;
 
+<<<<<<< Updated upstream
         // bind dữ liệu sang UI
         BindingContext = _poi;
     }
+=======
+    // Lấy AudioService (Tài nhớ kiểm tra đã đăng ký trong MauiProgram chưa nhé)
+    _audioService = Application.Current?.Handler?.MauiContext?.Services.GetService<IAudioService>();
+
+    // Bind dữ liệu
+    BindingContext = _poi;
+}
+>>>>>>> Stashed changes
 
     public PoiDetailPage(Poi selectedPoi)
     {

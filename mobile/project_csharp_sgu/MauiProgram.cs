@@ -4,15 +4,27 @@ using ZXing.Net.Maui.Controls; // 1. PHẢI CÓ dòng này
 
 namespace project_csharp_sgu;
 
+using ZXing.Net.Maui.Controls; // 1. THÊM DÒNG NÀY
+
 public static class MauiProgram
 {
     public static MauiApp CreateMauiApp()
     {   
+<<<<<<< Updated upstream
         var builder = MauiApp.CreateBuilder();
 
         builder
             .UseMauiApp<App>()
             .UseBarcodeReader() // 2. QUAN TRỌNG: Kích hoạt camera quét QR tại đây
+=======
+        // Tạo builder
+        var builder = MauiApp.CreateBuilder();
+
+        // Register app and features
+        builder
+            .UseMauiApp<App>()
+            .UseBarcodeReader() // 2. THÊM DÒNG NÀY (Cực kỳ quan trọng để camera hoạt động)
+>>>>>>> Stashed changes
             .ConfigureFonts(fonts =>
             {                 
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
