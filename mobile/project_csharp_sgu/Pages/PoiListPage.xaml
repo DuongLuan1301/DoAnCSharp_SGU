@@ -5,22 +5,54 @@
     <CollectionView x:Name="PoiList">
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Frame Margin="10"
-                       Padding="15"
+                <Frame Margin="12"
+                       Padding="0"
                        CornerRadius="15"
-                       HasShadow="True">
+                       HasShadow="True"
+                       BackgroundColor="White">
 
-                    <VerticalStackLayout>
-                        <Label Text="{Binding name}"
-                               FontSize="18"
-                               FontAttributes="Bold"/>
+                    <Grid RowDefinitions="200,Auto" RowSpacing="0">
+                        
+                        <!-- Image -->
+                        <Image Grid.Row="0"
+                               Source="{Binding Image}"
+                               Aspect="AspectFill"
+                               BackgroundColor="#f0f0f0">
+                            <Image.Clip>
+                                <RoundRectangleGeometry CornerRadius="15,15,0,0"/>
+                            </Image.Clip>
+                        </Image>
 
-                        <Label Text="{Binding distance}"
-                               TextColor="Gray"/>
+                        <!-- Content -->
+                        <VerticalStackLayout Grid.Row="1" Padding="15" Spacing="10">
+                            
+                            <Label Text="{Binding Name}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="#2c3e50"/>
 
-                        <Button Text="Detail"
-                                Clicked="OnDetailClicked"/>
-                    </VerticalStackLayout>
+                            <Label Text="{Binding Address}"
+                                   FontSize="13"
+                                   TextColor="#7f8c8d"
+                                   LineBreakMode="TailTruncation"/>
+
+                            <Label Text="{Binding Distance}"
+                                   FontSize="13"
+                                   TextColor="#27ae60"
+                                   FontAttributes="Bold"/>
+
+                            <Button Text="Chi tiết →"
+                                    Clicked="OnDetailClicked"
+                                    BackgroundColor="#7851a9"
+                                    TextColor="White"
+                                    FontSize="14"
+                                    FontAttributes="Bold"
+                                    Padding="10,8"
+                                    Margin="0,5,0,0"
+                                    CornerRadius="8"/>
+                        </VerticalStackLayout>
+
+                    </Grid>
 
                 </Frame>
             </DataTemplate>

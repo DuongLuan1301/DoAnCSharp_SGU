@@ -2,16 +2,24 @@ using System.Drawing;
 using Microsoft.Maui.Media;
 using project_csharp_sgu.Models;
 
+#nullable enable
+
 namespace project_csharp_sgu.Services;
 
 public class AudioService : IAudioService
 {
-    private CancellationTokenSource _cts;
+    private CancellationTokenSource? _cts;
     private bool _isPlaying;
 
-    private Poi _currentPoi;
+    private Poi? _currentPoi;
 
     public bool IsPlaying => _isPlaying;
+
+    public AudioService()
+    {
+        _cts = null;
+        _currentPoi = null;
+    }
 
     public async Task PlayAsync(Poi poi, string lang)
     {
@@ -50,10 +58,13 @@ public class AudioService : IAudioService
                 l.Language.StartsWith(localeCode.Substring(0, 2))
             ) ?? locales.FirstOrDefault();
 
-            await TextToSpeech.SpeakAsync(poi.description, new SpeechOptions
+            if (poi.Description != null)
             {
-                Locale = selectedLocale
-            }, _cts.Token);
+                await TextToSpeech.SpeakAsync(poi.Description, new SpeechOptions
+                {
+                    Locale = selectedLocale
+                }, _cts.Token);
+            }
         }
         catch (OperationCanceledException)
         {

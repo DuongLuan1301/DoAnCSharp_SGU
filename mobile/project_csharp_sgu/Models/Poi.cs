@@ -1,12 +1,32 @@
+using System.Text.Json.Serialization;
+
+#nullable enable
+
 namespace project_csharp_sgu.Models;
 
 public class Poi
 {
-    public string name { get; set; }
-    public string address { get; set; }
-    public string image {get; set; }
-    public double lat { get; set; }
-    public double lng { get; set; }
-    public string description { get; set; }
-    public string distance { get; set; }
+    [JsonPropertyName("id")]
+    public string? Id { get; set; }
+
+    [JsonPropertyName("name")]
+    public string? Name { get; set; }
+
+    [JsonPropertyName("address")]
+    public string? Address { get; set; }
+
+    [JsonPropertyName("image")]
+    public string? Image { get; set; }
+
+    [JsonPropertyName("lat")]
+    public double Lat { get; set; }
+
+    [JsonPropertyName("lng")]
+    public double Lng { get; set; }
+
+    [JsonPropertyName("description")]
+    public string? Description { get; set; }
+
+    // Trường này tính toán tại Mobile nên không cần JsonPropertyName
+    public string? Distance { get; set; }
 }

@@ -8,33 +8,70 @@
                      Padding="20"
                      CornerRadius="20"
                      BackgroundColor="White"
-                     VerticalOptions="Center">
+                     VerticalOptions="FillAndExpand"
+                     HasShadow="True">
 
-                     <VerticalStackLayout Spacing="10">
+                     <Grid RowDefinitions="*" RowSpacing="0">
 
-                            <Image Source="{Binding image}"
-                                   HeightRequest="150"
-                                   Aspect="AspectFill"/>
+                            <!-- ScrollView for Content -->
+                            <ScrollView Grid.Row="0" Padding="15">
+                                   <VerticalStackLayout Spacing="12">
 
-                            <!-- Tên quán -->
-                            <Label Text="{Binding name}"
-                                   FontSize="20"
-                                   FontAttributes="Bold"/>
+                                          <!-- Image -->
+                                          <Image Source="{Binding Image}"
+                                                 HeightRequest="200"
+                                                 Aspect="AspectFill">
+                                                 <Image.Clip>
+                                                        <RoundRectangleGeometry CornerRadius="10"/>
+                                                 </Image.Clip>
+                                          </Image>
 
-                            <!-- Địa chỉ -->
-                            <Label Text="{Binding address}"
-                                   TextColor="Gray"/>
+                                          <!-- Tên POI -->
+                                          <Label Text="{Binding Name}"
+                                                 FontSize="22"
+                                                 FontAttributes="Bold"
+                                                 TextColor="#333"/>
 
-                            <!-- Description (sẽ bị replace sau khi dịch) -->
-                            <Label x:Name="DescriptionLabel"
-                                   Text="{Binding description}"
-                                   FontSize="14"/>
+                                          <!-- Địa chỉ -->
+                                          <VerticalStackLayout>
+                                                 <Label Text="📍 Địa chỉ:"
+                                                        FontSize="14"
+                                                        FontAttributes="Bold"
+                                                        TextColor="#555"/>
+                                                 <Label Text="{Binding Address}"
+                                                        FontSize="14"
+                                                        TextColor="#666"
+                                                        LineBreakMode="WordWrap"/>
+                                          </VerticalStackLayout>
 
-                            <Button x:Name="AudioButton"
-                                    Text="▶️ Play Audio"
-                                    Clicked="OnPlayAudioClicked"/>
+                                          <!-- Description -->
+                                          <VerticalStackLayout>
+                                                 <Label Text="📝 Thông tin:"
+                                                        FontSize="14"
+                                                        FontAttributes="Bold"
+                                                        TextColor="#555"/>
+                                                 <Label x:Name="DescriptionLabel"
+                                                        Text="{Binding Description}"
+                                                        FontSize="14"
+                                                        TextColor="#666"
+                                                        LineBreakMode="WordWrap"/>
+                                          </VerticalStackLayout>
 
-                     </VerticalStackLayout>
+                                          <!-- Play Audio Button -->
+                                          <Button x:Name="AudioButton"
+                                                  Text="▶️ Play Audio"
+                                                  Clicked="OnPlayAudioClicked"
+                                                  BackgroundColor="#7851a9"
+                                                  TextColor="White"
+                                                  FontSize="16"
+                                                  Padding="15"
+                                                  Margin="0,15,0,0"
+                                                  CornerRadius="10"/>
+
+                                   </VerticalStackLayout>
+                            </ScrollView>
+
+                     </Grid>
 
               </Frame>
 
