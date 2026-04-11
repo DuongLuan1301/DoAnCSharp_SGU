@@ -1,164 +1,56 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>POI Admin</title>
 
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f4f6f9;
-            margin: 0;
-            padding: 20px;
-        }
-
-        h2 {
-            margin-bottom: 10px;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .btn {
-            padding: 8px 14px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-        }
-
-        .btn-add {
-            background: #4CAF50;
-            color: white;
-        }
-
-        .btn-edit {
-            background: #2196F3;
-            color: white;
-        }
-
-        .btn-delete {
-            background: #f44336;
-            color: white;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 15px;
-            margin-top: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .card img {
-            width: 120px;
-            height: 90px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-
-        .info {
-            flex: 1;
-        }
-
-        .name {
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-        .address {
-            color: #666;
-            font-size: 14px;
-        }
-
-        .desc {
-            margin-top: 5px;
-            font-size: 14px;
-            color: #333;
-        }
-
-        .actions {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <div class="header">
-        <h2>📍 POI Admin</h2>
-        <button class="btn btn-add" onclick="goAdd()">➕ Add POI</button>
+<div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="logo">WEB ADMIN</div>
+
+        <nav class="menu">
+            <a href="index.html" class="active">📍 POIs List</a>
+            <a href="add.html">➕ Add POI</a>
+            <a class="logout">🚪 Sign Out</a>
+        </nav>
+    </aside>
+
+    <!-- MAIN -->
+    <div class="main">
+
+        <!-- TOPBAR -->
+        <header class="topbar">
+            <div class="search">
+                <input type="text" placeholder="Search POI...">
+            </div>
+
+            <div class="user">
+                <img src="https://i.pravatar.cc/40" />
+                <span>Admin</span>
+            </div>
+        </header>
+
+        <!-- CONTENT -->
+        <div class="content">
+
+            <h2 class="page-title">POI Management</h2>
+
+            <div class="grid">
+
+                <!-- CARD -->
+            </div>
+        </div>
     </div>
-
-    <div id="list"></div>
-
-    <script>
-        const API = "http://localhost:5188/admin/poi";
-
-        async function load() {
-            const res = await fetch(API);
-            const data = await res.json();
-
-            const list = document.getElementById("list");
-            list.innerHTML = "";
-
-            data.forEach(p => {
-
-                const id = p.id || p._id?.$oid;
-                const vi = p.localizations?.find(l => l.lang === "vi");
-
-                list.innerHTML += `
-                <div class="card">
-                    <img src="http://localhost:5188/images/${p.image}" />
-
-                    <div class="info">
-                        <div class="name">${p.name}</div>
-                        <div class="address">${p.address}</div>
-                        <div>📍 ${p.lat}, ${p.lng}</div>
-                        <div class="desc">
-                            ${vi ? vi.description.substring(0, 100) + "..." : ""}
-                        </div>
-                    </div>
-
-                    <div class="actions">
-                        <button class="btn btn-edit" onclick="edit('${id}')">Edit</button>
-                        <button class="btn btn-delete" onclick="del('${id}')">Delete</button>
-                    </div>
-                </div>
-                `;
-            });
-        }
-
-        function goAdd() {
-            window.location.href = "add.html";
-        }
-
-        function edit(id) {
-            window.location.href = `edit.html?id=${id}`;
-        }
-
-        async function del(id) {
-            if (!confirm("Delete this POI?")) return;
-
-            await fetch(`${API}/${id}`, {
-                method: "DELETE"
-            });
-
-            load();
-        }
-
-        load();
-    </script>
+</div>
 
 </body>
-
+<script type="module" src="js/index.js"></script>
 </html>

@@ -1,204 +1,214 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>Add POI</title>
 
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f4f6f9;
-            padding: 20px;
-        }
+    <link rel="stylesheet" href="css/add.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-        .container {
-            max-width: 650px;
-            margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        input,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 6px 0 12px 0;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
-
-        textarea {
-            min-height: 120px;
-        }
-
-        button {
-            padding: 10px 16px;
-            border: none;
-            border-radius: 8px;
-            background: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-
-        #dropZone {
-            border: 2px dashed #aaa;
-            padding: 30px;
-            text-align: center;
-            border-radius: 12px;
-            margin-bottom: 10px;
-            transition: 0.2s;
-        }
-
-        #preview {
-            display: none;
-            width: 160px;
-            margin-top: 10px;
-            border-radius: 10px;
-        }
-
-        #fileName {
-            font-size: 14px;
-            color: #555;
-            margin-top: 5px;
-        }
-
-        .back {
-            background: #777;
-            margin-left: 10px;
-        }
-
-        .back:hover {
-            background: #555;
-        }
-    </style>
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 
 <body>
 
-    <div class="container">
-        <h2>➕ Add POI</h2>
+    <div class="layout">
 
-        <input id="name" placeholder="Name">
-        <input id="address" placeholder="Address">
-        <input id="lat" placeholder="Latitude">
-        <input id="lng" placeholder="Longitude">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="logo">WEB ADMIN</div>
 
-        <h3>📷 Image</h3>
-        <div id="dropZone">Drag & Drop Image Here</div>
-        <div id="fileName"></div>
-        <img id="preview">
+            <nav class="menu">
+                <a href="index.html">📍 POIs List</a>
+                <a href="add.html" class="active">➕ Add POI</a>
+                <a class="logout">🚪 Sign Out</a>
+            </nav>
+        </aside>
 
-        <h3>🇻🇳 Description</h3>
-        <textarea id="vi"></textarea>
+        <!-- FORM -->
+        <div class="form-panel">
 
-        <button onclick="save()">Save</button>
-        <button class="back" onclick="goBack()">Back</button>
+            <h2>Add New POI</h2>
+
+            <div class="form">
+                <!-- NAME -->
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id="name">
+                </div>
+                <!-- ADDRESS -->
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" id="address">
+                </div>
+                <!-- LOCATION -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Latitude</label>
+                        <input type="text" id="lat">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Longitude</label>
+                        <input type="text" id="lng">
+                    </div>
+                </div>
+                <!-- DESCRIPTION -->
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="desc"></textarea>
+                </div>
+                <!-- IMAGE -->
+                <div class="form-group">
+                    <label>Image</label>
+
+                    <label class="upload-box">
+                        Click to choose image
+                        <input type="file" id="fileInput" hidden>
+                    </label>
+
+                    <div class="file-info" id="fileName"></div>
+                </div>
+
+                <div class="form-actions">
+                    <button class="btn cancel">Cancel</button>
+                    <button class="btn submit">Save</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MAP -->
+        <div class="map-panel">
+            <div id="map"></div>
+        </div>
+
     </div>
 
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- MAP -->
     <script>
-        const API = "http://localhost:5188/admin/poi";
-        const UPLOAD_API = "http://localhost:5188/upload-image";
+        const map = L.map('map').setView([10.7769, 106.7009], 13);
+        // load map FREE
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap'
+        }).addTo(map);
 
-        let uploadedImage = "";
+        let marker;
 
-        const dropZone = document.getElementById("dropZone");
-        const preview = document.getElementById("preview");
-        const fileNameText = document.getElementById("fileName");
+        //click → lấy tọa độ + fill form + lấy địa chỉ
+        map.on('click', async function (e) {
+            const { lat, lng } = e.latlng;
+            // fill lat lng
+            document.getElementById("lat").value = lat.toFixed(6);
+            document.getElementById("lng").value = lng.toFixed(6);
+            // marker
+            if (marker) map.removeLayer(marker);
+            marker = L.marker([lat, lng]).addTo(map);
+            //gọi API reverse geocoding
+            const res = await fetch(
+                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+            );
 
-        // 🔥 DRAG OVER
-        dropZone.addEventListener("dragover", e => {
-            e.preventDefault();
-            dropZone.style.background = "#eee";
+            const data = await res.json();
+
+            if (data && data.display_name) {
+                document.getElementById("address").value = data.display_name;
+            }
         });
+    </script>
+    <!-- IMAGE FILE -->
+    <script>
+        let selectedFile = null;
 
-        // 🔥 DRAG LEAVE
-        dropZone.addEventListener("dragleave", () => {
-            dropZone.style.background = "";
+        const fileInput = document.getElementById("fileInput");
+        const fileName = document.getElementById("fileName");
+
+        // khi chọn file
+        fileInput.addEventListener("change", (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            selectedFile = file;
+            fileName.innerText = file.name;
         });
+    </script>
+    <!-- SUBMIT -->
+    <script>
+        document.querySelector(".btn.submit").addEventListener("click", async () => {
 
-        // 🔥 DROP
-        dropZone.addEventListener("drop", async (e) => {
-            e.preventDefault();
-            dropZone.style.background = "";
+            const name = document.getElementById("name").value.trim();
+            const address = document.getElementById("address").value.trim();
+            const lat = document.getElementById("lat").value.trim();
+            const lng = document.getElementById("lng").value.trim();
+            const desc = document.getElementById("desc").value.trim();
 
-            console.log("DROP TRIGGERED");
-
-            const file = e.dataTransfer.files[0];
-            console.log("FILE:", file);
-
-            if (!file) {
-                alert("❌ No file detected!");
+            // ===== VALIDATE =====
+            if (!name) {
+                alert("Thiếu tên quán");
+                return;
+            }
+            if (!address) {
+                alert("Thiếu địa chỉ");
+                return;
+            }
+            if (!lat || isNaN(lat)) {
+                alert("Latitude không hợp lệ");
+                return;
+            }
+            if (!lng || isNaN(lng)) {
+                alert("Longitude không hợp lệ");
+                return;
+            }
+            if (!desc) {
+                alert("Thiếu mô tả");
+                return;
+            }
+            if (!selectedFile) {
+                alert("Vui lòng chọn ảnh");
                 return;
             }
 
-            // 🔥 HIỂN THỊ TÊN FILE
-            fileNameText.innerText = file.name;
-
-            // 🔥 PREVIEW NGAY (KHÔNG CHỜ UPLOAD)
-            preview.src = URL.createObjectURL(file);
-            preview.style.display = "block";
-
-            // 🔥 UPLOAD ẢNH
+            // ===== UPLOAD IMAGE =====
             const formData = new FormData();
-            formData.append("file", file);
+            formData.append("file", selectedFile);
 
-            const res = await fetch(UPLOAD_API, {
+            const uploadRes = await fetch("http://localhost:5188/upload-image", {
                 method: "POST",
                 body: formData
             });
 
-            console.log("UPLOAD STATUS:", res.status);
+            const uploadData = await uploadRes.json();
+            const imageName = uploadData.fileName;
 
-            const data = await res.json();
-            console.log("UPLOAD RESPONSE:", data);
-
-            uploadedImage = data.fileName;
-        });
-
-        // 🔥 SAVE
-        async function save() {
-
-            if (!uploadedImage) {
-                alert("⚠️ Please upload image first!");
-                return;
-            }
-
+            // ===== CREATE POI =====
             const poi = {
-                name: document.getElementById("name").value,
-                address: document.getElementById("address").value,
-                lat: parseFloat(document.getElementById("lat").value),
-                lng: parseFloat(document.getElementById("lng").value),
-                image: uploadedImage,
-
+                name,
+                address,
+                lat: parseFloat(lat),
+                lng: parseFloat(lng),
+                image: imageName,
                 localizations: [
                     {
                         lang: "vi",
-                        description: document.getElementById("vi").value
+                        description: desc
                     }
                 ]
             };
-
-            console.log("SENDING:", poi);
-
-            await fetch(API, {
+            // ===== CALL API =====
+            await fetch("http://localhost:5188/admin/poi", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(poi)
             });
-
-            alert("✅ Added successfully!");
+            alert("Added successfully!");
             window.location.href = "index.html";
-        }
-        function goBack() {
-            window.location.href = "index.html";
-        }
+        });
     </script>
-
 </body>
 
 </html>
