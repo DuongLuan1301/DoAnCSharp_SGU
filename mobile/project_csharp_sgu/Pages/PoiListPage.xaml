@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="project_csharp_sgu.Pages.PoiListPage">
@@ -5,41 +6,37 @@
     <CollectionView x:Name="PoiList">
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <Frame Margin="12"
-                       Padding="0"
-                       CornerRadius="15"
-                       HasShadow="True"
-                       BackgroundColor="White">
+                
+                <Border Margin="12"
+                        Padding="0"
+                        Stroke="Transparent"
+                        StrokeShape="RoundRectangle 15"
+                        BackgroundColor="White">
 
                     <Grid RowDefinitions="200,Auto" RowSpacing="0">
                         
-                        <!-- Image -->
                         <Image Grid.Row="0"
                                Source="{Binding Image}"
+                               HeightRequest="200"
                                Aspect="AspectFill"
-                               BackgroundColor="#f0f0f0">
-                            <Image.Clip>
-                                <RoundRectangleGeometry CornerRadius="15,15,0,0"/>
-                            </Image.Clip>
-                        </Image>
+                               BackgroundColor="#f0f0f0" />
 
-                        <!-- Content -->
                         <VerticalStackLayout Grid.Row="1" Padding="15" Spacing="10">
                             
                             <Label Text="{Binding Name}"
                                    FontSize="18"
                                    FontAttributes="Bold"
-                                   TextColor="#2c3e50"/>
+                                   TextColor="#2c3e50" />
 
                             <Label Text="{Binding Address}"
                                    FontSize="13"
                                    TextColor="#7f8c8d"
-                                   LineBreakMode="TailTruncation"/>
+                                   LineBreakMode="TailTruncation" />
 
                             <Label Text="{Binding Distance}"
                                    FontSize="13"
                                    TextColor="#27ae60"
-                                   FontAttributes="Bold"/>
+                                   FontAttributes="Bold" />
 
                             <Button Text="Chi tiết →"
                                     Clicked="OnDetailClicked"
@@ -49,12 +46,11 @@
                                     FontAttributes="Bold"
                                     Padding="10,8"
                                     Margin="0,5,0,0"
-                                    CornerRadius="8"/>
+                                    CornerRadius="8" />
                         </VerticalStackLayout>
-
                     </Grid>
-
-                </Frame>
+                </Border>
+                
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>

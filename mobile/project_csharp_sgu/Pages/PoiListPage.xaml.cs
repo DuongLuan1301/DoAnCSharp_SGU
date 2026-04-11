@@ -81,38 +81,59 @@ public partial class PoiListPage : ContentPage
         }
     }
 
-    public async Task<ObservableCollection<Poi>> LoadPoisAsync(string lang)
+  public async Task<ObservableCollection<Poi>> LoadPoisAsync(string lang)
+{
+    using var client = new HttpClient();
+    
+    // Tách Base URL ra để dùng chung
+    string baseUrl = "http://10.0.2.2:5188"; 
+    string url = $"{baseUrl}/api/poi?lang={lang}";
+
+    try
     {
-        using var client = new HttpClient();
-        string url = $"http://10.0.2.2:5188/api/poi?lang={lang}";
-
-        try
+        System.Diagnostics.Debug.WriteLine($"[PoiListPage] Loading POIs from: {url}");
+        
+        var pois = await client.GetFromJsonAsync<List<Poi>>(url);
+        
+        if (pois == null) 
         {
-            System.Diagnostics.Debug.WriteLine($"[PoiListPage] Loading POIs from: {url}");
-            
-            var pois = await client.GetFromJsonAsync<List<Poi>>(url);
-            
-            if (pois == null) 
-            {
-                System.Diagnostics.Debug.WriteLine("[PoiListPage] API returned null");
-                return new ObservableCollection<Poi>();
-            }
-
-            System.Diagnostics.Debug.WriteLine($"[PoiListPage] Loaded {pois.Count} POIs:");
-            foreach (var poi in pois)
-            {
-                System.Diagnostics.Debug.WriteLine($"  - {poi.Name}: Image='{poi.Image}'");
-            }
-
-            return new ObservableCollection<Poi>(pois);
-        }
-        catch (Exception ex)
-        {
-            System.Diagnostics.Debug.WriteLine($"[PoiListPage] ERROR: {ex.Message}\n{ex.StackTrace}");
-            await DisplayAlertAsync("Error", $"Lỗi kết nối API: {ex.Message}", "OK");
+            System.Diagnostics.Debug.WriteLine("[PoiListPage] API returned null");
             return new ObservableCollection<Poi>();
         }
+
+        System.Diagnostics.Debug.WriteLine($"[PoiListPage] Loaded {pois.Count} POIs:");
+       // Kiểm tra chắc chắn _locationService không bị null trước khi dùng
+if (_locationService != null)
+{
+    // subscribe GPS (nhận event mỗi khi locationService gửi đến)
+    _locationService.LocationUpdated += OnLocationUpdated;
+
+    _locationService.Start(); // đảm bảo GPS chạy
+
+    if (_locationService.CurrentLocation != null)
+    {
+        OnLocationUpdated(_locationService);
     }
+}
+else
+{
+    System.Diagnostics.Debug.WriteLine("[PoiListPage] Cảnh báo: _locationService bị null!");
+}
+        return new ObservableCollection<Poi>(pois);
+    }
+    catch (Exception ex)
+    {
+        System.Diagnostics.Debug.WriteLine($"[PoiListPage] ERROR: {ex.Message}\n{ex.StackTrace}");
+        
+        // Chạy DisplayAlert trên MainThread để tránh lỗi crash app
+        MainThread.BeginInvokeOnMainThread(async () =>
+        {
+            await DisplayAlertAsync("Error", $"Lỗi kết nối API: {ex.Message}", "OK");
+        });
+        
+        return new ObservableCollection<Poi>();
+    }
+}
 
     private void OnLocationUpdated(LocationService service)
     {
