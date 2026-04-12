@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b67ecdf3-58e0-4f2e-adb3-18aa07124a7e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Controllers/UploadController.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Endpoints/MobileEndpoints.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Endpoints/PoiEndpoints.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Endpoints/UploadEndpoints.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../web_admin/js/add.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/wwwroot/images/2bce5e84-eba2-4083-936f-a01b77187201.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_admin/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web_admin/add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web_admin/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="b67ecdf3-58e0-4f2e-adb3-18aa07124a7e" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
