@@ -5,9 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b67ecdf3-58e0-4f2e-adb3-18aa07124a7e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../PRD.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../PRD.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/wwwroot/images/2bce5e84-eba2-4083-936f-a01b77187201.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web_admin/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web_admin/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../web_admin/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web_admin/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

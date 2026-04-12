@@ -74,7 +74,7 @@
 
                 <div class="form-actions">
                     <button class="btn cancel">Cancel</button>
-                    <button class="btn submit">Save</button>
+                    <button type="button" class="btn submit">Save</button>
                 </div>
 
             </div>
@@ -87,128 +87,11 @@
 
     </div>
 
+    <!-- Leaflet -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <!-- MAP -->
-    <script>
-        const map = L.map('map').setView([10.7769, 106.7009], 13);
-        // load map FREE
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap'
-        }).addTo(map);
 
-        let marker;
-
-        //click → lấy tọa độ + fill form + lấy địa chỉ
-        map.on('click', async function (e) {
-            const { lat, lng } = e.latlng;
-            // fill lat lng
-            document.getElementById("lat").value = lat.toFixed(6);
-            document.getElementById("lng").value = lng.toFixed(6);
-            // marker
-            if (marker) map.removeLayer(marker);
-            marker = L.marker([lat, lng]).addTo(map);
-            //gọi API reverse geocoding
-            const res = await fetch(
-                `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
-            );
-
-            const data = await res.json();
-
-            if (data && data.display_name) {
-                document.getElementById("address").value = data.display_name;
-            }
-        });
-    </script>
-    <!-- IMAGE FILE -->
-    <script>
-        let selectedFile = null;
-
-        const fileInput = document.getElementById("fileInput");
-        const fileName = document.getElementById("fileName");
-
-        // khi chọn file
-        fileInput.addEventListener("change", (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            selectedFile = file;
-            fileName.innerText = file.name;
-        });
-    </script>
-    <!-- SUBMIT -->
-    <script>
-        document.querySelector(".btn.submit").addEventListener("click", async () => {
-
-            const name = document.getElementById("name").value.trim();
-            const address = document.getElementById("address").value.trim();
-            const lat = document.getElementById("lat").value.trim();
-            const lng = document.getElementById("lng").value.trim();
-            const desc = document.getElementById("desc").value.trim();
-
-            // ===== VALIDATE =====
-            if (!name) {
-                alert("Thiếu tên quán");
-                return;
-            }
-            if (!address) {
-                alert("Thiếu địa chỉ");
-                return;
-            }
-            if (!lat || isNaN(lat)) {
-                alert("Latitude không hợp lệ");
-                return;
-            }
-            if (!lng || isNaN(lng)) {
-                alert("Longitude không hợp lệ");
-                return;
-            }
-            if (!desc) {
-                alert("Thiếu mô tả");
-                return;
-            }
-            if (!selectedFile) {
-                alert("Vui lòng chọn ảnh");
-                return;
-            }
-
-            // ===== UPLOAD IMAGE =====
-            const formData = new FormData();
-            formData.append("file", selectedFile);
-
-            const uploadRes = await fetch("http://localhost:5188/upload-image", {
-                method: "POST",
-                body: formData
-            });
-
-            const uploadData = await uploadRes.json();
-            const imageName = uploadData.fileName;
-
-            // ===== CREATE POI =====
-            const poi = {
-                name,
-                address,
-                lat: parseFloat(lat),
-                lng: parseFloat(lng),
-                image: imageName,
-                localizations: [
-                    {
-                        lang: "vi",
-                        description: desc
-                    }
-                ]
-            };
-            // ===== CALL API =====
-            await fetch("http://localhost:5188/admin/poi", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(poi)
-            });
-            alert("Added successfully!");
-            window.location.href = "index.html";
-        });
-    </script>
+    <!-- MAIN LOGIC -->
+    <script src="js/add.js"></script>
 </body>
 
 </html>
