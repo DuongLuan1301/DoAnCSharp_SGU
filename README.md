@@ -2,7 +2,7 @@
 
 Danh sách thành viên:
 Nhữ Dương Luân - 3123411184,
-Huỳnh Tuấn Tài - 
+Huỳnh Tuấn Tài - 3123411261
 
 Tên đồ án: Ứng dụng thuyết minh tự động quảng bá sản phẩm cho du khách du nước ngoài.
 

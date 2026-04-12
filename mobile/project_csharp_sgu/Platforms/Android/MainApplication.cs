@@ -2,8 +2,7 @@
 using Android.Runtime;
 
 namespace project_csharp_sgu;
-
-[Application]
+[Application(UsesCleartextTraffic = true)] // Thêm đoạn này
 public class MainApplication : MauiApplication
 {
 	public MainApplication(IntPtr handle, JniHandleOwnership ownership)
