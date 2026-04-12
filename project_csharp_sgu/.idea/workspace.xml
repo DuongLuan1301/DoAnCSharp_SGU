@@ -4,9 +4,6 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="b67ecdf3-58e0-4f2e-adb3-18aa07124a7e" name="Changes" comment="" />
-=======
     <list default="true" id="b67ecdf3-58e0-4f2e-adb3-18aa07124a7e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Models/Poi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Models/Poi.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Program.cs" afterDir="false" />
@@ -15,7 +12,6 @@
       <change beforePath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/PoiDetailPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/PoiDetailPage.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
->>>>>>> test_client
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

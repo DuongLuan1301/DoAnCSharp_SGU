@@ -5,7 +5,7 @@ using MongoDB.Bson;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 
-// Configure CORS
+// 1. Configure CORS (Chỉ cần khai báo 1 lần)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
@@ -16,39 +16,21 @@ builder.Services.AddCors(options =>
     });
 });
 
+// 2. Kết nối MongoDB
 var client = new MongoClient("mongodb://localhost:27017");
 var database = client.GetDatabase("poi_db");
 var poiCollection = database.GetCollection<Poi>("pois");
 
-
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAll",
-        p => p.AllowAnyOrigin()
-              .AllowAnyHeader()
-              .AllowAnyMethod());
-});
-
+// 3. Build App
 var app = builder.Build();
-app.UseCors("AllowAll");
-app.UseStaticFiles();
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
+
+if (app.Environment.IsDevelopment()) 
+{ 
+    app.MapOpenApi(); 
 }
-// app.UseHttpsRedirection();
 
-// gọi endpoints
-app.MapMobileEndpoints(poiCollection);
-app.MapPoiEndpoints(poiCollection);
-app.MapUploadEndpoints();
-
-app.Run();
-
-if (app.Environment.IsDevelopment()) { app.MapOpenApi(); }
-
+// 4. Đăng ký Middleware
 app.UseCors("AllowAll");
-
 app.UseStaticFiles(new StaticFileOptions
 {
     OnPrepareResponse = ctx =>
@@ -63,7 +45,11 @@ app.UseStaticFiles(new StaticFileOptions
 string baseUrl = "http://10.0.2.2:5188"; 
 // ==========================================
 
-#region API CHO APP MAUI & PARTNER PORTAL (Giữ nguyên không thay đổi)
+
+// =========================================================================
+// REGION 1: API CHO APP MAUI & PARTNER PORTAL
+// =========================================================================
+#region API CHO APP MAUI
 
 app.MapGet("/api/poi", async (string lang = "vi") =>
 {
@@ -154,21 +140,20 @@ app.MapPut("/api/poi/{id}", async (string id, Poi updatedPoi) =>
 
 #endregion
 
-// =========================================================================
-// THÊM MỚI: API DÀNH RIÊNG CHO WEB ADMIN CỦA BẠN
-// =========================================================================
 
-#region API CHO WEB ADMIN (/admin/poi & /upload-image)
+// =========================================================================
+// REGION 2: API CHO WEB ADMIN (/admin/poi & /upload-image)
+// =========================================================================
+#region API CHO WEB ADMIN
 
-// 1. API GET: Lấy toàn bộ POI gốc (dành cho index.js)
+// 1. Lấy toàn bộ POI gốc
 app.MapGet("/admin/poi", async () =>
 {
     var pois = await poiCollection.Find(_ => true).ToListAsync();
-    // Trả về Raw Data, không chế biến Image URL để Web Admin tự nối chuỗi
     return Results.Ok(pois);
 });
 
-// 2. API POST: Thêm POI mới (dành cho add.html)
+// 2. Thêm POI mới
 app.MapPost("/admin/poi", async (Poi newPoi) =>
 {
     try
@@ -179,15 +164,26 @@ app.MapPost("/admin/poi", async (Poi newPoi) =>
     catch (Exception ex) { return Results.BadRequest(ex.Message); }
 });
 
-// 3. API DELETE: Xóa POI (dành cho nút Delete trong index.js)
+// 3. API DELETE: Xóa POI
 app.MapDelete("/admin/poi/{id}", async (string id) =>
 {
-    var result = await poiCollection.DeleteOneAsync(p => p.Id == id);
-    if (result.DeletedCount > 0) return Results.Ok(new { message = "Xóa thành công" });
-    return Results.NotFound(new { message = "Không tìm thấy POI" });
+    try 
+    {
+        // Thêm .Trim() để dọn dẹp khoảng trắng dư thừa ở ID
+        var result = await poiCollection.DeleteOneAsync(p => p.Id == id.Trim());
+        
+        if (result.DeletedCount > 0) 
+            return Results.Ok(new { message = "Xóa thành công" });
+            
+        return Results.NotFound(new { message = "Không tìm thấy POI trong Database" });
+    }
+    catch (Exception ex)
+    {
+        return Results.BadRequest(new { message = "Lỗi định dạng ID: " + ex.Message });
+    }
 });
 
-// 4. API UPLOAD IMAGE: Hứng file ảnh thực tế tải lên từ Web Admin
+// 4. Upload Hình Ảnh
 app.MapPost("/upload-image", async (IFormFile file) =>
 {
     try
@@ -195,15 +191,11 @@ app.MapPost("/upload-image", async (IFormFile file) =>
         if (file == null || file.Length == 0) 
             return Results.BadRequest(new { message = "Chưa chọn file" });
 
-        // Tạo đường dẫn đến thư mục wwwroot/images
         var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
         
-        // Nếu thư mục chưa tồn tại thì tự động tạo
         if (!Directory.Exists(uploadsFolder)) 
             Directory.CreateDirectory(uploadsFolder);
 
-        // Lưu file bằng tên gốc của nó (hoặc bạn có thể dùng Guid để không trùng lặp)
-        // Thay khoảng trắng bằng dấu gạch ngang cho an toàn
         var fileName = file.FileName.Replace(" ", "-"); 
         var filePath = Path.Combine(uploadsFolder, fileName);
 
@@ -212,16 +204,15 @@ app.MapPost("/upload-image", async (IFormFile file) =>
             await file.CopyToAsync(stream);
         }
 
-        // Trả về đúng object json mà add.html đang mong đợi: uploadData.fileName
         return Results.Ok(new { fileName = fileName });
     }
     catch (Exception ex)
     {
         return Results.BadRequest(new { message = ex.Message });
     }
-}).DisableAntiforgery(); // Tắt check Antiforgery để cho phép upload file từ client ngoài
+}).DisableAntiforgery(); 
 
 #endregion
 
-app.UseStaticFiles();
+// 5. Chạy Server (Lệnh cuối cùng của ứng dụng)
 app.Run("http://0.0.0.0:5188");
