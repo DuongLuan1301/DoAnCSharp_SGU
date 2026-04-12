@@ -1,74 +1,74 @@
-const API_BASE = "http://127.0.0.1:5188";
+document.addEventListener("DOMContentLoaded", () => {
 
-// =====================
-// MAP
-// =====================
-const map = L.map('map').setView([10.7769, 106.7009], 13);
+    // =====================
+    // MAP
+    // =====================
+    const map = L.map('map').setView([10.7769, 106.7009], 13);
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; OpenStreetMap'
-}).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap'
+    }).addTo(map);
 
-let marker;
+    let marker;
 
-map.on('click', async function (e) {
-    const { lat, lng } = e.latlng;
+    map.on('click', async (e) => {
+        const { lat, lng } = e.latlng;
 
-    document.getElementById("lat").value = lat.toFixed(6);
-    document.getElementById("lng").value = lng.toFixed(6);
+        document.getElementById("lat").value = lat.toFixed(6);
+        document.getElementById("lng").value = lng.toFixed(6);
 
-    if (marker) map.removeLayer(marker);
-    marker = L.marker([lat, lng]).addTo(map);
+        if (marker) map.removeLayer(marker);
+        marker = L.marker([lat, lng]).addTo(map);
 
-    // reverse geocoding
-    const res = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
-    );
+        const res = await fetch(
+            `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+        );
 
-    const data = await res.json();
+        const data = await res.json();
 
-    if (data && data.display_name) {
-        document.getElementById("address").value = data.display_name;
-    }
-});
+        if (data?.display_name) {
+            document.getElementById("address").value = data.display_name;
+        }
+    });
 
-// =====================
-// IMAGE UPLOAD
-// =====================
-let selectedFile = null;
+    // =====================
+    // IMAGE
+    // =====================
+    let selectedFile = null;
 
-const fileInput = document.getElementById("fileInput");
-const fileName = document.getElementById("fileName");
+    const fileInput = document.getElementById("fileInput");
+    const fileName = document.getElementById("fileName");
 
-fileInput.addEventListener("change", (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
+    fileInput.addEventListener("change", (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
 
-    selectedFile = file;
-    fileName.innerText = file.name;
-});
+        selectedFile = file;
+        fileName.innerText = file.name;
+    });
 
-// =====================
-// SUBMIT
-// =====================
-document.querySelector(".btn.submit").addEventListener("click", async (e) => {
-    e.preventDefault();
+    // =====================
+    // SUBMIT
+    // =====================
+    const form = document.getElementById("poiForm");
 
-    const name = document.getElementById("name").value.trim();
-    const address = document.getElementById("address").value.trim();
-    const lat = document.getElementById("lat").value.trim();
-    const lng = document.getElementById("lng").value.trim();
-    const desc = document.getElementById("desc").value.trim();
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-    if (!name) return alert("Thiếu tên");
-    if (!address) return alert("Thiếu địa chỉ");
-    if (!lat || isNaN(lat)) return alert("Lat lỗi");
-    if (!lng || isNaN(lng)) return alert("Lng lỗi");
-    if (!desc) return alert("Thiếu mô tả");
-    if (!selectedFile) return alert("Thiếu ảnh");
+        console.log("SUBMIT START");
 
-    try {
-        // ===== UPLOAD =====
+        const name = document.getElementById("name").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const lat = document.getElementById("lat").value.trim();
+        const lng = document.getElementById("lng").value.trim();
+        const desc = document.getElementById("desc").value.trim();
+
+        if (!name || !address || !lat || !lng || !desc || !selectedFile) {
+            alert("Vui lòng nhập đầy đủ dữ liệu");
+            return;
+        }
+
+        // UPLOAD IMAGE
         const formData = new FormData();
         formData.append("file", selectedFile);
 
@@ -77,19 +77,9 @@ document.querySelector(".btn.submit").addEventListener("click", async (e) => {
             body: formData
         });
 
-        // 🔥 FIX: KHÔNG parse JSON nếu fail
-        if (!uploadRes.ok) {
-            throw new Error("Upload lỗi");
-        }
+        const uploadData = await uploadRes.json();
 
-        let uploadData = {};
-        try {
-            uploadData = await uploadRes.json();
-        } catch {
-            throw new Error("Upload không trả JSON");
-        }
-
-        // ===== ADD POI =====
+        // CREATE POI
         const poi = {
             name,
             address,
@@ -101,6 +91,7 @@ document.querySelector(".btn.submit").addEventListener("click", async (e) => {
             ]
         };
 
+        // SEND POI
         const res = await fetch("http://127.0.0.1:5188/admin/poi", {
             method: "POST",
             headers: {
@@ -109,16 +100,15 @@ document.querySelector(".btn.submit").addEventListener("click", async (e) => {
             body: JSON.stringify(poi)
         });
 
-        // 🔥 FIX: KHÔNG đọc body nếu fail
         if (!res.ok) {
-            throw new Error("Add POI lỗi");
+            const err = await res.text();
+            throw new Error(err);
         }
 
-        // 🔥 QUAN TRỌNG: redirect NGAY LẬP TỨC
-        window.location.assign("index.html");
+        alert("Added successfully!");
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 200);
 
-    } catch (err) {
-        console.error("ERROR:", err);
-        alert(err.message);
-    }
+    });
 });
