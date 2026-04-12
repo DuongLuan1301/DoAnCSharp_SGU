@@ -8,18 +8,19 @@ using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Projections;
 
+#nullable enable
+
 namespace project_csharp_sgu.Pages;
 
 public partial class HomePage : ContentPage
 {
     // 🔹 dùng để dừng timer khi rời trang (tránh leak)
-    private CancellationTokenSource _cts;
+    private CancellationTokenSource _cts = new CancellationTokenSource();
     private bool isFirst = true;
 
     public HomePage()
     {
         InitializeComponent();
-
         LoadLanguage();
     }
 

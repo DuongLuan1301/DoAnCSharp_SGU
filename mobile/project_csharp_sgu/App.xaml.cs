@@ -1,5 +1,7 @@
 ﻿using project_csharp_sgu.Services;
 
+#nullable enable
+
 namespace project_csharp_sgu;
 
 public partial class App : Application
@@ -20,7 +22,10 @@ public partial class App : Application
         {
             AppState.CurrentLanguage = "en";
         }
+    }
 
-        MainPage = new AppShell();
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        return new Window(new AppShell());
     }
 }

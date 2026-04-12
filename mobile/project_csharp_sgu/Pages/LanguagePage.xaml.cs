@@ -1,6 +1,8 @@
 using Microsoft.Maui.Controls;
 using project_csharp_sgu.Services;
 
+#nullable enable
+
 namespace project_csharp_sgu.Pages;
 
 public partial class LanguagePage : ContentPage
@@ -45,6 +47,9 @@ public partial class LanguagePage : ContentPage
         }
 
         //reload app để áp dụng ngôn ngữ mới
-        Application.Current.MainPage = new AppShell();
+        if (Application.Current?.Windows.Count > 0)
+        {
+            Application.Current.Windows[0].Page = new AppShell();
+        }
     }
 }

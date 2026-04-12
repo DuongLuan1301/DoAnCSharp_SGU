@@ -1,23 +1,33 @@
 using Microsoft.Maui.Devices.Sensors;
 
+#nullable enable
+
 namespace project_csharp_sgu.Services;
 
 public class LocationService
 {
     // vòng đời của timer (dừng / chạy)
-    private CancellationTokenSource _cts;
+    private CancellationTokenSource? _cts;
 
     // vị trí hiện tại của user
-    public Location CurrentLocation { get; private set; }
+    public Location? CurrentLocation { get; private set; }
 
     // vị trí "root" để so sánh DistanceFromAnrchor (anchor)
-    public Location AnchorLocation { get; private set; }
+    public Location? AnchorLocation { get; private set; }
 
     // khoảng cách từ CurrentLocation → AnchorLocation (km)
     public double DistanceFromAnchor { get; private set; }
 
     // event để notify cho các page khi có GPS mới
-    public event Action<LocationService> LocationUpdated;
+    public event Action<LocationService>? LocationUpdated;
+
+    public LocationService()
+    {
+        _cts = null;
+        CurrentLocation = null;
+        AnchorLocation = null;
+        LocationUpdated = null;
+    }
 
     // 1. BẮT ĐẦU GPS (GLOBAL)
     public void Start()
@@ -30,15 +40,19 @@ public class LocationService
         _cts = new CancellationTokenSource();
 
         // tạo timer chạy mỗi 10 giây
-        Application.Current.Dispatcher.StartTimer(TimeSpan.FromSeconds(5), () =>
+        var dispatcher = Application.Current?.Dispatcher;
+        if (dispatcher != null)
         {
-            // gọi async GPS (không await để tránh block UI)
-            _ = UpdateLocationAsync();
+            dispatcher.StartTimer(TimeSpan.FromSeconds(5), () =>
+            {
+                // gọi async GPS (không await để tránh block UI)
+                _ = UpdateLocationAsync();
 
-            // nếu chưa bị cancel → tiếp tục timer
-            // nếu bị cancel → dừng timer
-            return !_cts.IsCancellationRequested;
-        });
+                // nếu chưa bị cancel → tiếp tục timer
+                // nếu bị cancel → dừng timer
+                return !_cts.IsCancellationRequested;
+            });
+        }
     }
 
     // 2. LẤY GPS + TÍNH KHOẢNG CÁCH
@@ -49,7 +63,7 @@ public class LocationService
             new GeolocationRequest(GeolocationAccuracy.High));
 
         // nếu location đã có → kiểm tra khoảng cách
-        if (CurrentLocation != null)
+        if (CurrentLocation != null && location != null)
         {
             //tính khoảng cách: movedDistance = Distance(anchorLocation, currentLocation)
             double movedDistance = Location.CalculateDistance(
@@ -66,16 +80,16 @@ public class LocationService
         CurrentLocation = location;
 
         // anchor logic giữ nguyên (dùng cho 1km nếu cần)
-        if (AnchorLocation == null)
+        if (AnchorLocation == null && location != null)
         {
             AnchorLocation = location;
             DistanceFromAnchor = 0;
         }
-        else
+        else if (location != null)
         {
             DistanceFromAnchor = Location.CalculateDistance(
                 location,
-                AnchorLocation,
+                AnchorLocation!,
                 DistanceUnits.Kilometers);
         }
 

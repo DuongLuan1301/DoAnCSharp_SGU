@@ -1,11 +1,20 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="project_csharp_sgu.Pages.QrPage">
+             xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls"
+             x:Class="project_csharp_sgu.Pages.QrPage"
+             Title="Quét mã QR">
 
     <Grid>
-        <Label Text="QR Scanner"
-               HorizontalOptions="Center"
-               VerticalOptions="Center"/>
-    </Grid>
+        <zxing:CameraBarcodeReaderView 
+            x:Name="barcodeReader"
+            BarcodesDetected="OnBarcodesDetected"/>
 
+        <Border Stroke="White" StrokeThickness="3"
+                VerticalOptions="Center" HorizontalOptions="Center"
+                HeightRequest="250" WidthRequest="250"
+                InputTransparent="True">
+            <Label Text="Đưa mã QR vào khung" TextColor="White" 
+                   VerticalOptions="End" HorizontalOptions="Center" Margin="10"/>
+        </Border>
+    </Grid>
 </ContentPage>

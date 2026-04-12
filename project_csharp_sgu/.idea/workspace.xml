@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b67ecdf3-58e0-4f2e-adb3-18aa07124a7e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../PRD.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../PRD.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Models/Poi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Models/Poi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobile/project_csharp_sgu/App.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/project_csharp_sgu/App.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Models/Poi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Models/Poi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/PoiDetailPage.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/PoiDetailPage.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
