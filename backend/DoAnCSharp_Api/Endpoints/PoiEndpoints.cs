@@ -17,8 +17,8 @@ public static class PoiEndpoints
                 p.Address,
                 p.Lat,
                 p.Lng,
-                p.Image,
-                p.Localizations
+                p.Localizations,
+                p.Image
             });
 
             return Results.Ok(result);
@@ -51,25 +51,43 @@ public static class PoiEndpoints
         });
     }
     //AUTO TRANSLATE VIETNAMESE DESCRIPTION
+    private static readonly HttpClient _http = new HttpClient()
+    {
+        Timeout = TimeSpan.FromSeconds(10) // ⏱ tăng thời gian chờ
+    };
+
     private static async Task<string> Translate(string text, string target)
     {
-        try
-        {
-            using var http = new HttpClient();
-
-            var url =
-                $"https://translate.googleapis.com/translate_a/single?client=gtx&sl=vi&tl={target}&dt=t&q={Uri.EscapeDataString(text)}";
-
-            var res = await http.GetStringAsync(url);
-
-            var json = JsonDocument.Parse(res);
-
-            // lấy đoạn dịch
-            return json.RootElement[0][0][0].GetString();
-        }
-        catch
-        {
+        if (string.IsNullOrWhiteSpace(text))
             return text;
+
+        var url =
+            $"https://translate.googleapis.com/translate_a/single?client=gtx&sl=vi&tl={target}&dt=t&q={Uri.EscapeDataString(text)}";
+
+        for (int attempt = 0; attempt < 3; attempt++)
+        {
+            try
+            {
+                var res = await _http.GetStringAsync(url);
+
+                if (string.IsNullOrWhiteSpace(res) || res.StartsWith("<"))
+                    continue;
+
+                var json = JsonDocument.Parse(res);
+
+                var translated = json.RootElement[0][0][0].GetString();
+
+                if (!string.IsNullOrWhiteSpace(translated))
+                    return translated;
+            }
+            catch
+            {
+                // retry tiếp
+                await Task.Delay(300 * (attempt + 1));
+            }
         }
+
+        // fallback nếu fail
+        return text;
     }
 }

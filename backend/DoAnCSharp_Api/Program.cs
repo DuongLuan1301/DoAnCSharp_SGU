@@ -38,6 +38,9 @@ app.UseStaticFiles(new StaticFileOptions
         ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=3600");
     }
 });
+app.MapMobileEndpoints(poiCollection);
+app.MapPoiEndpoints(poiCollection);
+app.MapUploadEndpoints();
 
 // ==========================================
 // CẤU HÌNH BASE URL CHO APP MAUI
@@ -50,35 +53,6 @@ string baseUrl = "http://10.0.2.2:5188";
 // REGION 1: API CHO APP MAUI & PARTNER PORTAL
 // =========================================================================
 #region API CHO APP MAUI
-
-app.MapGet("/api/poi", async (string lang = "vi") =>
-{
-    try
-    {
-        var pois = await poiCollection.Find(_ => true).ToListAsync();
-        var result = pois.Select(p => 
-        {
-            string desc = "No description";
-            if (p.Localizations != null && p.Localizations.Any())
-            {
-                var loc = p.Localizations.FirstOrDefault(l => l.Lang != null && l.Lang.Trim().ToLower() == lang.Trim().ToLower());
-                if (loc != null && !string.IsNullOrWhiteSpace(loc.Description)) desc = loc.Description;
-            }
-
-            string imgUrl = $"{baseUrl}/images/default.jpg?v={DateTime.Now.Ticks}";
-            if (!string.IsNullOrWhiteSpace(p.Image))
-            {
-                if (p.Image.StartsWith("http")) imgUrl = p.Image; 
-                else imgUrl = $"{baseUrl}/images/{p.Image}?v={DateTime.Now.Ticks}"; 
-            }
-
-            return new { p.Id, p.Name, p.Address, Image = imgUrl, p.Lat, p.Lng, Description = desc };
-        }).ToList();
-        
-        return Results.Ok(result);
-    }
-    catch (Exception ex) { return Results.BadRequest(ex.Message); }
-});
 
 app.MapGet("/api/poi/{id}", async (string id, string lang = "vi") =>
 {
@@ -106,20 +80,6 @@ app.MapGet("/api/poi/{id}", async (string id, string lang = "vi") =>
     catch { return Results.BadRequest("ID format error"); }
 });
 
-app.MapPost("/api/poi", async (Poi newPoi) =>
-{
-    try
-    {
-        if (!string.IsNullOrWhiteSpace(newPoi.Image))
-        {
-            string pathWithoutQuery = newPoi.Image.Split('?')[0]; 
-            newPoi.Image = System.IO.Path.GetFileName(pathWithoutQuery); 
-        }
-        await poiCollection.InsertOneAsync(newPoi);
-        return Results.Ok(new { message = "Thêm thành công", id = newPoi.Id });
-    }
-    catch (Exception ex) { return Results.BadRequest(ex.Message); }
-});
 
 app.MapPut("/api/poi/{id}", async (string id, Poi updatedPoi) =>
 {
@@ -145,24 +105,6 @@ app.MapPut("/api/poi/{id}", async (string id, Poi updatedPoi) =>
 // REGION 2: API CHO WEB ADMIN (/admin/poi & /upload-image)
 // =========================================================================
 #region API CHO WEB ADMIN
-
-// 1. Lấy toàn bộ POI gốc
-app.MapGet("/admin/poi", async () =>
-{
-    var pois = await poiCollection.Find(_ => true).ToListAsync();
-    return Results.Ok(pois);
-});
-
-// 2. Thêm POI mới
-app.MapPost("/admin/poi", async (Poi newPoi) =>
-{
-    try
-    {
-        await poiCollection.InsertOneAsync(newPoi);
-        return Results.Ok(newPoi);
-    }
-    catch (Exception ex) { return Results.BadRequest(ex.Message); }
-});
 
 // 3. API DELETE: Xóa POI
 app.MapDelete("/admin/poi/{id}", async (string id) =>

@@ -85,10 +85,13 @@ document.addEventListener("DOMContentLoaded", () => {
             address,
             lat: parseFloat(lat),
             lng: parseFloat(lng),
-            image: uploadData.fileName,
             localizations: [
-                { lang: "vi", description: desc }
-            ]
+                { lang: "vi", description: desc },
+                { lang: "en", description: desc },
+                { lang: "ja", description: desc },
+                { lang: "zh", description: desc }
+            ],
+            image: uploadData.fileName
         };
 
         // SEND POI
