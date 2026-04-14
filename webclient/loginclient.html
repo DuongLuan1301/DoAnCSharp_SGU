@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khu Phố Ẩm Thực - Đăng Nhập</title>
+    
+    <!-- Liên kết tới file CSS thuần (Offline) -->
+    <link rel="stylesheet" href="css/loginclient.css">
+</head>
+<body>
+    
+    <!-- Ảnh nền -->
+    <div class="background-layer">
+        <img src="[https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80](https://images.unsplash.com/photo-1528127269322-539801943592?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80)" 
+             alt="Khu ẩm thực Vĩnh Khánh">
+    </div>
+
+    <!-- Container chính -->
+    <div class="form-container fade-in">
+        
+        <!-- Header / Logo -->
+        <div class="header-section">
+            <div class="icon-wrapper">
+                <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.361-6.867 8.21 8.21 0 003 2.48z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1A3.75 3.75 0 0012 18z" />
+                </svg>
+            </div>
+            <h1 id="form-title" class="form-title">Đăng nhập</h1>
+            <p id="form-subtitle" class="form-subtitle">Chào mừng trở lại khu phố ẩm thực!</p>
+        </div>
+
+        <!-- Form Đăng Nhập -->
+        <form id="login-section" class="fade-in" onsubmit="handleLogin(event)">
+            <div class="input-group">
+                <label class="input-label">Tên đăng nhập hoặc Email</label>
+                <input type="text" required class="input-field" placeholder="nhapten@email.com">
+            </div>
+            <div class="input-group">
+                <label class="input-label">Mật khẩu</label>
+                <input type="password" required class="input-field" placeholder="••••••••">
+            </div>
+            <div class="flex-end">
+                <a href="#" class="action-link">Quên mật khẩu?</a>
+            </div>
+            <button type="submit" class="btn-submit">
+                Vào Bếp Ngay!
+            </button>
+            <p class="switch-prompt">
+                Chưa có tài khoản? 
+                <button type="button" onclick="toggleView()" class="action-link">Đăng ký ngay</button>
+            </p>
+        </form>
+
+        <!-- Form Đăng Ký (Ẩn mặc định) -->
+        <form id="register-section" class="hidden fade-in" onsubmit="handleRegister(event)">
+            <div class="input-group">
+                <label class="input-label">Họ và Tên</label>
+                <input type="text" required class="input-field" placeholder="Ví dụ: Nguyễn Văn A">
+            </div>
+            <div class="input-group">
+                <label class="input-label">Email</label>
+                <input type="email" required class="input-field" placeholder="email@example.com">
+            </div>
+            <div class="input-group">
+                <label class="input-label">Mật khẩu</label>
+                <input type="password" required class="input-field" placeholder="Ít nhất 8 ký tự">
+            </div>
+            <button type="submit" class="btn-submit">
+                Tạo Tài Khoản
+            </button>
+            <p class="switch-prompt">
+                Đã có tài khoản? 
+                <button type="button" onclick="toggleView()" class="action-link">Đăng nhập</button>
+            </p>
+        </form>
+
+    </div>
+
+    <!-- Liên kết JS xử lý logic trực tiếp -->
+    <script src="js/loginclient.js"></script>
+</body>
+</html>

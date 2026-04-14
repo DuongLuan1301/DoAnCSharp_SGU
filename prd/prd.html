@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRD - Ứng dụng thuyết minh du lịch</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4f46e5', // Indigo 600
+                        secondary: '#4338ca', // Indigo 700
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for better look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c7c7cc; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a1a1aa; 
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <!-- Navbar / Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-file-lines text-primary text-2xl"></i>
+                <h1 class="font-bold text-xl text-gray-900 hidden sm:block">Tài liệu Đặc tả Yêu cầu (PRD)</h1>
+            </div>
+            <div class="text-sm font-medium text-gray-500">
+                Đồ án C# - .NET MAUI
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col md:flex-row gap-8">
+        
+        <!-- Sidebar / Table of Contents -->
+        <aside class="w-full md:w-64 flex-shrink-0">
+            <div class="sticky top-24 bg-white rounded-xl shadow-sm border border-gray-100 p-5">
+                <h3 class="font-bold text-gray-900 mb-4 uppercase text-sm tracking-wider">Mục lục</h3>
+                <nav class="space-y-2 text-sm">
+                    <a href="#title-section" class="block text-gray-600 hover:text-primary transition-colors">Thông tin chung</a>
+                    <a href="#tong-quan" class="block text-gray-600 hover:text-primary transition-colors">1. Tổng quan đồ án</a>
+                    <a href="#muc-tieu" class="block text-gray-600 hover:text-primary transition-colors">2. Mục tiêu & Tiêu chí</a>
+                    <a href="#vai-tro" class="block text-gray-600 hover:text-primary transition-colors">3. Vai trò người dùng</a>
+                    <a href="#luong-hoat-dong" class="block text-gray-600 hover:text-primary transition-colors">4. Luồng hoạt động</a>
+                    <a href="#tinh-nang" class="block text-gray-600 hover:text-primary transition-colors">5. Danh sách tính năng</a>
+                    <a href="#cau-truc" class="block text-gray-600 hover:text-primary transition-colors">6. Cấu trúc hệ thống</a>
+                    <a href="#giao-dien" class="block text-gray-600 hover:text-primary transition-colors">7. Giao diện & Trải nghiệm</a>
+                    <a href="#so-do" class="block text-gray-600 hover:text-primary transition-colors">8. Sơ đồ hệ thống</a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 space-y-12">
+            
+            <!-- Title Section -->
+            <section id="title-section" class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-10 text-center relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-primary"></div>
+                <p class="text-sm font-semibold text-primary uppercase tracking-wide mb-2">Đồ án môn học ngôn ngữ lập trình C#</p>
+                <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4 leading-tight">
+                    Ứng dụng thuyết minh tự động quảng bá sản phẩm cho du khách nước ngoài
+                </h1>
+                <p class="text-gray-500 max-w-2xl mx-auto">Tài liệu đặc tả yêu cầu sản phẩm (PRD), mô tả chi tiết các tính năng, luồng nghiệp vụ và cấu trúc hệ thống của dự án.</p>
+            </section>
+
+            <!-- 1. Tổng quan -->
+            <section id="tong-quan" class="scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="bg-indigo-100 p-2 rounded-lg text-primary"><i class="fa-solid fa-layer-group"></i></div>
+                    <h2 class="text-2xl font-bold text-gray-900">1. Tổng quan đồ án</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3"><i class="fa-solid fa-compress text-gray-400 mr-2"></i>Tóm tắt</h3>
+                        <p class="text-gray-600 leading-relaxed">Ứng dụng là một hệ thống du lịch thông minh hỗ trợ du khách nước ngoài khám phá các hàng quán gần vị trí hiện tại bằng ngôn ngữ bản địa.</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3"><i class="fa-solid fa-users text-gray-400 mr-2"></i>Đối tượng sử dụng</h3>
+                        <ul class="list-disc pl-5 text-gray-600 space-y-2">
+                            <li><strong>Du khách:</strong> Dùng ứng dụng trên điện thoại để định vị, xem danh sách các hàng quán và nghe thuyết minh mô tả.</li>
+                            <li><strong>Admin:</strong> Đăng nhập vào website với quyền quản trị để quản lý danh sách các hàng quán.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3"><i class="fa-solid fa-triangle-exclamation text-gray-400 mr-2"></i>Các vấn đề giải quyết</h3>
+                        <ul class="list-disc pl-5 text-gray-600 space-y-2">
+                            <li><strong>Du khách nước ngoài (Customer):</strong> Gặp rào cản ngôn ngữ, khó khăn trong việc tìm kiếm các địa điểm phù hợp gần vị trí hiện tại, tiếp cận thông tin đáng tin cậy về sản phẩm, dịch vụ.</li>
+                            <li><strong>Người bán hàng (Seller):</strong> Gặp khó khăn trong việc quảng bá hình ảnh đến khách hàng quốc tế.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="text-lg font-bold text-gray-900 mb-3"><i class="fa-solid fa-bullseye text-gray-400 mr-2"></i>Phạm vi đồ án</h3>
+                        <ul class="list-disc pl-5 text-gray-600 space-y-2">
+                            <li>Hệ thống chạy demo bằng giả lập (Android Studio).</li>
+                            <li>Dữ liệu được lưu MongoDB, truy cập thông qua API.</li>
+                            <li>Ứng dụng mobile hỗ trợ chạy trên Android (.NET MAUI).</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Mục tiêu & Tiêu chí -->
+            <section id="muc-tieu" class="scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="bg-green-100 p-2 rounded-lg text-green-600"><i class="fa-solid fa-list-check"></i></div>
+                    <h2 class="text-2xl font-bold text-gray-900">2. Mục tiêu và tiêu chí</h2>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-gray-100">
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-gray-900 mb-4 text-green-600">Mục tiêu</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                                    <span class="text-gray-600">Giúp du khách khám phá các hàng quán trong phạm vị bán kính 1km.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                                    <span class="text-gray-600">Hỗ trợ phát thuyết minh tự động cho các văn bản mô tả bằng ngôn ngữ quốc tế (Anh, Pháp, Nhật, Trung, v.v).</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-green-500 mt-1"></i>
+                                    <span class="text-gray-600">Hỗ trợ người bán hàng quảng bá sản phẩm.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-gray-900 mb-4 text-blue-600">Tiêu chí</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-regular fa-star text-blue-500 mt-1"></i>
+                                    <span class="text-gray-600">App hiển thị, cập nhật danh sách các hàng quán theo thời gian thực.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-regular fa-star text-blue-500 mt-1"></i>
+                                    <span class="text-gray-600">Có thể phát thuyết minh mô tả dựa trên thông tin mỗi hàng quán.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-regular fa-star text-blue-500 mt-1"></i>
+                                    <span class="text-gray-600">User có thể chọn ngôn ngữ, xem vị trí, xem danh sách hàng quán trong phạm vi xung quanh, xem thông tin hàng quán và tiếp cận bằng ngôn ngữ bản địa.</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-regular fa-star text-blue-500 mt-1"></i>
+                                    <span class="text-gray-600">User có thể quét QR trực tiếp tại một địa điểm để tiếp cận thông tin trong thời gian thực.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Vai trò -->
+            <section id="vai-tro" class="scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="bg-orange-100 p-2 rounded-lg text-orange-600"><i class="fa-solid fa-user-tag"></i></div>
+                    <h2 class="text-2xl font-bold text-gray-900">3. Vai trò người sử dụng (User roles)</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-l-4 border-l-primary border-gray-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-indigo-50 flex items-center justify-center text-primary text-xl">
+                                <i class="fa-solid fa-plane"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900">Du khách nước ngoài (Customer)</h3>
+                        </div>
+                        <ul class="list-disc pl-12 text-gray-600 space-y-2">
+                            <li>Xem map, vị trí hiện tại.</li>
+                            <li>Xem danh sách, thông tin chi tiết các hàng quán.</li>
+                            <li>Quét QR một hàng quán để nghe thuyết minh.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-l-4 border-l-orange-500 border-gray-100">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-500 text-xl">
+                                <i class="fa-solid fa-user-shield"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900">Quản trị viên (Admin)</h3>
+                        </div>
+                        <ul class="list-disc pl-12 text-gray-600 space-y-2">
+                            <li>Xem danh sách hàng quán trên map.</li>
+                            <li>Quản lý thông tin các hàng quán.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Luồng hoạt động -->
+            <section id="luong-hoat-dong" class="scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="bg-purple-100 p-2 rounded-lg text-purple-600"><i class="fa-solid fa-route"></i></div>
+                    <h2 class="text-2xl font-bold text-gray-900">4. Luồng hoạt động (Work-Flow)</h2>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Workflow Customer -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                            <i class="fa-solid fa-mobile-screen text-gray-400"></i> Luồng của Customer
+                        </h3>
+                        <div class="relative border-l border-gray-200 ml-3 space-y-6">
+                            
+                            <div class="relative pl-6">
+                                <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-white"></span>
+                                <p class="text-sm font-semibold text-gray-900">Khởi động ứng dụng</p>
+                                <p class="text-gray-600 text-sm mt-1">Customer mở ứng dụng -> Hệ thống yêu cầu cấp quyền truy cập vị trí -> Customer cấp quyền -> Hệ thống lấy vị trí (GPS).</p>
+                            </div>
+                            
+                            <div class="relative pl-6">
+                                <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-white"></span>
+                                <p class="text-sm font-semibold text-gray-900">Hiển thị trang chủ</p>
+                                <p class="text-gray-600 text-sm mt-1">Hệ thống hiển thị danh sách ngôn ngữ -> Hiển thị trang home mặc định (gồm map và vị trí user) -> Tải các danh sách POIs (dựa vào GPS).</p>
+                            </div>
+
+                            <div class="relative pl-6">
+                                <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-white"></span>
+                                <p class="text-sm font-semibold text-gray-900">Cá nhân hóa</p>
+                                <p class="text-gray-600 text-sm mt-1">Customer chọn ngôn ngữ -> Hệ thống chuyển ngôn ngữ, tải danh sách POIs theo ngôn ngữ đó.</p>
+                            </div>
+
+                            <div class="relative pl-6">
+                                <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-primary ring-4 ring-white"></span>
+                                <p class="text-sm font-semibold text-gray-900">Khám phá & Trải nghiệm</p>
+                                <p class="text-gray-600 text-sm mt-1">Customer chọn xem danh sách POIs -> Xem thông tin danh sách POIs ở gần -> Nhấn mục xem chi tiết 1 POI -> Hệ thống hiển thị thông tin, hình ảnh, text đã dịch -> Customer chọn phát âm thanh -> Hệ thống phát thuyết minh.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Workflow Admin -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                            <i class="fa-solid fa-laptop text-gray-400"></i> Luồng của Admin
+                        </h3>
+                        <div class="relative border-l border-gray-200 ml-3 space-y-6">
+                            <div class="relative pl-6">
+                                <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-orange-500 ring-4 ring-white"></span>
+                                <p class="text-sm font-semibold text-gray-900">Truy cập hệ thống</p>
+                                <p class="text-gray-600 text-sm mt-1">Đăng nhập dưới quyền admin trên Website.</p>
+                            </div>
+                            <div class="relative pl-6">
+                                <span class="absolute -left-[9px] top-1 w-4 h-4 rounded-full bg-orange-500 ring-4 ring-white"></span>
+                                <p class="text-sm font-semibold text-gray-900">Quản lý nội dung</p>
+                                <p class="text-gray-600 text-sm mt-1">Xem danh sách các hàng quán đang được lưu trữ -> Sử dụng các chức năng thêm, xóa, sửa thông tin hàng quán.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Tính năng -->
+            <section id="tinh-nang" class="scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="bg-teal-100 p-2 rounded-lg text-teal-600"><i class="fa-solid fa-list"></i></div>
+                    <h2 class="text-2xl font-bold text-gray-900">5. Danh sách tính năng (Functional requirements)</h2>
+                </div>
+
+                <!-- Tabs (Visual only for layout) -->
+                <div class="space-y-8">
+                    <!-- Mobile App Features -->
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 border-b border-gray-200 pb-2 mb-4">A. Mobile App</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                                <h4 class="font-bold text-primary mb-2">Trang Home</h4>
+                                <ul class="text-sm text-gray-600 space-y-1 list-disc pl-4">
+                                    <li>Hiển thị bản đồ và vị trí hiện tại của customer.</li>
+                                    <li>Cho phép truy cập trang chọn ngôn ngữ.</li>
+                                    <li>Cập nhật vị trí khi customer di chuyển.</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                                <h4 class="font-bold text-primary mb-2">Trang chọn ngôn ngữ</h4>
+                                <ul class="text-sm text-gray-600 space-y-1 list-disc pl-4">
+                                    <li>Hiển thị danh sách ngôn ngữ.</li>
+                                    <li>Lưu lại ngôn ngữ đã chọn, tái sử dụng lần truy cập sau.</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                                <h4 class="font-bold text-primary mb-2">Trang danh sách hàng quán</h4>
+                                <ul class="text-sm text-gray-600 space-y-1 list-disc pl-4">
+                                    <li>Lọc các hàng quán trong phạm vi bán kính 1km.</li>
+                                    <li>Hiển thị (tên, khoảng cách) từ gần đến xa vị trí customer.</li>
+                                    <li>Cho phép chọn một hàng quán để xem chi tiết.</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                                <h4 class="font-bold text-primary mb-2">Trang thông tin chi tiết</h4>
+                                <ul class="text-sm text-gray-600 space-y-1 list-disc pl-4">
+                                    <li>Hiển thị ảnh, tên, địa chỉ, mô tả một hàng quán.</li>
+                                    <li>Hiển thị nút nghe thuyết minh, phát thuyết minh tự động dựa trên mô tả.</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                                <h4 class="font-bold text-primary mb-2">Trang QR</h4>
+                                <ul class="text-sm text-gray-600 space-y-1 list-disc pl-4">
+                                    <li>Cho phép dùng camera quét QR trên app.</li>
+                                    <li>Chuyển về trang thông tin chi tiết của quán được quét.</li>
+                                </ul>
+                            </div>
+
+                            <div class="bg-red-50 p-4 rounded-lg border border-red-100">
+                                <h4 class="font-bold text-red-600 mb-2">Xử lý lỗi</h4>
+                                <ul class="text-sm text-gray-600 space-y-1 list-disc pl-4">
+                                    <li>Thông báo khi Customer không cấp quyền truy cập location.</li>
+                                    <li>Thông báo khi không có hàng quán trong phạm vi.</li>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- Web Admin Features -->
+                    <div>
+                        <h3 class="text-lg font-bold text-gray-800 border-b border-gray-200 pb-2 mb-4">B. Website – Admin</h3>
+                        <div class="bg-white border border-gray-200 rounded-lg overflow-hidden">
+                            <table class="w-full text-sm text-left">
+                                <thead class="bg-gray-50 text-gray-700">
+                                    <tr>
+                                        <th class="px-6 py-3 font-semibold w-1/4">Tính năng</th>
+                                        <th class="px-6 py-3 font-semibold">Mô tả</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-100">
+                                    <tr>
+                                        <td class="px-6 py-4 font-medium text-gray-900">Login</td>
+                                        <td class="px-6 py-4 text-gray-600">Đăng nhập bằng tài khoản, mật khẩu admin.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 font-medium text-gray-900">View POIs</td>
+                                        <td class="px-6 py-4 text-gray-600">Xem danh sách các hàng quán được lưu trữ.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 font-medium text-gray-900">Add POIs</td>
+                                        <td class="px-6 py-4 text-gray-600">Hiển thị form điền thông tin hàng quán.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 font-medium text-gray-900">Update POIs</td>
+                                        <td class="px-6 py-4 text-gray-600">Hiển thị form thông tin và cho phép thay đổi thông tin.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 font-medium text-gray-900 text-red-500">Delete POIs</td>
+                                        <td class="px-6 py-4 text-gray-600">Ẩn một hàng quán trong database.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. Cấu trúc hệ thống -->
+            <section id="cau-truc" class="scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="bg-blue-100 p-2 rounded-lg text-blue-600"><i class="fa-solid fa-server"></i></div>
+                    <h2 class="text-2xl font-bold text-gray-900">6. Cấu trúc hệ thống (System structure)</h2>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Frontend -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fa-brands fa-microsoft text-blue-500 text-xl"></i>
+                            <h3 class="text-lg font-bold text-gray-900">Frontend (.NET MAUI)</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3">Ứng dụng mobile được phát triển bằng .NET MAUI. Cung cấp giao diện tương tác:</p>
+                        <ul class="list-disc pl-5 text-sm text-gray-600 space-y-1 mb-3">
+                            <li>Xem bản đồ và vị trí hiện tại.</li>
+                            <li>Xem danh sách và chi tiết các hàng quán.</li>
+                            <li>Lựa chọn ngôn ngữ.</li>
+                            <li>Nghe thuyết minh tự động.</li>
+                            <li>Quét mã QR.</li>
+                        </ul>
+                        <p class="text-sm text-gray-600">Sử dụng GPS thiết bị, gửi yêu cầu đến backend qua API và hiển thị dữ liệu.</p>
+                    </div>
+
+                    <!-- Backend -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fa-solid fa-cloud text-gray-500 text-xl"></i>
+                            <h3 class="text-lg font-bold text-gray-900">Backend (Web API)</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-3">Được xây dựng dưới dạng Web API để xử lý và cung cấp dữ liệu cho mobile app.</p>
+                        <ul class="list-disc pl-5 text-sm text-gray-600 space-y-1">
+                            <li>Tiếp nhận yêu cầu từ frontend và trả về dữ liệu phù hợp.</li>
+                            <li>Thêm, xóa, sửa thông tin hàng quán (POIs) từ web admin.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Database -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <div class="flex items-center gap-2 mb-3">
+                            <i class="fa-solid fa-database text-green-600 text-xl"></i>
+                            <h3 class="text-lg font-bold text-gray-900">Database (MongoDB)</h3>
+                        </div>
+                        <p class="text-sm text-gray-600 mb-4">Lưu trữ dữ liệu dưới dạng document (NoSQL). Cấu trúc lưu thông tin hàng quán (POIs):</p>
+                        
+                        <div class="bg-[#1e1e1e] rounded-lg p-4 overflow-x-auto text-sm font-mono text-green-400">
+                            <code>
+<span class="text-blue-300">_id:</span> ObjectId('69cb8bcdea738c70d2445849')<br>
+<span class="text-blue-300">name:</span> "Bún bò Huế"<br>
+<span class="text-blue-300">address:</span> "123 Nguyễn Huệ, Hồ Chí Minh"<br>
+<span class="text-blue-300">lat:</span> 10.811245<br>
+<span class="text-blue-300">lng:</span> 106.626809<br>
+<span class="text-blue-300">localizations:</span> [<br>
+&nbsp;&nbsp;{ <span class="text-blue-300">lang:</span> "vi", <span class="text-blue-300">description:</span> "Bún bò Huế là một trong những món ăn..." },<br>
+&nbsp;&nbsp;{ <span class="text-blue-300">lang:</span> "en", <span class="text-blue-300">description:</span> "Bún bò Huế is one of the most iconic..." },<br>
+&nbsp;&nbsp;{ <span class="text-blue-300">lang:</span> "ja", <span class="text-blue-300">description:</span> "ブンボーフエはベトナム中部を代表する..." },<br>
+&nbsp;&nbsp;{ <span class="text-blue-300">lang:</span> "zh", <span class="text-blue-300">description:</span> "顺化牛肉米粉是越南中部最具代表性的..." }<br>
+]<br>
+<span class="text-blue-300">image:</span> "bunbohue.jpg"
+                            </code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. Giao diện & Trải nghiệm -->
+            <section id="giao-dien" class="scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="bg-pink-100 p-2 rounded-lg text-pink-600"><i class="fa-solid fa-mobile-button"></i></div>
+                    <h2 class="text-2xl font-bold text-gray-900">7. Giao diện và trải nghiệm</h2>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                    <h3 class="text-lg font-bold text-gray-800 mb-6">Mobile App UI</h3>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+                        <!-- Placeholder cho các hình ảnh trong tài liệu -->
+                        <div class="flex flex-col items-center">
+                            <div class="w-full aspect-[9/16] bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center mb-3">
+                                <span class="text-gray-400 text-sm font-medium">[Hình ảnh 1]</span>
+                            </div>
+                            <p class="text-sm font-semibold text-center text-gray-700">Trang mặc định (Home)</p>
+                        </div>
+
+                        <div class="flex flex-col items-center">
+                            <div class="w-full aspect-[9/16] bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center mb-3">
+                                <span class="text-gray-400 text-sm font-medium">[Hình ảnh 2]</span>
+                            </div>
+                            <p class="text-sm font-semibold text-center text-gray-700">Trang lựa chọn ngôn ngữ</p>
+                        </div>
+
+                        <div class="flex flex-col items-center">
+                            <div class="w-full aspect-[9/16] bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center mb-3">
+                                <span class="text-gray-400 text-sm font-medium">[Hình ảnh 4]</span>
+                            </div>
+                            <p class="text-sm font-semibold text-center text-gray-700">Trang xem danh sách</p>
+                        </div>
+
+                        <div class="flex flex-col items-center">
+                            <div class="w-full aspect-[9/16] bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center mb-3">
+                                <span class="text-gray-400 text-sm font-medium">[Hình ảnh 3]</span>
+                            </div>
+                            <p class="text-sm font-semibold text-center text-gray-700">Trang xem chi tiết</p>
+                        </div>
+
+                        <div class="flex flex-col items-center">
+                            <div class="w-full aspect-[9/16] bg-gray-100 border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center mb-3">
+                                <span class="text-gray-400 text-sm font-medium">[Hình ảnh 5]</span>
+                            </div>
+                            <p class="text-sm font-semibold text-center text-gray-700">Trang quét QR</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. Sơ đồ hệ thống -->
+            <section id="so-do" class="scroll-mt-24 mb-20">
+                <div class="flex items-center gap-3 mb-6">
+                    <div class="bg-yellow-100 p-2 rounded-lg text-yellow-600"><i class="fa-solid fa-project-diagram"></i></div>
+                    <h2 class="text-2xl font-bold text-gray-900">8. Sơ đồ (Diagrams)</h2>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Use Case</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 flex flex-col items-center justify-center min-h-[200px]">
+                                <i class="fa-regular fa-image text-3xl text-gray-300 mb-2"></i>
+                                <span class="text-gray-500 font-medium">[Sơ đồ Use Case - Mobile]</span>
+                            </div>
+                            <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 flex flex-col items-center justify-center min-h-[200px]">
+                                <i class="fa-regular fa-image text-3xl text-gray-300 mb-2"></i>
+                                <span class="text-gray-500 font-medium">[Sơ đồ Use Case - Web Admin]</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+                        <h3 class="text-lg font-bold text-gray-800 mb-4 border-b pb-2">Sequence & Flow</h3>
+                        <div class="space-y-4">
+                            <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
+                                <i class="fa-regular fa-image text-3xl text-gray-300 mb-2"></i>
+                                <span class="text-gray-500 font-medium">[Sơ đồ QR Scan (Seller/User)]</span>
+                            </div>
+                            <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
+                                <i class="fa-regular fa-image text-3xl text-gray-300 mb-2"></i>
+                                <span class="text-gray-500 font-medium">[Sơ đồ Sequence - HomePage]</span>
+                            </div>
+                            <div class="bg-gray-50 border border-gray-200 rounded-lg p-6 flex flex-col items-center justify-center min-h-[150px]">
+                                <i class="fa-regular fa-image text-3xl text-gray-300 mb-2"></i>
+                                <span class="text-gray-500 font-medium">[Sơ đồ Sequence - Các trang chức năng khác]</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+</body>
+</html>
