@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khu Phố Ẩm Thực - Quản Lý Gian Hàng</title>
+    
+    <!-- Liên kết tới file CSS trong thư mục css -->
+    <link rel="stylesheet" href="css/client.css">
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            FoodStreet
+        </div>
+        <ul class="sidebar-menu">
+            <li id="menu-stats" class="active" onclick="switchTab('stats')">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                Thống Kê
+            </li>
+            <li id="menu-edit" onclick="switchTab('edit')">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                Gian Hàng
+            </li>
+            <li onclick="alert('Đăng xuất thành công!')" style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1);">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                Đăng Xuất
+            </li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="topbar">
+            <div id="topbar-title" class="topbar-title">Tổng Quan Thống Kê</div>
+            <div class="user-profile">
+                <span>Chủ quán: Bún bò Huế</span>
+                <img src="https://ui-avatars.com/api/?name=Bun+Bo&background=ff4757&color=fff" alt="Avatar" style="border-radius: 50%; width: 40px;">
+            </div>
+        </header>
+
+        <div class="content-area">
+            
+            <!-- SECTION 1: THỐNG KÊ -->
+            <section id="section-stats" class="section active">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon visitor">
+                            <svg style="width:30px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Tổng Khách Ghé Thăm</h3>
+                            <p>3,240</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon qr">
+                            <svg style="width:30px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Lượt Quét Mã QR</h3>
+                            <p>1,850</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon audio">
+                            <svg style="width:30px" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Lượt Nghe Audio</h3>
+                            <p>2,105</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <div class="panel-card">
+                        <div class="panel-title">
+                            Gian Hàng POI Được Quan Tâm Nhất
+                            <span class="panel-tag info">Theo tuần</span>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Gian Hàng / POI</th>
+                                    <th>Quan Tâm</th>
+                                    <th>Nghe Audio</th>
+                                    <th>Xu Hướng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="poi-info">
+                                            <img class="poi-img" src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=100&q=80" alt="Bun Bo">
+                                            <div>
+                                                <div class="poi-name">Bún bò Huế Vĩnh Khánh</div>
+                                                <div class="poi-category">Ẩm thực đặc sản</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-info">1.2k lượt</span></td>
+                                    <td><span class="badge badge-audio">850 lượt</span></td>
+                                    <td class="text-success">↑ 15%</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="poi-info">
+                                            <img class="poi-img" src="https://images.unsplash.com/photo-1563379091339-03b17af4a4f9?auto=format&fit=crop&w=100&q=80" alt="Oc Dao">
+                                            <div>
+                                                <div class="poi-name">Ốc Đào Hải Sản</div>
+                                                <div class="poi-category">Hải sản tươi sống</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><span class="badge badge-info">950 lượt</span></td>
+                                    <td><span class="badge badge-audio">420 lượt</span></td>
+                                    <td class="text-success">↑ 8%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="panel-card">
+                        <div class="panel-title">
+                            Mật Độ Truy Cập POI
+                            <span class="panel-tag success">
+                                <span class="live-dot"></span>Trực tiếp
+                            </span>
+                        </div>
+                        <div class="density-container">
+                            <p class="density-desc">Tình trạng nhộn nhịp hiện tại tại gian hàng của bạn:</p>
+                            <div class="density-bar-bg">
+                                <div id="density-bar" class="density-bar-fill"></div>
+                            </div>
+                            <div class="density-status">
+                                <span class="text-success">Vắng</span>
+                                <span class="text-primary">Rất Đông</span>
+                            </div>
+                            <div class="density-stats">
+                                <div class="density-stat-row">
+                                    <span class="label">Khách hiện tại:</span>
+                                    <span class="value">42 người</span>
+                                </div>
+                                <div class="density-stat-row">
+                                    <span class="label">Dự kiến (1h tới):</span>
+                                    <span class="value text-primary">Tăng mạnh</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION 2: CẬP NHẬT GIAN HÀNG -->
+            <section id="section-edit" class="section">
+                <div class="panel-card">
+                    <div class="section-header">
+                        <h2>Chỉnh Sửa Thông Tin Gian Hàng</h2>
+                        <p class="code-style">_id: ObjectId('69cb8bcdea738c70d2445849')</p>
+                    </div>
+
+                    <form id="stall-form" onsubmit="saveStoreData(event)">
+                        <div class="form-row">
+                            <div class="form-group flex-2">
+                                <label class="form-label">Tên gian hàng / Món đặc trưng (name)</label>
+                                <input type="text" id="store-name" class="form-input" value="Bún bò Huế" required>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label class="form-label">Tên File Ảnh (image)</label>
+                                <input type="text" id="store-image" class="form-input" value="bunbohue.jpg" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Địa chỉ (address)</label>
+                            <input type="text" id="store-address" class="form-input" value="123 Nguyễn Huệ, Hồ Chí Minh" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Vĩ độ (lat)</label>
+                                <input type="number" step="any" id="store-lat" class="form-input" value="10.7551245" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Kinh độ (lng)</label>
+                                <input type="number" step="any" id="store-lng" class="form-input" value="106.696809" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Mô tả gian hàng (description - Tiếng Việt)</label>
+                            <textarea id="desc-vi" class="form-input" placeholder="Nhập mô tả tiếng Việt..." required>Bún bò Huế là một trong những món ăn đặc trưng nổi tiếng của miền Trung Việt Nam. Nước dùng được hầm từ xương bò và giò heo, kết hợp với mắm ruốc tạo nên hương vị đậm đà khó quên.</textarea>
+                            <p class="form-note">* Hệ thống sẽ tự động dịch sang Anh, Nhật, Trung sau khi bạn lưu.</p>
+                        </div>
+
+                        <div class="form-footer">
+                            <button type="submit" class="btn-submit">Lưu Cập Nhật Gian Hàng</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Liên kết tới file JS trong thư mục js -->
+    <script src="js/client.js"></script>
+</body>
+</html>
