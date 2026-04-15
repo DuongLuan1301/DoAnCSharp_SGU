@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký gian hàng</title>
+
+    <!-- CSS hệ thống -->
+    <link rel="stylesheet" href="css/client.css">
+    <link rel="stylesheet" href="css/add.css">
+
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            FoodStreet
+        </div>
+        <ul class="sidebar-menu">
+            <li id="menu-stats" onclick="window.location.href='index.html'">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                    </path>
+                </svg>
+                Thống Kê
+            </li>
+            <li id="menu-edit" onclick="window.location.href='list.html'">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                    </path>
+                </svg>
+                Gian Hàng
+            </li>
+            <li id="menu-add" class="active">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4">
+                    </path>
+                </svg>
+                Đăng ký Gian Hàng
+            </li>
+            <li style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1);">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                    </path>
+                </svg>
+                Đăng Xuất
+            </li>
+        </ul>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content add-layout">
+
+        <!-- FORM -->
+        <form id="poiForm" class="form-panel">
+
+            <h2>Đăng ký gian hàng</h2>
+
+            <div class="form">
+                <div class="form-group">
+                    <label>Tên gian hàng</label>
+                    <input type="text" id="name">
+                </div>
+
+                <div class="form-group">
+                    <label>Địa chỉ</label>
+                    <input type="text" id="address">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Vĩ độ</label>
+                        <input type="text" id="lat">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Kinh độ</label>
+                        <input type="text" id="lng">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Mô tả</label>
+                    <textarea id="desc"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Hình ảnh</label>
+
+                    <label class="upload-box">
+                        Chọn ảnh
+                        <input type="file" id="fileInput" hidden>
+                    </label>
+
+                    <div class="file-info" id="fileName"></div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn cancel" onclick="window.location.href='add.html'">
+                        Hủy
+                    </button>
+                    <button type="submit" class="btn submit">
+                        Lưu gian hàng
+                    </button>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <!-- MAP -->
+    <div class="map-panel">
+        <div id="map"></div>
+    </div>
+    <!-- JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="js/add.js"></script>
+    <script src="js/logout.js"></script>
+</body>
+
+</html>

@@ -53,7 +53,7 @@ string baseUrl = "http://10.0.2.2:5188";
 // REGION 1: API CHO APP MAUI & PARTNER PORTAL
 // =========================================================================
 #region API CHO APP MAUI
-
+//QUET QR API
 app.MapGet("/api/poi/{id}", async (string id, string lang = "vi") =>
 {
     try {
@@ -80,7 +80,7 @@ app.MapGet("/api/poi/{id}", async (string id, string lang = "vi") =>
     catch { return Results.BadRequest("ID format error"); }
 });
 
-
+//EDIT API
 app.MapPut("/api/poi/{id}", async (string id, Poi updatedPoi) =>
 {
     try
