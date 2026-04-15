@@ -5,10 +5,10 @@ using System.Text.Json;
 //These APIs are for admin website
 public static class PoiEndpoints
 {
-    public static void MapPoiEndpoints(this WebApplication app, IMongoCollection<Poi> poiCollection)
+    public static void MapPoiEndpoints(this WebApplication app)
     {
         //GET ALL POIs API
-        app.MapGet("/admin/poi", async () =>
+        app.MapGet("/admin/poi", async (IMongoCollection<Poi> poiCollection) =>
         {
             var pois = await poiCollection.Find(_ => true).ToListAsync();
 
@@ -27,7 +27,9 @@ public static class PoiEndpoints
         });
 
         // ===== ADD POI =====
-        app.MapPost("/admin/poi", async (Poi poi) =>
+        app.MapPost("/admin/poi", async (
+            Poi poi,
+            IMongoCollection<Poi> poiCollection) =>
         {
             var viDesc = poi.Localizations?
                 .FirstOrDefault(l => l.Lang == "vi")?.Description;

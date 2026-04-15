@@ -3,10 +3,12 @@ using DoAnCSharp_Api.Models;
 //These APIs are for mobile app
 public static class MobileEndpoints
 {
-    public static void MapMobileEndpoints(this WebApplication app, IMongoCollection<Poi> poiCollection)
+    public static void MapMobileEndpoints(this WebApplication app)
     {
         //GET ALL POIs API
-        app.MapGet("/api/poi", async (string lang) =>
+        app.MapGet("/api/poi", async (
+            string lang,
+            IMongoCollection<Poi> poiCollection) =>
         {
             var pois = await poiCollection.Find(_ => true).ToListAsync();
 
