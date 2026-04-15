@@ -39,7 +39,7 @@ public partial class PoiDetailPage : ContentPage
             BindingContext = _poi;
         }
 
-        private async void OnPlayAudioClicked(object sender, EventArgs e)
+      private async void OnPlayAudioClicked(object sender, EventArgs e)
     {
         if (_poi == null || string.IsNullOrWhiteSpace(_poi.Description) || _audioService == null)
             return;
@@ -55,15 +55,28 @@ public partial class PoiDetailPage : ContentPage
         // PLAY
         AudioButton.Text = "⏸️ Stop Audio";
 
+        // 🔥 GỌI API GHI NHẬN NGHE AUDIO CHẠY NGẦM
+        if (!string.IsNullOrEmpty(_poi.Id))
+        {
+            _ = TrackInteractionAsync(_poi.Id, "listen-audio");
+        }
+
         await _audioService.PlayAsync(_poi, AppState.CurrentLanguage);
 
         // khi đọc xong
         AudioButton.Text = "▶️ Play Audio";
     }
 
-    // ĐÓNG POPUP
-    private async void OnCloseClicked(object sender, EventArgs e)
+    // 🔥 HÀM GỌI API LƯU LÊN MONGODB
+    private async Task TrackInteractionAsync(string poiId, string action)
     {
-        await Navigation.PopAsync();
-    }
-}
+        try {
+            using var client = new HttpClient();
+            string url = $"http://10.0.2.2:5188/api/poi/{poiId}/{action}";
+            var content = new StringContent("", System.Text.Encoding.UTF8, "application/json");
+            await client.PostAsync(url, content);
+        }
+        catch (Exception ex) {
+            System.Diagnostics.Debug.WriteLine($"[Tracking Error] {action}: {ex.Message}");
+        }
+    }}

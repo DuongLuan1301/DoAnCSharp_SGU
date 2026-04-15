@@ -1,5 +1,7 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace DoAnCSharp_Api.Models
 {
@@ -7,34 +9,54 @@ namespace DoAnCSharp_Api.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        [JsonPropertyName("id")] 
+        public string Id { get; set; } = string.Empty;
 
         [BsonElement("name")]
-        public string Name { get; set; }
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = string.Empty;
 
         [BsonElement("address")]
-        public string Address { get; set; }
+        [JsonPropertyName("address")]
+        public string Address { get; set; } = string.Empty;
 
         [BsonElement("image")]
-        public string Image { get; set; }
+        [JsonPropertyName("image")]
+        public string Image { get; set; } = string.Empty;
 
         [BsonElement("lat")]
+        [JsonPropertyName("lat")]
         public double Lat { get; set; }
 
         [BsonElement("lng")]
+        [JsonPropertyName("lng")]
         public double Lng { get; set; }
 
+        [BsonElement("qrScans")]
+        [JsonPropertyName("qrScans")]
+        public int QrScans { get; set; } = 0;
+
+        [BsonElement("audioListens")]
+        [JsonPropertyName("audioListens")]
+        public int AudioListens { get; set; } = 0;
+
+        [BsonElement("views")]
+        [JsonPropertyName("views")]
+        public int Views { get; set; } = 0;
+
         [BsonElement("localizations")]
-        public List<Localization>? Localizations { get; set; } // nullable
+        [JsonPropertyName("localizations")]
+        public List<Localization>? Localizations { get; set; }
     }
 
     public class Localization
     {
         [BsonElement("lang")]
-        public string? Lang { get; set; }  // nullable
+        [JsonPropertyName("lang")]
+        public string Lang { get; set; } = string.Empty;
 
         [BsonElement("description")]
-        public string? Description { get; set; } // nullable
+        [JsonPropertyName("description")]
+        public string Description { get; set; } = string.Empty;
     }
 }
-

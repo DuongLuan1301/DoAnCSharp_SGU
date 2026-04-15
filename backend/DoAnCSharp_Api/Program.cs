@@ -2,6 +2,9 @@ using MongoDB.Driver;
 using DoAnCSharp_Api.Models;
 using MongoDB.Bson;
 
+// THÊM ĐÚNG DÒNG NÀY VÀO TRÊN CÙNG:
+using DoAnCSharp_Api.Endpoints;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 
@@ -41,6 +44,10 @@ app.UseStaticFiles(new StaticFileOptions
 app.MapMobileEndpoints(poiCollection);
 app.MapPoiEndpoints(poiCollection);
 app.MapUploadEndpoints();
+
+// ==== THÊM DÒNG NÀY ĐỂ LIÊN KẾT FILE MỚI ====
+app.MapTrackingEndpoints(poiCollection); 
+// ============================================
 
 // ==========================================
 // CẤU HÌNH BASE URL CHO APP MAUI

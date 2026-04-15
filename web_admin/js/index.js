@@ -39,8 +39,8 @@ function renderPOIs(dataList) {
         const name = p.name || p.Name || "Không tên";
         const address = p.address || p.Address || "Không có địa chỉ";
         
-        // Sửa đường dẫn ảnh nếu cần khớp với Backend C# của bạn
-        const imageUrl = p.image ? `http://localhost:5188/images/${p.image}` : "https://via.placeholder.com/300x180?text=No+Image";
+        // ĐÃ THÊM TIMESTAMP Ở ĐÂY ĐỂ XÓA CACHE ẢNH (LUÔN TẢI ẢNH MỚI)
+        const imageUrl = p.image ? `http://localhost:5188/images/${p.image}?v=${new Date().getTime()}` : "https://via.placeholder.com/300x180?text=No+Image";
 
         const card = `
         <div class="card">

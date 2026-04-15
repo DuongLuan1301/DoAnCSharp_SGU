@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khu Phố Ẩm Thực - Quản Lý Gian Hàng</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/client.css">
+    <link rel="stylesheet" href="css/store.css">
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">FoodStreet</div>
+        <ul class="sidebar-menu">
+            <li>
+                <a href="client.html" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 10px; width: 100%;">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    Thống Kê
+                </a>
+            </li>
+            <li class="active">
+                <a href="store.html" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 10px; width: 100%;">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    Gian Hàng
+                </a>
+            </li>
+            <li style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1);">
+                <a href="loginclient.html" onclick="return confirm('Bạn muốn đăng xuất?')" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 10px; width: 100%;">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                    Đăng Xuất
+                </a>
+            </li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <header class="topbar">
+            <div id="topbar-title" class="topbar-title">Chỉnh Sửa Gian Hàng</div>
+            <div class="user-profile">
+                <span>Chủ quán: Bún bò Huế</span>
+                <img src="https://ui-avatars.com/api/?name=Bun+Bo&background=ff4757&color=fff" alt="Avatar" style="border-radius: 50%; width: 40px;">
+            </div>
+        </header>
+
+        <div class="content-area">
+            <div class="panel-card">
+                <div class="section-header">
+                    <h2>Thông Tin Cơ Bản</h2>
+                    <p class="code-style">_id: ObjectId('69cb8bcdea738c70d2445849')</p>
+                </div>
+
+                <form id="stall-form" onsubmit="handleUpdate(event)">
+                    
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Tên gian hàng (name)</label>
+                            <input type="text" id="name" class="control" value="Bún bò Huế" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Tên file ảnh (image)</label>
+                            <input type="text" id="image" class="control" value="bunbohue.jpg" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Địa chỉ cụ thể (address)</label>
+                        <input type="text" id="address" class="control" value="123 Nguyễn Huệ, Quận 1, TP.HCM" required>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label>Vĩ độ (Latitude)</label>
+                            <input type="number" step="any" id="lat" class="control" value="10.7551245" required>
+                        </div>
+                        <div class="input-group">
+                            <label>Kinh độ (Longitude)</label>
+                            <input type="number" step="any" id="lng" class="control" value="106.696809" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Chọn vị trí trên bản đồ (Click hoặc kéo ghim)</label>
+                        <div id="map-picker"></div>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Mô tả chi tiết (Tiếng Việt)</label>
+                        <textarea id="desc-vi" class="control" rows="4" required>Bún bò Huế chuẩn vị miền Trung. Nước dùng được hầm từ xương bò và giò heo, kết hợp với mắm ruốc tạo nên hương vị đậm đà khó quên.</textarea>
+                    </div>
+
+                    <div class="actions">
+                        <button type="submit" class="btn-primary">Lưu Thay Đổi</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/store.js"></script>
+</body>
+</html>

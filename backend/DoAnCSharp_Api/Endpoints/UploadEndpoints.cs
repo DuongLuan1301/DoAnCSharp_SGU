@@ -17,6 +17,7 @@ public static class UploadEndpoints
             await file.CopyToAsync(stream);
 
             return Results.Ok(new { fileName });
-        });
+            
+        }).DisableAntiforgery(); // 🔥 ĐẶT Ở ĐÂY MỚI ĐÚNG VỊ TRÍ
     }
 }

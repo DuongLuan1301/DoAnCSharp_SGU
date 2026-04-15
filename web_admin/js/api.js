@@ -2,7 +2,8 @@ const BASE_URL = "http://localhost:5188/admin/poi";
 
 // GET ALL POIs
 export async function getPOIs() {
-    const res = await fetch(BASE_URL);
+    // Thêm cache: 'no-store' để không bao giờ bị dính dữ liệu cũ
+    const res = await fetch(BASE_URL, { cache: "no-store" });
     return await res.json();
 }
 

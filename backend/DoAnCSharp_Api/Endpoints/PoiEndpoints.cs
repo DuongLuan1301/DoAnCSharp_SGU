@@ -20,7 +20,14 @@ public static class PoiEndpoints
                 p.Lat,
                 p.Lng,
                 p.Localizations,
-                p.Image
+                p.Image,
+
+                // 🔥 ĐÃ THÊM 3 BIẾN NÀY ĐỂ WEB ADMIN ĐỌC ĐƯỢC DỮ LIỆU
+                views = p.Views,              
+                qrScans = p.QrScans,          
+                audioListens = p.AudioListens
+                
+
             });
 
             return Results.Ok(result);

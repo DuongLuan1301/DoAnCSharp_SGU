@@ -1,0 +1,75 @@
+/* Chỉ chứa các class dành riêng cho Form nhập liệu */
+.section-header { margin-bottom: 25px; }
+.section-header h2 { font-size: 1.5rem; color: #1f2937; margin: 0; }
+.code-style { font-family: monospace; color: #6b7280; font-size: 0.85rem; margin-top: 5px; }
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.input-group { margin-bottom: 20px; }
+
+.input-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #374151;
+}
+
+.control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: #f9fafb;
+    transition: 0.2s;
+    box-sizing: border-box; /* Quan trọng để không bị tràn khung */
+    font-family: inherit;
+}
+
+.control:focus {
+    border-color: #ff4757;
+    background-color: #fff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.1);
+}
+
+textarea.control {
+    resize: vertical;
+}
+
+/* Kiểu dáng cho khung Map */
+#map-picker {
+    height: 350px;
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+    z-index: 1; /* Tránh đè lên dropdown */
+}
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background: #ff4757;
+    color: white;
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-primary:hover {
+    background: #e84118;
+}

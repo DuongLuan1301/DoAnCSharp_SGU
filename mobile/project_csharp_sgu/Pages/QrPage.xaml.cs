@@ -26,7 +26,6 @@ public partial class QrPage : ContentPage
         var result = e.Results.FirstOrDefault();
         if (result == null) { _isScanning = true; return; }
 
-        // Chạy trên MainThread để tránh văng app
         MainThread.BeginInvokeOnMainThread(async () => {
             await FetchAndNavigate(result.Value);
         });
@@ -35,21 +34,38 @@ public partial class QrPage : ContentPage
     private async Task FetchAndNavigate(string id)
     {
         using var client = new HttpClient();
-        string url = $"http://10.0.2.2:5188/api/poi/{id.Trim()}?lang={AppState.CurrentLanguage}";
+        string cleanId = id.Trim();
+        string url = $"http://10.0.2.2:5188/api/poi/{cleanId}?lang={AppState.CurrentLanguage}";
 
         try {
             var poi = await client.GetFromJsonAsync<Poi>(url);
             if (poi != null) {
+                // 🔥 GỌI API GHI NHẬN QUÉT QR CHẠY NGẦM
+                _ = TrackInteractionAsync(cleanId, "scan-qr");
+
                 await Navigation.PushAsync(new PoiDetailPage(poi));
-                // Không set lại _isScanning vì trang đã thay đổi
             } else {
                 await DisplayAlertAsync("Lỗi", "Không tìm thấy địa điểm", "OK");
-                _isScanning = true; // Cho phép quét lại
+                _isScanning = true; 
             }
         }
         catch (Exception ex) {
             await DisplayAlertAsync("Lỗi", $"Lỗi kết nối API: {ex.Message}", "OK");
-            _isScanning = true; // Cho phép quét lại
+            _isScanning = true; 
+        }
+    }
+
+    // 🔥 HÀM GỌI API LƯU LÊN MONGODB
+    private async Task TrackInteractionAsync(string poiId, string action)
+    {
+        try {
+            using var client = new HttpClient();
+            string url = $"http://10.0.2.2:5188/api/poi/{poiId}/{action}";
+            var content = new StringContent("", System.Text.Encoding.UTF8, "application/json");
+            await client.PostAsync(url, content);
+        }
+        catch (Exception ex) {
+            System.Diagnostics.Debug.WriteLine($"[Tracking Error] {action}: {ex.Message}");
         }
     }
 
@@ -63,4 +79,5 @@ public partial class QrPage : ContentPage
         base.OnDisappearing();
         _isScanning = false;
         barcodeReader.IsDetecting = false;
-    }}
+    }
+}

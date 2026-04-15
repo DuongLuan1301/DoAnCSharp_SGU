@@ -27,6 +27,16 @@ public class Poi
     [JsonPropertyName("description")]
     public string? Description { get; set; }
 
+    // 🔥 CÁC TRƯỜNG MỚI ĐỒNG BỘ TỪ BACKEND
+    [JsonPropertyName("views")]
+    public int Views { get; set; }
+
+    [JsonPropertyName("qrScans")]
+    public int QrScans { get; set; }
+
+    [JsonPropertyName("audioListens")]
+    public int AudioListens { get; set; }
+
     // Trường này tính toán tại Mobile nên không cần JsonPropertyName
     public string? Distance { get; set; }
 }

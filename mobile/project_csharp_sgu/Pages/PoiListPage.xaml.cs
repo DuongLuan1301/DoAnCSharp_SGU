@@ -177,11 +177,31 @@ else
         });
     }
 
-    private async void OnDetailClicked(object sender, EventArgs e)
+  private async void OnDetailClicked(object sender, EventArgs e)
     {
         if (sender is Button button && button.BindingContext is Poi selectedPoi)
         {
+            // 🔥 GỌI API GHI NHẬN LƯỢT TRUY CẬP (VIEW) CHẠY NGẦM
+            if (!string.IsNullOrEmpty(selectedPoi.Id))
+            {
+                _ = TrackInteractionAsync(selectedPoi.Id, "view");
+            }
+
             await Navigation.PushAsync(new PoiDetailPage(selectedPoi));
+        }
+    }
+
+    // 🔥 HÀM GỌI API LƯU LÊN MONGODB
+    private async Task TrackInteractionAsync(string poiId, string action)
+    {
+        try {
+            using var client = new HttpClient();
+            string url = $"http://10.0.2.2:5188/api/poi/{poiId}/{action}";
+            var content = new StringContent("", System.Text.Encoding.UTF8, "application/json");
+            await client.PostAsync(url, content);
+        }
+        catch (Exception ex) {
+            System.Diagnostics.Debug.WriteLine($"[Tracking Error] {action}: {ex.Message}");
         }
     }
 
