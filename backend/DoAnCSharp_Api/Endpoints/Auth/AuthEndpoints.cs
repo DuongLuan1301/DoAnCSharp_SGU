@@ -14,16 +14,12 @@ public static class AuthEndpoints
         group.MapPost("/register", async (UserRegisterDto dto, IMongoCollection<User> users) =>
         {
             // check email và sđt tồn tại
-            var existEmail = await users.Find(x => x.Email == dto.Email).FirstOrDefaultAsync();
-            if (existEmail != null)
-                return Results.BadRequest(new { message = "Email đã tồn tại" });
-
-            var existPhone = await users.Find(x => x.Phone == dto.Phone).FirstOrDefaultAsync();
-            if (existPhone != null)
-                return Results.BadRequest(new { message = "Số điện thoại đã tồn tại"});
+            var exist = await users.Find(x => x.Email == dto.Email || x.Phone == dto.Phone).FirstOrDefaultAsync();
+            if (exist != null)
+                return Results.BadRequest(new { message = "Email hoặc SĐT đã tồn tại" });
 
             // hash password
-            var hash = BCrypt.Net.BCrypt.HashPassword(dto.PasswordHash);
+            var hash = BCrypt.Net.BCrypt.HashPassword(dto.Password);
 
             var user = new User
             {
