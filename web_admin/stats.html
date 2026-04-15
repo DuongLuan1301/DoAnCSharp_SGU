@@ -20,16 +20,14 @@
                 <a href="index.html">📍 POIs List</a>
                 <a href="stats.html" class="active">📊 Statistics</a>
                 <a href="add.html">➕ Add POI</a>
-                <a class="logout">🚪 Sign Out</a>
+                <a href="client.html">👥 Clients</a>
+                <a href="#" class="logout" onclick="localStorage.removeItem('adminToken'); window.location.href='login.html';">🚪 Sign Out</a>
             </nav>
         </aside>
 
         <div class="main">
             <header class="topbar">
-                <div class="search">
-                    <input type="text" placeholder="Tìm kiếm thống kê...">
-                </div>
-            </header>
+                </header>
 
             <div class="content">
                 <h2 class="page-title">Hệ thống Thống kê Dashboard</h2>
