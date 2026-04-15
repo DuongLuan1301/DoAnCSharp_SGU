@@ -1,10 +1,11 @@
 using MongoDB.Driver;
 using DoAnCSharp_Api.Models;
-
+//These APIs are for mobile app
 public static class MobileEndpoints
 {
     public static void MapMobileEndpoints(this WebApplication app, IMongoCollection<Poi> poiCollection)
     {
+        //GET ALL POIs API
         app.MapGet("/api/poi", async (string lang) =>
         {
             var pois = await poiCollection.Find(_ => true).ToListAsync();

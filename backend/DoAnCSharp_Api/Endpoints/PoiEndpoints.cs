@@ -1,11 +1,13 @@
 using MongoDB.Driver;
 using DoAnCSharp_Api.Models;
 using System.Text.Json;
+
+//These APIs are for admin website
 public static class PoiEndpoints
 {
     public static void MapPoiEndpoints(this WebApplication app, IMongoCollection<Poi> poiCollection)
     {
-        // ===== GET ALL POI =====
+        //GET ALL POIs API
         app.MapGet("/admin/poi", async () =>
         {
             var pois = await poiCollection.Find(_ => true).ToListAsync();
@@ -53,7 +55,7 @@ public static class PoiEndpoints
     //AUTO TRANSLATE VIETNAMESE DESCRIPTION
     private static readonly HttpClient _http = new HttpClient()
     {
-        Timeout = TimeSpan.FromSeconds(10) // ⏱ tăng thời gian chờ
+        Timeout = TimeSpan.FromSeconds(10) // tăng thời gian chờ
     };
 
     private static async Task<string> Translate(string text, string target)
@@ -66,8 +68,7 @@ public static class PoiEndpoints
 
         for (int attempt = 0; attempt < 3; attempt++)
         {
-            try
-            {
+            try {
                 var res = await _http.GetStringAsync(url);
 
                 if (string.IsNullOrWhiteSpace(res) || res.StartsWith("<"))
@@ -80,13 +81,10 @@ public static class PoiEndpoints
                 if (!string.IsNullOrWhiteSpace(translated))
                     return translated;
             }
-            catch
-            {
-                // retry tiếp
+            catch {
                 await Task.Delay(300 * (attempt + 1));
             }
         }
-
         // fallback nếu fail
         return text;
     }

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Sách Gian Hàng</title>
+    <link rel="stylesheet" href="css/client.css">
+    <link rel="stylesheet" href="css/list.css">
+
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            FoodStreet
+        </div>
+        <ul class="sidebar-menu">
+            <li id="menu-stats" onclick="window.location.href='index.html'">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                    </path>
+                </svg>
+                Thống Kê
+            </li>
+            <li id="menu-edit" class="active">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                    </path>
+                </svg>
+                Gian Hàng
+            </li>
+            <li id="menu-add" onclick="window.location.href='add.html'">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4">
+                    </path>
+                </svg>
+                Đăng ký Gian Hàng
+            </li>
+            <li style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1);">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                    </path>
+                </svg>
+                Đăng Xuất
+            </li>
+        </ul>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-content">
+
+        <header class="topbar">
+            <div class="topbar-title">Danh Sách Gian Hàng</div>
+            <div class="user-profile">
+                <span>Xin chào</span>
+                <span>Nguyễn Văn A</span>
+            </div>
+        </header>
+
+        <div class="content-area">
+
+            <div class="panel-card">
+
+                <div class="section-header">
+                    <h2>Danh sách các gian hàng trong hệ thống</h2>
+                </div>
+
+                <div class="table-container">
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Gian hàng</th>
+                                <th>Địa chỉ</th>
+                                <th>Tọa độ</th>
+                                <th>Tình trạng</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="store-info">
+                                        <div>
+                                            <div class="store-name">Bún bò Huế</div>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>123 Nguyễn Huệ</td>
+                                <td>10.7551, 106.6968</td>
+
+                                <td>
+                                    <span class="status approved">Đã duyệt</span>
+                                </td>
+                                <td>
+                                    <div class="action-group">
+                                        <button class="action-btn btn-view">Chi tiết</button>
+                                        <button class="action-btn btn-edit"
+                                            onclick="window.location.href='edit.html'">Cập nhật</button>
+                                        <button class="action-btn btn-delete">Xóa</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <div class="store-info">
+                                        <div>
+                                            <div class="store-name">Ốc Đào</div>
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td>456 Lê Lợi</td>
+                                <td>10.7622, 106.6820</td>
+
+                                <td>
+                                    <span class="status pending">Chưa duyệt</span>
+                                </td>
+
+                                <td>
+                                    <div class="action-group">
+                                        <button class="action-btn btn-view">Chi tiết</button>
+                                        <button class="action-btn btn-edit"
+                                            onclick="window.location.href='edit.html'">Cập nhật</button>
+                                        <button class="action-btn btn-delete">Xóa</button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function viewStore() {
+            alert("Xem chi tiết gian hàng");
+        }
+
+        function editStore() {
+            // GHI CHÚ: chuyển sang trang edit.html
+            window.location.href = "edit.html";
+        }
+
+        function deleteStore() {
+            if (confirm("Bạn có chắc muốn xóa?")) {
+                alert("Đã xóa gian hàng");
+            }
+        }
+    </script>
+    <script src="js/logout.js"></script>
+
+</body>
+
+</html>
