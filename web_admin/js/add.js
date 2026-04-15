@@ -11,6 +11,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let marker;
 
+    // =====================
+    // TÍNH NĂNG MỚI: HIỂN THỊ CÁC POI ĐÃ CÓ LÊN BẢN ĐỒ
+    // =====================
+    async function loadExistingPOIs() {
+        try {
+            const res = await fetch("http://127.0.0.1:5188/admin/poi");
+            if (res.ok) {
+                const data = await res.json();
+                data.forEach(p => {
+                    const lat = p.lat || p.Lat;
+                    const lng = p.lng || p.Lng;
+                    const name = p.name || p.Name || "Gian hàng";
+                    
+                    if (lat && lng) {
+                        // Tạo marker mờ (opacity: 0.5) cho các điểm đã tồn tại
+                        const existingMarker = L.marker([lat, lng], { opacity: 0.5 }).addTo(map);
+                        existingMarker.bindPopup(`
+                            <div style="text-align:center;">
+                                <b style="color: #4f46e5;">${name}</b><br>
+                                <span style="font-size: 11px; color: gray;">(Đã tồn tại)</span>
+                            </div>
+                        `);
+                    }
+                });
+            }
+        } catch (error) {
+            console.error("Lỗi khi tải danh sách POI cũ:", error);
+        }
+    }
+    
+    // Gọi hàm tải POI cũ ngay khi load xong map
+    loadExistingPOIs();
+
+    // =====================
+    // CLICK ĐỂ CHỌN VỊ TRÍ MỚI
+    // =====================
     map.on('click', async (e) => {
         const { lat, lng } = e.latlng;
 
@@ -18,6 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("lng").value = lng.toFixed(6);
 
         if (marker) map.removeLayer(marker);
+        
+        // Marker mới sẽ đậm và rõ nét (opacity mặc định = 1)
         marker = L.marker([lat, lng]).addTo(map);
 
         const res = await fetch(
