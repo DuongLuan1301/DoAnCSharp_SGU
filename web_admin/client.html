@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Client Management - POI Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">WEB ADMIN</div>
+            <nav class="menu">
+                <a href="index.html">📍 POIs List</a>
+                <a href="add.html">➕ Add POI</a>
+                <a href="stats.html">📊 Statistics</a>
+                <a href="clients.html" class="active">👥 Clients</a>
+                <a class="logout">🚪 Sign Out</a>
+            </nav>
+        </aside>
+
+        <div class="main">
+            <header class="topbar">
+                <div class="search">
+                    <input type="text" id="searchClient" placeholder="Tìm kiếm tài khoản...">
+                </div>
+                <button class="btn submit" id="btnAddClient" style="width: auto; padding: 10px 20px;">➕ Thêm Tài Khoản</button>
+            </header>
+
+            <div class="content">
+                <h2 class="page-title">Quản lý Tài Khoản Chủ Gian Hàng</h2>
+
+                <div class="card" style="padding: 0; overflow: hidden;">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Tên đăng nhập</th>
+                                <th>Chủ sở hữu</th>
+                                <th>Gian hàng quản lý (POI)</th>
+                                <th>Lượt truy cập</th>
+                                <th style="text-align: center;">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientTableBody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="clientModal">
+        <div class="modal-content">
+            <h3 id="modalTitle" style="margin-bottom: 20px;">Thêm Tài Khoản Mới</h3>
+            <form id="clientForm">
+                <input type="hidden" id="clientId">
+                <div class="form-group">
+                    <label>Tên đăng nhập (Username)</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <input type="password" id="password" placeholder="Nhập để đặt/đổi mật khẩu mới">
+                </div>
+                <div class="form-group">
+                    <label>Tên chủ sở hữu (Full Name)</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label>Chọn Gian Hàng (POI)</label>
+                    <select id="poiSelect" style="width: 100%; padding: 12px 16px; border-radius: 10px; border: 1.5px solid var(--border); font-family: inherit; font-size: 14px;">
+                        <option value="">-- Đang tải danh sách gian hàng --</option>
+                    </select>
+                </div>
+                <div class="form-actions" style="margin-top: 25px; gap: 15px;">
+                    <button type="button" class="btn cancel" id="btnCancel">Hủy</button>
+                    <button type="submit" class="btn submit">Lưu Tài Khoản</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="js/clients.js"></script>
+</body>
+</html>

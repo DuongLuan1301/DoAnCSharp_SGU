@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Statistics - POI Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.heat/dist/leaflet-heat.js"></script>
+</head>
+<body>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="logo">WEB ADMIN</div>
+            <nav class="menu">
+                <a href="index.html">📍 POIs List</a>
+                <a href="stats.html" class="active">📊 Statistics</a>
+                <a href="add.html">➕ Add POI</a>
+                <a class="logout">🚪 Sign Out</a>
+            </nav>
+        </aside>
+
+        <div class="main">
+            <header class="topbar">
+                <div class="search">
+                    <input type="text" placeholder="Tìm kiếm thống kê...">
+                </div>
+            </header>
+
+            <div class="content">
+                <h2 class="page-title">Hệ thống Thống kê Dashboard</h2>
+
+                <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 30px;">
+                    <div class="card" style="padding: 20px; text-align: center;">
+                        <h4 style="color: var(--text-muted);">Tổng Gian Hàng</h4>
+                        <p id="totalStalls" style="font-size: 32px; font-weight: 700; color: var(--primary);">0</p>
+                    </div>
+                    <div class="card" style="padding: 20px; text-align: center;">
+                        <h4 style="color: var(--text-muted);">Tổng Lượt Truy Cập</h4>
+                        <p id="totalViews" style="font-size: 32px; font-weight: 700; color: var(--success);">0</p>
+                    </div>
+                    <div class="card" style="padding: 20px; text-align: center; position: relative;">
+                        <h4 style="color: var(--text-muted);">Đang Truy Cập (Live) <span style="color: red; animation: blink 1s infinite;">●</span></h4>
+                        <p id="liveUsers" style="font-size: 32px; font-weight: 700; color: #f59e0b;">0</p>
+                    </div>
+                </div>
+
+                <div class="grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 30px; gap: 24px;">
+                    <div class="card" style="padding: 25px;">
+                        <h3 style="margin-bottom: 20px;">Lượt truy cập từng gian hàng</h3>
+                        <canvas id="trafficChart" style="max-height: 350px;"></canvas>
+                    </div>
+                    
+                    <div class="card" style="padding: 25px;">
+                        <h3 style="margin-bottom: 20px;">Bản đồ nhiệt (Heatmap)</h3>
+                        <div id="heatMap" style="height: 350px; width: 100%; border-radius: 12px; z-index: 1;"></div>
+                    </div>
+                </div>
+
+                <div class="card" style="padding: 20px;">
+                    <h3 style="margin-bottom: 15px;">Chi tiết gian hàng</h3>
+                    <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                        <thead>
+                            <tr style="border-bottom: 2px solid var(--border);">
+                                <th style="padding: 12px;">Tên Gian Hàng</th>
+                                <th style="padding: 12px;">Địa chỉ</th>
+                                <th style="padding: 12px;">Lượt truy cập</th>
+                            </tr>
+                        </thead>
+                        <tbody id="statsTableBody">
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+
+    <script type="module" src="js/stats.js"></script>
+</body>
+</html>
