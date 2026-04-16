@@ -68,6 +68,16 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        // ==========================================
+        // 🔥 KIỂM TRA ĐĂNG NHẬP VÀ LẤY CLIENT ID
+        // ==========================================
+        const currentClientId = localStorage.getItem("clientId");
+        if (!currentClientId) {
+            alert("Lỗi phiên đăng nhập. Vui lòng đăng nhập lại!");
+            window.location.href = "loginclient.html";
+            return;
+        }
+
         // UPLOAD IMAGE
         const formData = new FormData();
         formData.append("file", selectedFile);
@@ -81,6 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // CREATE POI
         const poi = {
+            clientId: currentClientId, // 🔥 GẮN CHỦ SỞ HỮU VÀO ĐÂY ĐỂ ĐẨY LÊN DATABASE
             name,
             address,
             lat: parseFloat(lat),

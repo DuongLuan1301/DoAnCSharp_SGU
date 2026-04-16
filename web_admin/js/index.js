@@ -39,8 +39,9 @@ function renderPOIs(dataList) {
         const name = p.name || p.Name || "Không tên";
         const address = p.address || p.Address || "Không có địa chỉ";
         
-        // ĐÃ THÊM TIMESTAMP Ở ĐÂY ĐỂ XÓA CACHE ẢNH (LUÔN TẢI ẢNH MỚI)
-        const imageUrl = p.image ? `http://localhost:5188/images/${p.image}?v=${new Date().getTime()}` : "https://via.placeholder.com/300x180?text=No+Image";
+        // 🔥 ĐÃ CHÈN SỬA LỖI Ở ĐÂY: Lấy cả p.image và p.Image để không bị undefiend
+        const imgVal = p.image || p.Image;
+        const imageUrl = imgVal ? `http://127.0.0.1:5188/images/${imgVal}?v=${new Date().getTime()}` : "https://via.placeholder.com/300x180?text=No+Image";
 
         const card = `
         <div class="card">

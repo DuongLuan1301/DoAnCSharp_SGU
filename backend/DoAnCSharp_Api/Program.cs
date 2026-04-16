@@ -1,21 +1,17 @@
 using MongoDB.Driver;
 using DoAnCSharp_Api.Models;
 using MongoDB.Bson;
-
-// THÊM ĐÚNG DÒNG NÀY VÀO TRÊN CÙNG:
-using DoAnCSharp_Api.Endpoints;
+using DoAnCSharp_Api.Endpoints; // Khai báo thư mục chứa Endpoints
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
 
-// 1. Configure CORS (Chỉ cần khai báo 1 lần)
+// 1. Configure CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin()
-              .AllowAnyMethod()
-              .AllowAnyHeader();
+        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     });
 });
 
@@ -26,15 +22,13 @@ builder.Services.AddSingleton<IMongoClient>(sp =>
 builder.Services.AddScoped<IMongoCollection<Poi>>(sp =>
 {
     var client = sp.GetRequiredService<IMongoClient>();
-    var db = client.GetDatabase("poi_db");
-    return db.GetCollection<Poi>("pois");
+    return client.GetDatabase("poi_db").GetCollection<Poi>("pois");
 });
 
 builder.Services.AddScoped<IMongoCollection<User>>(sp =>
 {
     var client = sp.GetRequiredService<IMongoClient>();
-    var db = client.GetDatabase("poi_db");
-    return db.GetCollection<User>("users");
+    return client.GetDatabase("poi_db").GetCollection<User>("users");
 });
 
 // 3. Build App
@@ -54,133 +48,15 @@ app.UseStaticFiles(new StaticFileOptions
     }
 });
 
+// ==========================================
+// 5. GỌI TẤT CẢ CÁC MODULE API
+// ==========================================
 app.MapMobileEndpoints();
 app.MapPoiEndpoints();
 app.MapUploadEndpoints();
 app.MapAuthEndpoints();
-
-// ==== THÊM DÒNG NÀY ĐỂ LIÊN KẾT FILE MỚI ====
 app.MapTrackingEndpoints(); 
-// ============================================
+app.MapUserEndpoints(); // Giữ lại dòng này để web Admin load được User
 
-// ==========================================
-// CẤU HÌNH BASE URL CHO APP MAUI
-// ==========================================
-string baseUrl = "http://10.0.2.2:5188";
-// ==========================================
-
-
-// =========================================================================
-// REGION 1: API CHO APP MAUI & PARTNER PORTAL
-// =========================================================================
-#region API CHO APP MAUI
-//QUET QR API
-app.MapGet("/api/poi/{id}", async (string id, IMongoCollection<Poi> poiCollection, string lang = "vi") =>
-{
-    try
-    {
-        var p = await poiCollection.Find(poi => poi.Id == id.Trim()).FirstOrDefaultAsync();
-        if (p == null) return Results.NotFound();
-
-        string desc = "No description";
-        if (p.Localizations != null && p.Localizations.Any())
-        {
-            var loc = p.Localizations.FirstOrDefault(l => l.Lang != null && l.Lang.Trim().ToLower() == lang.Trim().ToLower());
-            if (loc != null && !string.IsNullOrWhiteSpace(loc.Description)) desc = loc.Description;
-        }
-
-        string imgUrl = $"{baseUrl}/images/default.jpg?v={DateTime.Now.Ticks}";
-        if (!string.IsNullOrWhiteSpace(p.Image))
-        {
-            if (p.Image.StartsWith("http")) imgUrl = p.Image;
-            else imgUrl = $"{baseUrl}/images/{p.Image}?v={DateTime.Now.Ticks}";
-        }
-
-        var result = new { p.Id, p.Name, p.Address, Image = imgUrl, p.Lat, p.Lng, Description = desc };
-        return Results.Ok(result);
-    }
-    catch { return Results.BadRequest("ID format error"); }
-});
-//EDIT API
-app.MapPut("/api/poi/{id}", async (
-    string id, 
-    Poi updatedPoi,
-    IMongoCollection<Poi> poiCollection) =>
-{
-    try
-    {
-        updatedPoi.Id = id;
-        if (!string.IsNullOrWhiteSpace(updatedPoi.Image))
-        {
-            string pathWithoutQuery = updatedPoi.Image.Split('?')[0];
-            updatedPoi.Image = System.IO.Path.GetFileName(pathWithoutQuery);
-        }
-        var result = await poiCollection.ReplaceOneAsync(p => p.Id == id, updatedPoi);
-        if (result.MatchedCount == 0) return Results.NotFound("Không tìm thấy POI");
-        return Results.Ok(new { message = "Cập nhật thành công" });
-    }
-    catch (Exception ex) { return Results.BadRequest(ex.Message); }
-});
-
-#endregion
-
-
-// =========================================================================
-// REGION 2: API CHO WEB ADMIN (/admin/poi & /upload-image)
-// =========================================================================
-#region API CHO WEB ADMIN
-
-// 3. API DELETE: Xóa POI
-app.MapDelete("/admin/poi/{id}", async (
-    string id,
-    IMongoCollection<Poi> poiCollection) =>
-{
-    try
-    {
-        // Thêm .Trim() để dọn dẹp khoảng trắng dư thừa ở ID
-        var result = await poiCollection.DeleteOneAsync(p => p.Id == id.Trim());
-
-        if (result.DeletedCount > 0)
-            return Results.Ok(new { message = "Xóa thành công" });
-
-        return Results.NotFound(new { message = "Không tìm thấy POI trong Database" });
-    }
-    catch (Exception ex)
-    {
-        return Results.BadRequest(new { message = "Lỗi định dạng ID: " + ex.Message });
-    }
-});
-
-// 4. Upload Hình Ảnh
-app.MapPost("/upload-image", async (IFormFile file) =>
-{
-    try
-    {
-        if (file == null || file.Length == 0)
-            return Results.BadRequest(new { message = "Chưa chọn file" });
-
-        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images");
-
-        if (!Directory.Exists(uploadsFolder))
-            Directory.CreateDirectory(uploadsFolder);
-
-        var fileName = file.FileName.Replace(" ", "-");
-        var filePath = Path.Combine(uploadsFolder, fileName);
-
-        using (var stream = new FileStream(filePath, FileMode.Create))
-        {
-            await file.CopyToAsync(stream);
-        }
-
-        return Results.Ok(new { fileName = fileName });
-    }
-    catch (Exception ex)
-    {
-        return Results.BadRequest(new { message = ex.Message });
-    }
-}).DisableAntiforgery();
-
-#endregion
-
-// 5. Chạy Server (Lệnh cuối cùng của ứng dụng)
+// 6. Chạy Server
 app.Run("http://0.0.0.0:5188");

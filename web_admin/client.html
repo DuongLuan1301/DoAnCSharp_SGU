@@ -5,6 +5,7 @@
     <title>Client Management - POI Admin</title>
     <link rel="stylesheet" href="css/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
 </head>
 <body>
     <div class="layout">
@@ -22,23 +23,26 @@
         <div class="main">
             <header class="topbar">
                 <div class="search">
-                    <input type="text" id="searchClient" placeholder="Tìm kiếm tài khoản...">
+                    <input type="text" id="searchClient" placeholder="Tìm kiếm tài khoản (Tên, Email)..." style="padding:10px; border-radius:8px; border:1px solid #ccc; width:300px;">
                 </div>
-                <button class="btn submit" id="btnAddClient" style="width: auto; padding: 10px 20px;">➕ Thêm Tài Khoản</button>
+                <button class="btn submit" id="btnAddClient" style="width: auto; padding: 10px 20px; border-radius: 8px; background: #3b82f6; color: white; font-weight: 600; border: none; cursor: pointer;">
+                    ➕ Thêm Tài Khoản
+                </button>
             </header>
 
             <div class="content">
-                <h2 class="page-title">Quản lý Tài Khoản Chủ Gian Hàng</h2>
+                <h2 class="page-title" style="margin-bottom: 20px; color: #1e293b;">Quản lý Tài Khoản Chủ Gian Hàng</h2>
 
-                <div class="card" style="padding: 0; overflow: hidden;">
-                    <table class="data-table">
-                        <thead>
+                <div class="card" style="padding: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+                    <table class="data-table" style="width: 100%; border-collapse: collapse;">
+                        <thead style="background: #f8fafc; border-bottom: 2px solid #e2e8f0;">
                             <tr>
-                                <th>Tên đăng nhập</th>
-                                <th>Chủ sở hữu</th>
-                                <th>Gian hàng quản lý (POI)</th>
-                                <th>Lượt truy cập</th>
-                                <th style="text-align: center;">Hành động</th>
+                                <th style="padding: 15px; text-align: left; color: #475569;">Tên chủ sở hữu</th>
+                                <th style="padding: 15px; text-align: left; color: #475569;">Email (Tài khoản)</th>
+                                <th style="padding: 15px; text-align: left; color: #475569;">Số điện thoại</th>
+                                <th style="padding: 15px; text-align: center; color: #475569;">Danh sách Gian hàng</th>
+                                <th style="padding: 15px; text-align: center; color: #475569;">Trạng thái</th>
+                                <th style="padding: 15px; text-align: center; color: #475569;">Hành động</th>
                             </tr>
                         </thead>
                         <tbody id="clientTableBody">
@@ -51,35 +55,96 @@
 
     <div class="modal-overlay" id="clientModal">
         <div class="modal-content">
-            <h3 id="modalTitle" style="margin-bottom: 20px;">Thêm Tài Khoản Mới</h3>
+            <h3 id="modalTitle">Thêm Tài Khoản Mới</h3>
             <form id="clientForm">
                 <input type="hidden" id="clientId">
+                
                 <div class="form-group">
-                    <label>Tên đăng nhập (Username)</label>
-                    <input type="text" id="username" required>
+                    <label>Họ và Tên</label>
+                    <input type="text" id="fullName" placeholder="Ví dụ: Nguyễn Văn A" required>
+                </div>
+                <div class="form-group">
+                    <label>Email (Dùng để đăng nhập)</label>
+                    <input type="email" id="email" placeholder="example@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại</label>
+                    <input type="text" id="phone" placeholder="0912345678" required>
                 </div>
                 <div class="form-group">
                     <label>Mật khẩu</label>
-                    <input type="password" id="password" placeholder="Nhập để đặt/đổi mật khẩu mới">
+                    <input type="password" id="password" placeholder="Bỏ trống nếu không muốn đổi mật khẩu">
                 </div>
-                <div class="form-group">
-                    <label>Tên chủ sở hữu (Full Name)</label>
-                    <input type="text" id="fullName" required>
-                </div>
-                <div class="form-group">
-                    <label>Chọn Gian Hàng (POI)</label>
-                    <select id="poiSelect" style="width: 100%; padding: 12px 16px; border-radius: 10px; border: 1.5px solid var(--border); font-family: inherit; font-size: 14px;">
-                        <option value="">-- Đang tải danh sách gian hàng --</option>
-                    </select>
-                </div>
-                <div class="form-actions" style="margin-top: 25px; gap: 15px;">
-                    <button type="button" class="btn cancel" id="btnCancel">Hủy</button>
-                    <button type="submit" class="btn submit">Lưu Tài Khoản</button>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-modal cancel" id="btnCancel">Hủy Bỏ</button>
+                    <button type="submit" class="btn-modal submit">Lưu Tài Khoản</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <script type="module" src="js/clients.js"></script>
+    <div class="modal-overlay" id="poiListModal">
+        <div class="modal-content" style="max-width: 850px; width: 95%;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid #e2e8f0; padding-bottom: 15px;">
+                <h3 id="poiListTitle" style="margin: 0; border: none; padding: 0;">Danh sách gian hàng</h3>
+                <button class="btn-modal cancel" id="btnClosePoiList" style="padding: 6px 15px;">Đóng x</button>
+            </div>
+            
+            <div style="max-height: 400px; overflow-y: auto;">
+                <table class="data-table" style="width: 100%; border-collapse: collapse;">
+                    <thead style="background: #f8fafc;">
+                        <tr>
+                            <th style="padding: 12px; text-align: left;">Hình ảnh</th>
+                            <th style="padding: 12px; text-align: left;">Tên gian hàng</th>
+                            <th style="padding: 12px; text-align: left;">Địa chỉ</th>
+                            <th style="padding: 12px; text-align: left;">Tương tác</th>
+                            <th style="padding: 12px; text-align: center;">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="poiListBody">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="changeOwnerModal">
+        <div class="modal-content" style="max-width: 450px;">
+            <h3 style="margin-bottom: 15px;">Chuyển chủ sở hữu</h3>
+            <p id="targetPoiName" style="font-weight: 600; color: #4f46e5; margin-bottom: 15px; font-size: 1.1rem;"></p>
+            <input type="hidden" id="targetPoiId">
+            
+            <div class="form-group">
+                <label>Chọn chủ mới (Client)</label>
+                <select id="newOwnerSelect">
+                    </select>
+            </div>
+            
+            <div class="form-actions">
+                <button type="button" class="btn-modal cancel" id="btnCancelChangeOwner">Quay lại</button>
+                <button type="button" class="btn-modal submit" id="btnConfirmChangeOwner">Xác nhận chuyển</button>
+            </div>
+        </div>
+    </div>
+<div class="modal-overlay" id="assignPoiModal">
+        <div class="modal-content" style="max-width: 450px;">
+            <h3 style="margin-bottom: 15px;">Gán Gian Hàng</h3>
+            <p id="targetAssignClientName" style="font-weight: 600; color: #10b981; margin-bottom: 15px; font-size: 1.1rem;"></p>
+            <input type="hidden" id="targetAssignClientId">
+            
+            <div class="form-group">
+                <label>Chọn gian hàng (POI) để cấp cho người này</label>
+                <select id="assignPoiSelect">
+                    </select>
+            </div>
+            
+            <div class="form-actions">
+                <button type="button" class="btn-modal cancel" id="btnCancelAssignPoi">Hủy bỏ</button>
+                <button type="button" class="btn-modal submit" id="btnConfirmAssignPoi" style="background: #10b981;">Xác nhận gán</button>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="js/client.js"></script>
 </body>
 </html>

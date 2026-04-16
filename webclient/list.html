@@ -85,56 +85,19 @@
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>
-                                    <div class="store-info">
-                                        <div>
-                                            <div class="store-name">Bún bò Huế</div>
-                                        </div>
-                                    </div>
-                                </td>
-
-                                <td>123 Nguyễn Huệ</td>
-                                <td>10.7551, 106.6968</td>
-
-                                <td>
-                                    <span class="status approved">Đã duyệt</span>
-                                </td>
-                                <td>
-                                    <div class="action-group">
-                                        <button class="action-btn btn-view">Chi tiết</button>
-                                        <button class="action-btn btn-edit"
-                                            onclick="window.location.href='edit.html'">Cập nhật</button>
-                                        <button class="action-btn btn-delete">Xóa</button>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <div class="store-info">
-                                        <div>
-                                            <div class="store-name">Ốc Đào</div>
-                                        </div>
-                                    </div>
-                                </td>
-
-                                <td>456 Lê Lợi</td>
-                                <td>10.7622, 106.6820</td>
-
-                                <td>
-                                    <span class="status pending">Chưa duyệt</span>
-                                </td>
-
-                                <td>
-                                    <div class="action-group">
-                                        <button class="action-btn btn-view">Chi tiết</button>
-                                        <button class="action-btn btn-edit"
-                                            onclick="window.location.href='edit.html'">Cập nhật</button>
-                                        <button class="action-btn btn-delete">Xóa</button>
-                                    </div>
-                                </td>
-                            </tr>
+                      <table class="data-table">
+    <thead>
+        <tr>
+            <th>Gian hàng</th>
+            <th>Địa chỉ</th>
+            <th>Tọa độ</th>
+            <th>Tình trạng</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        </tbody>
+</table>
 
                         </tbody>
                     </table>
@@ -144,24 +107,7 @@
         </div>
     </main>
 
-    <script>
-        function viewStore() {
-            alert("Xem chi tiết gian hàng");
-        }
-
-        function editStore() {
-            // GHI CHÚ: chuyển sang trang edit.html
-            window.location.href = "edit.html";
-        }
-
-        function deleteStore() {
-            if (confirm("Bạn có chắc muốn xóa?")) {
-                alert("Đã xóa gian hàng");
-            }
-        }
-    </script>
+    <script src="js/client.js"></script>
     <script src="js/logout.js"></script>
-
 </body>
-
 </html>
