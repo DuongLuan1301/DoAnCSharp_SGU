@@ -1,5 +1,25 @@
 import { getPOIById, updatePOI } from "./api.js";
 
+// === HÀM MỚI: TỰ ĐỘNG DỊCH BẰNG GOOGLE TRANSLATE ===
+// Dùng phương thức POST để tránh lỗi nếu đoạn văn mô tả quá dài
+async function translateText(text, targetLang) {
+    if (!text) return "";
+    try {
+        const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=vi&tl=${targetLang}&dt=t`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `q=${encodeURIComponent(text)}`
+        });
+        const data = await res.json();
+        return data[0].map(item => item[0]).join('');
+    } catch (err) {
+        console.error(`Lỗi dịch sang ${targetLang}:`, err);
+        return text; // Nếu lỗi mạng thì dùng tạm tiếng Việt
+    }
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const poiId = urlParams.get('id');
@@ -13,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     let currentImage = ""; 
     let currentViews = 0, currentQrScans = 0, currentAudioListens = 0;
 
-    // TẢI DỮ LIỆU
+    // TẢI DỮ LIỆU CŨ LÊN FORM
     try {
         const data = await getPOIById(poiId);
         document.getElementById("name").value = data.name || data.Name || "";
@@ -35,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         marker = L.marker(latLng).addTo(map);
     } catch (e) { alert("Lỗi tải dữ liệu POI cũ"); }
 
-    // BẢN ĐỒ
+    // XỬ LÝ CLICK TRÊN BẢN ĐỒ
     map.on('click', async (e) => {
         const { lat, lng } = e.latlng;
         document.getElementById("lat").value = lat.toFixed(6);
@@ -49,7 +69,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         } catch(err){}
     });
 
-    // CHỌN ẢNH
+    // CHỌN ẢNH MỚI
     let selectedFile = null;
     document.getElementById("fileInput").addEventListener("change", (e) => {
         selectedFile = e.target.files[0];
@@ -59,7 +79,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    // SUBMIT
+    // NHẤN NÚT SUBMIT
     document.getElementById("poiForm").addEventListener("submit", async (e) => {
         e.preventDefault();
         const btn = document.querySelector('.submit');
@@ -70,18 +90,25 @@ document.addEventListener("DOMContentLoaded", async () => {
         try {
             let finalImg = currentImage;
             
+            // Xử lý upload ảnh nếu có
             if (selectedFile) {
                 const formData = new FormData();
                 formData.append("file", selectedFile);
                 const upRes = await fetch("http://127.0.0.1:5188/upload-image", { method: "POST", body: formData });
                 if (!upRes.ok) throw new Error("Upload ảnh thất bại");
                 const upData = await upRes.json();
-                // Bắt cả 2 trường hợp viết hoa/viết thường
                 finalImg = upData.fileName || upData.filename || finalImg; 
             }
 
             const desc = document.getElementById("desc").value.trim();
-            // Tạm thời bỏ qua Google Dịch để test cho nhanh
+            
+            // === ĐÃ SỬA: GỌI API DỊCH TRƯỚC KHI ĐÓNG GÓI ===
+            btn.innerText = "Đang dịch ngôn ngữ...";
+            const descEn = await translateText(desc, 'en');
+            const descJa = await translateText(desc, 'ja');
+            const descZh = await translateText(desc, 'zh');
+            btn.innerText = "Đang lưu trữ...";
+
             const poi = {
                 name: document.getElementById("name").value.trim(), 
                 address: document.getElementById("address").value.trim(), 
@@ -93,9 +120,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 audioListens: currentAudioListens,
                 localizations: [
                     { lang: "vi", description: desc },
-                    { lang: "en", description: desc },
-                    { lang: "ja", description: desc },
-                    { lang: "zh", description: desc }
+                    { lang: "en", description: descEn },
+                    { lang: "ja", description: descJa },
+                    { lang: "zh", description: descZh }
                 ]
             };
 

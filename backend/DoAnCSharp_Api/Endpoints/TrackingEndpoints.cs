@@ -2,15 +2,19 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using MongoDB.Driver;
 using DoAnCSharp_Api.Models;
+using System;
 
 namespace DoAnCSharp_Api.Endpoints
 {
     public static class TrackingEndpoints
     {
-        public static void MapTrackingEndpoints(this WebApplication app, IMongoCollection<Poi> poiCollection)
+        // 1. XÓA tham số IMongoCollection ở đây
+        public static void MapTrackingEndpoints(this WebApplication app) 
         {
-            // 1. Ghi nhận lượt truy cập chung (View)
-            app.MapPost("/api/poi/{id}/view", async (string id) =>
+            // 2. THÊM tham số IMongoCollection vào từng endpoint cụ thể
+            
+            // Ghi nhận lượt truy cập chung (View)
+            app.MapPost("/api/poi/{id}/view", async (string id, IMongoCollection<Poi> poiCollection) =>
             {
                 try
                 {
@@ -24,8 +28,8 @@ namespace DoAnCSharp_Api.Endpoints
                 catch (Exception ex) { return Results.BadRequest(ex.Message); }
             });
 
-            // 2. Ghi nhận lượt quét QR
-            app.MapPost("/api/poi/{id}/scan-qr", async (string id) =>
+            // Ghi nhận lượt quét QR
+            app.MapPost("/api/poi/{id}/scan-qr", async (string id, IMongoCollection<Poi> poiCollection) =>
             {
                 try
                 {
@@ -41,8 +45,8 @@ namespace DoAnCSharp_Api.Endpoints
                 catch (Exception ex) { return Results.BadRequest(ex.Message); }
             });
 
-            // 3. Ghi nhận lượt nghe Audio
-            app.MapPost("/api/poi/{id}/listen-audio", async (string id) =>
+            // Ghi nhận lượt nghe Audio
+            app.MapPost("/api/poi/{id}/listen-audio", async (string id, IMongoCollection<Poi> poiCollection) =>
             {
                 try
                 {

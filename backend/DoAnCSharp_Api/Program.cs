@@ -60,7 +60,7 @@ app.MapUploadEndpoints();
 app.MapAuthEndpoints();
 
 // ==== THÊM DÒNG NÀY ĐỂ LIÊN KẾT FILE MỚI ====
-app.MapTrackingEndpoints(poiCollection); 
+app.MapTrackingEndpoints(); 
 // ============================================
 
 // ==========================================
@@ -101,7 +101,6 @@ app.MapGet("/api/poi/{id}", async (string id, IMongoCollection<Poi> poiCollectio
     }
     catch { return Results.BadRequest("ID format error"); }
 });
-
 //EDIT API
 app.MapPut("/api/poi/{id}", async (
     string id, 
