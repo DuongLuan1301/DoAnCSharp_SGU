@@ -12,8 +12,19 @@ public static class PoiEndpoints
         app.MapGet("/admin/poi", async (IMongoCollection<Poi> poiCollection) =>
         {
             var pois = await poiCollection.Find(_ => true).ToListAsync();
-            var result = pois.Select(p => new {
-                id = p.Id.ToString(), clientId = p.ClientId, p.Name, p.Address, p.Lat, p.Lng, p.Localizations, p.Image, views = p.Views, qrScans = p.QrScans, audioListens = p.AudioListens
+            var result = pois.Select(p => new
+            {
+                id = p.Id.ToString(),
+                clientId = p.ClientId,
+                p.Name,
+                p.Address,
+                p.Lat,
+                p.Lng,
+                p.Localizations,
+                p.Image,
+                views = p.Views,
+                qrScans = p.QrScans,
+                audioListens = p.AudioListens
             });
             return Results.Ok(result);
         });
@@ -22,8 +33,19 @@ public static class PoiEndpoints
         app.MapGet("/client/poi/{clientId}", async (string clientId, IMongoCollection<Poi> poiCollection) =>
         {
             var pois = await poiCollection.Find(p => p.ClientId == clientId).ToListAsync();
-            var result = pois.Select(p => new {
-                id = p.Id.ToString(), clientId = p.ClientId, p.Name, p.Address, p.Lat, p.Lng, p.Localizations, p.Image, views = p.Views, qrScans = p.QrScans, audioListens = p.AudioListens
+            var result = pois.Select(p => new
+            {
+                id = p.Id.ToString(),
+                clientId = p.ClientId,
+                p.Name,
+                p.Address,
+                p.Lat,
+                p.Lng,
+                p.Localizations,
+                p.Image,
+                views = p.Views,
+                qrScans = p.QrScans,
+                audioListens = p.AudioListens
             });
             return Results.Ok(result);
         });
@@ -31,24 +53,28 @@ public static class PoiEndpoints
         // 3. GET CHI TIẾT 1 POI
         app.MapGet("/api/poi/{id}", async (string id, IMongoCollection<Poi> poiCollection, string lang = "vi") =>
         {
-            try {
+            try
+            {
                 var p = await poiCollection.Find(poi => poi.Id == id.Trim()).FirstOrDefaultAsync();
                 if (p == null) return Results.NotFound();
 
                 string desc = "No description";
-                if (p.Localizations != null && p.Localizations.Any()) {
+                if (p.Localizations != null && p.Localizations.Any())
+                {
                     var loc = p.Localizations.FirstOrDefault(l => l.Lang != null && l.Lang.Trim().ToLower() == lang.Trim().ToLower());
                     if (loc != null && !string.IsNullOrWhiteSpace(loc.Description)) desc = loc.Description;
                 }
 
                 string imgUrl = $"{baseUrl}/images/default.jpg?v={DateTime.Now.Ticks}";
-                if (!string.IsNullOrWhiteSpace(p.Image)) {
+                if (!string.IsNullOrWhiteSpace(p.Image))
+                {
                     if (p.Image.StartsWith("http")) imgUrl = p.Image;
                     else imgUrl = $"{baseUrl}/images/{p.Image}?v={DateTime.Now.Ticks}";
                 }
 
                 return Results.Ok(new { p.Id, p.ClientId, p.Name, p.Address, Image = imgUrl, p.Lat, p.Lng, Description = desc, p.Views, p.QrScans, p.AudioListens, p.Localizations });
-            } catch { return Results.BadRequest("ID format error"); }
+            }
+            catch { return Results.BadRequest("ID format error"); }
         });
 
         // 4. THÊM POI MỚI (AUTO DỊCH)
@@ -69,9 +95,11 @@ public static class PoiEndpoints
         // 5. UPDATE POI (CÓ BẢO MẬT)
         app.MapPut("/api/poi/{id}", async (string id, Poi updatedPoi, IMongoCollection<Poi> poiCollection) =>
         {
-            try {
+            try
+            {
                 updatedPoi.Id = id;
-                if (!string.IsNullOrWhiteSpace(updatedPoi.Image)) {
+                if (!string.IsNullOrWhiteSpace(updatedPoi.Image))
+                {
                     string pathWithoutQuery = updatedPoi.Image.Split('?')[0];
                     updatedPoi.Image = System.IO.Path.GetFileName(pathWithoutQuery);
                 }
@@ -86,20 +114,37 @@ public static class PoiEndpoints
 
                 var result = await poiCollection.ReplaceOneAsync(p => p.Id == id, updatedPoi);
                 return Results.Ok(new { message = "Cập nhật thành công" });
-            } catch (Exception ex) { return Results.BadRequest(ex.Message); }
+            }
+            catch (Exception ex) { return Results.BadRequest(ex.Message); }
         });
 
         // 6. DELETE POI (CÓ BẢO MẬT)
-        app.MapDelete("/admin/poi/{id}", async (string id, string? clientId, IMongoCollection<Poi> poiCollection) =>
+        app.MapDelete("/admin/poi/{id}", async (string id, string? clientId, IMongoCollection<Poi> poiCollection,    IWebHostEnvironment env) =>
         {
-            try {
+            try
+            {
+
                 DeleteResult result;
+                //Lấy POI trước để biết tên file ảnh
+                var poi = await poiCollection.Find(p => p.Id == id.Trim()).FirstOrDefaultAsync();
+                if (poi == null)
+                    return Results.BadRequest("Không tìm thấy POI");
+                //Xóa file ảnh
+                if (!string.IsNullOrWhiteSpace(poi.Image))
+                {
+                    var filePath = Path.Combine(env.WebRootPath, "images", poi.Image);
+                    if (File.Exists(filePath))
+                    {
+                        File.Delete(filePath);
+                    }
+                }
                 if (!string.IsNullOrEmpty(clientId)) result = await poiCollection.DeleteOneAsync(p => p.Id == id.Trim() && p.ClientId == clientId.Trim());
                 else result = await poiCollection.DeleteOneAsync(p => p.Id == id.Trim());
 
                 if (result.DeletedCount > 0) return Results.Ok(new { message = "Xóa thành công" });
                 return Results.BadRequest("Xóa thất bại: Bạn không có quyền xóa gian hàng này!");
-            } catch (Exception ex) { return Results.BadRequest(new { message = "Lỗi hệ thống: " + ex.Message }); }
+            }
+            catch (Exception ex) { return Results.BadRequest(new { message = "Lỗi hệ thống: " + ex.Message }); }
         });
 
         // 🔥 7. API ĐẶC QUYỀN: CẤP QUYỀN (GÁN POI)
@@ -119,14 +164,17 @@ public static class PoiEndpoints
     {
         if (string.IsNullOrWhiteSpace(text)) return text;
         var url = $"https://translate.googleapis.com/translate_a/single?client=gtx&sl=vi&tl={target}&dt=t&q={Uri.EscapeDataString(text)}";
-        for (int attempt = 0; attempt < 3; attempt++) {
-            try {
+        for (int attempt = 0; attempt < 3; attempt++)
+        {
+            try
+            {
                 var res = await _http.GetStringAsync(url);
                 if (string.IsNullOrWhiteSpace(res) || res.StartsWith("<")) continue;
                 var json = JsonDocument.Parse(res);
                 var translated = json.RootElement[0][0][0].GetString();
                 if (!string.IsNullOrWhiteSpace(translated)) return translated;
-            } catch { await Task.Delay(300 * (attempt + 1)); }
+            }
+            catch { await Task.Delay(300 * (attempt + 1)); }
         }
         return text;
     }
