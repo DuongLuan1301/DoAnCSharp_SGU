@@ -4,12 +4,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const tableBody = document.getElementById("clientTableBody");
     const modal = document.getElementById("clientModal");
     const clientForm = document.getElementById("clientForm");
-    
+
     const poiListModal = document.getElementById("poiListModal");
     const poiListBody = document.getElementById("poiListBody");
     const changeOwnerModal = document.getElementById("changeOwnerModal");
     const newOwnerSelect = document.getElementById("newOwnerSelect");
-    
+
     // Nơi chứa elements cho Gán POI
     const assignPoiModal = document.getElementById("assignPoiModal");
     const assignPoiSelect = document.getElementById("assignPoiSelect");
@@ -22,14 +22,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     // =====================================
     async function loadData() {
         try {
-            poiData = await getPOIs(); 
+            poiData = await getPOIs();
             const res = await fetch("http://127.0.0.1:5188/admin/users");
             clients = res.ok ? await res.json() : [];
-            
-            newOwnerSelect.innerHTML = clients.map(c => 
+
+            newOwnerSelect.innerHTML = clients.map(c =>
                 `<option value="${c.id || c.Id}">${c.name || c.Name}</option>`
             ).join('');
-            
+
             renderTable();
         } catch (e) { console.error("Lỗi tải dữ liệu", e); }
     }
@@ -39,14 +39,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     // =====================================
     function renderTable() {
         tableBody.innerHTML = "";
-        
+
         clients.forEach(client => {
             const clientId = client.id || client.Id;
             const clientPois = poiData.filter(p => p.clientId === clientId);
             const ownedPoisCount = clientPois.length;
 
             const isLocked = client.status === "locked";
-            const statusBadge = isLocked 
+            const statusBadge = isLocked
                 ? `<span style="background: #fee2e2; color: #ef4444; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600;">Đã Khóa</span>`
                 : `<span style="background: #dcfce3; color: #10b981; padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600;">Hoạt động</span>`;
 
@@ -58,10 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <td style="text-align: center;">
                         <div style="display: flex; gap: 8px; justify-content: center;">
                             <button class="btn-view-poi" onclick="viewClientPOIs('${clientId}', '${client.name || client.Name}')">
-                                👀 Xem ${ownedPoisCount}
-                            </button>
-                            <button class="btn-view-poi" style="background: #f0fdf4; color: #16a34a; border-color: #bbf7d0;" onclick="openAssignPoiModal('${clientId}', '${client.name || client.Name}')">
-                                ➕ Gán POI
+                                Xem (${ownedPoisCount} gian hàng)
                             </button>
                         </div>
                     </td>
@@ -84,7 +81,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         clientForm.reset();
         document.getElementById("clientId").value = "";
         document.getElementById("modalTitle").innerText = "Thêm Tài Khoản Mới";
-        document.getElementById("password").required = true; 
+        document.getElementById("password").required = true;
         modal.classList.add("active");
     });
     document.getElementById("btnCancel").addEventListener("click", () => modal.classList.remove("active"));
@@ -101,19 +98,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         try {
             if (id) {
                 const res = await fetch(`http://127.0.0.1:5188/admin/users/${id}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
-                if(!res.ok) throw new Error(await res.text()); alert("Cập nhật tài khoản thành công!");
+                if (!res.ok) throw new Error(await res.text()); alert("Cập nhật tài khoản thành công!");
             } else {
                 const res = await fetch("http://127.0.0.1:5188/api/auth/register", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
-                if(!res.ok) throw new Error(await res.text()); alert("Thêm tài khoản mới thành công!");
+                if (!res.ok) throw new Error(await res.text()); alert("Thêm tài khoản mới thành công!");
             }
-            modal.classList.remove("active"); loadData(); 
+            modal.classList.remove("active"); loadData();
         } catch (error) { alert("Lỗi: " + error.message); } finally { btnSave.innerText = originalText; btnSave.disabled = false; }
     });
 
     // =====================================
     // 4A. CHUYỂN CHỦ TRONG DANH SÁCH (CÓ SẴN)
     // =====================================
-    window.viewClientPOIs = function(clientId, clientName) {
+    window.viewClientPOIs = function (clientId, clientName) {
         document.getElementById("poiListTitle").innerText = `Gian hàng của: ${clientName}`;
         poiListBody.innerHTML = "";
         const clientPois = poiData.filter(p => p.clientId === clientId);
@@ -136,7 +133,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         poiListModal.classList.add("active");
     };
 
-    window.openChangeOwnerModal = function(poiId, poiName) {
+    window.openChangeOwnerModal = function (poiId, poiName) {
         document.getElementById("targetPoiId").value = poiId;
         document.getElementById("targetPoiName").innerText = `Gian hàng: ${poiName}`;
         poiListModal.classList.remove("active"); changeOwnerModal.classList.add("active");
@@ -155,69 +152,38 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("btnClosePoiList").addEventListener("click", () => poiListModal.classList.remove("active"));
 
     // =====================================
-    // 🔥 4B. TÍNH NĂNG MỚI: GÁN POI BẤT KỲ CHO CLIENT
-    // =====================================
-    window.openAssignPoiModal = function(clientId, clientName) {
-        document.getElementById("targetAssignClientId").value = clientId;
-        document.getElementById("targetAssignClientName").innerText = `Cấp cho tài khoản: ${clientName}`;
-        
-        assignPoiSelect.innerHTML = '<option value="">-- Chọn gian hàng cần gán --</option>';
-
-        // Lọc ra các POI không thuộc về người này
-        const availablePois = poiData.filter(p => p.clientId !== clientId);
-        availablePois.forEach(p => {
-            const status = !p.clientId ? "(Chưa có chủ)" : "(Đang thuộc người khác)";
-            assignPoiSelect.innerHTML += `<option value="${p.id || p.Id}">${p.name || p.Name} - ${status}</option>`;
-        });
-
-        assignPoiModal.classList.add("active");
-    };
-
-    document.getElementById("btnConfirmAssignPoi").addEventListener("click", async () => {
-        const clientId = document.getElementById("targetAssignClientId").value;
-        const poiId = assignPoiSelect.value;
-        if (!poiId) return alert("Vui lòng chọn 1 gian hàng!");
-
-        try {
-            const res = await fetch(`http://127.0.0.1:5188/admin/poi/${poiId}/assign?clientId=${clientId}`, { method: "PUT" });
-            if (res.ok) {
-                alert("Gán gian hàng thành công!");
-                assignPoiModal.classList.remove("active");
-                loadData();
-            } else {
-                alert("Lỗi khi gán gian hàng!");
-            }
-        } catch (err) { alert("Lỗi hệ thống: " + err.message); }
-    });
-
-    document.getElementById("btnCancelAssignPoi").addEventListener("click", () => assignPoiModal.classList.remove("active"));
-
-    // =====================================
     // 5. CÁC HÀM XÓA, SỬA, KHÓA ACCOUNT
     // =====================================
-    window.editClient = function(id) {
+    window.editClient = function (id) {
         const client = clients.find(c => (c.id || c.Id) === id);
         if (!client) return;
         document.getElementById("clientId").value = id;
         document.getElementById("fullName").value = client.name || client.Name;
         document.getElementById("email").value = client.email || client.Email;
         document.getElementById("phone").value = client.phone || client.Phone;
-        document.getElementById("password").required = false; 
+        document.getElementById("password").required = false;
         document.getElementById("modalTitle").innerText = "Sửa Tài Khoản";
         modal.classList.add("active");
     };
 
-    window.deleteClient = async function(id) {
-        if (confirm("Xóa tài khoản này? (Gian hàng của họ sẽ thành vô chủ)")) {
-            const res = await fetch(`http://127.0.0.1:5188/admin/users/${id}`, { method: "DELETE" });
-            if(res.ok) loadData(); else alert("Lỗi khi xóa!");
-        }
+    window.deleteClient = async function (id) {
+        if (!confirm("Xóa tài khoản này?")) return;
+            const res = await fetch(`http://127.0.0.1:5188/admin/users/${id}`, {
+                method: "DELETE"
+            });
+            const message = await res.text();
+            if (!res.ok) {
+                alert(message);
+                return;
+            }
+            alert("Xóa thành công!");
+            loadData();
     };
 
-    window.toggleLock = async function(id) {
+    window.toggleLock = async function (id) {
         if (confirm("Đổi trạng thái tài khoản này?")) {
             const res = await fetch(`http://127.0.0.1:5188/admin/users/${id}/status`, { method: "PUT" });
-            if(res.ok) loadData(); else alert("Lỗi hệ thống!");
+            if (res.ok) loadData(); else alert("Lỗi hệ thống!");
         }
     };
 

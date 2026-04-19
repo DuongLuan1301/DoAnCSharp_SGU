@@ -17,18 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const lng = e.latlng.lng.toFixed(6);
 
         // =====================
-        // CHECK TRÙNG
-        // =====================
-        const isExist = existingLocations.some(loc =>
-            loc.lat === lat && loc.lng === lng
-        );
-
-        if (isExist) {
-            alert("Vị trí này đã có gian hàng!");
-            return;
-        }
-
-        // =====================
         // SET VALUE
         // =====================
         document.getElementById("lat").value = lat;
@@ -68,16 +56,16 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             // tạo marker màu khác (ví dụ đỏ)
-            const m = L.marker([lat, lng])
+            const m = L.marker([lat, lng], { opacity: 0.5 })
                 .addTo(map)
                 .bindPopup(`<b>${poi.name}</b>`);
 
             existingMarkers.push(m);
         });
     }
-
     // gọi khi load
     loadExistingPOI();
+    
     // =====================
     // IMAGE
     // =====================

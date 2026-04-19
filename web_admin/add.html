@@ -24,8 +24,9 @@
                 <a href="index.html">📍 POIs List</a>
                 <a href="stats.html">📊 Statistics</a>
                 <a href="add.html" class="active">➕ Add POI</a>
-                <a href="client.html">  👥 Clients</a>
-                <a href="#" class="logout" onclick="localStorage.removeItem('adminToken'); window.location.href='login.html';">🚪 Sign Out</a>
+                <a href="client.html"> 👥 Clients</a>
+                <a href="#" class="logout"
+                    onclick="localStorage.removeItem('adminToken'); window.location.href='login.html';">🚪 Sign Out</a>
             </nav>
         </aside>
 
@@ -38,29 +39,35 @@
                 <!-- NAME -->
                 <div class="form-group">
                     <label>Name</label>
-                    <input type="text" id="name">
+                    <input type="text" id="name" required>
                 </div>
                 <!-- ADDRESS -->
                 <div class="form-group">
                     <label>Address</label>
-                    <input type="text" id="address">
+                    <input type="text" id="address" required>
                 </div>
                 <!-- LOCATION -->
                 <div class="form-row">
                     <div class="form-group">
                         <label>Latitude</label>
-                        <input type="text" id="lat">
+                        <input type="text" id="lat" required readonly>
                     </div>
 
                     <div class="form-group">
                         <label>Longitude</label>
-                        <input type="text" id="lng">
+                        <input type="text" id="lng" required readonly>
                     </div>
+                </div>
+                <div class="form-group">
+                    <label>Owner</label>
+                    <select id="clientId" required>
+                        <option value="">-- Select client --</option>
+                    </select>
                 </div>
                 <!-- DESCRIPTION -->
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea id="desc"></textarea>
+                    <textarea id="desc"></textarea required>
                 </div>
                 <!-- IMAGE -->
                 <div class="form-group">
@@ -68,9 +75,8 @@
 
                     <label class="upload-box">
                         Click to choose image
-                        <input type="file" id="fileInput" hidden>
+                        <input type="file" id="fileInput" hidden required>
                     </label>
-
                     <div class="file-info" id="fileName"></div>
                 </div>
 

@@ -23,14 +23,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     const lat = p.lat || p.Lat;
                     const lng = p.lng || p.Lng;
                     const name = p.name || p.Name || "Gian hàng";
-                    
+
                     if (lat && lng) {
                         // Tạo marker mờ (opacity: 0.5) cho các điểm đã tồn tại
                         const existingMarker = L.marker([lat, lng], { opacity: 0.5 }).addTo(map);
                         existingMarker.bindPopup(`
                             <div style="text-align:center;">
                                 <b style="color: #4f46e5;">${name}</b><br>
-                                <span style="font-size: 11px; color: gray;">(Đã tồn tại)</span>
                             </div>
                         `);
                     }
@@ -40,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Lỗi khi tải danh sách POI cũ:", error);
         }
     }
-    
+
     // Gọi hàm tải POI cũ ngay khi load xong map
     loadExistingPOIs();
 
@@ -54,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("lng").value = lng.toFixed(6);
 
         if (marker) map.removeLayer(marker);
-        
+
         // Marker mới sẽ đậm và rõ nét (opacity mặc định = 1)
         marker = L.marker([lat, lng]).addTo(map);
 
@@ -84,7 +83,19 @@ document.addEventListener("DOMContentLoaded", () => {
         selectedFile = file;
         fileName.innerText = file.name;
     });
+    //CLIENT
+    async function loadClients() {
+        const res = await fetch("http://127.0.0.1:5188/admin/users");
+        const clients = await res.json();
 
+        const select = document.getElementById("clientId");
+
+        select.innerHTML = `<option value="">-- Select client --</option>
+                            ${clients.map(c =>
+            `<option value="${c.id || c.Id}"> ${c.name || c.Name} </option>`)
+                .join("")}`;
+    }
+    loadClients();
     // =====================
     // SUBMIT
     // =====================
@@ -116,9 +127,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const uploadData = await uploadRes.json();
-
+        const clientId = document.getElementById("clientId").value;
         // CREATE POI
         const poi = {
+            clientId: clientId,
             name,
             address,
             lat: parseFloat(lat),

@@ -12,34 +12,34 @@ public partial class PoiDetailPage : ContentPage
     private Poi? _poi;
     private IAudioService? _audioService;
 
-        //constructor
-        public PoiDetailPage(Poi poi)
+    //constructor
+    public PoiDetailPage(Poi poi)
+    {
+        InitializeComponent();
+
+        _poi = poi;
+
+        //lấy AudioService từ DI container
+        _audioService = Application.Current?
+            .Handler
+            .MauiContext
+            .Services
+            .GetService<IAudioService>();
+
+        // bind dữ liệu sang UI
+        BindingContext = _poi;
+    }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (_poi != null && !string.IsNullOrEmpty(_poi.Id))
         {
-            InitializeComponent();
-
-            _poi = poi;
-
-            //lấy AudioService từ DI container
-            _audioService = Application.Current?
-                .Handler
-                .MauiContext
-                .Services
-                .GetService<IAudioService>();
-
-            // Debug: in ra dữ liệu POI để xem có gì
-            System.Diagnostics.Debug.WriteLine($"[PoiDetailPage] ===== POI DETAILS =====");
-            System.Diagnostics.Debug.WriteLine($"  Name: {_poi?.Name}");
-            System.Diagnostics.Debug.WriteLine($"  Address: {_poi?.Address}");
-            System.Diagnostics.Debug.WriteLine($"  Image: {_poi?.Image}");
-            System.Diagnostics.Debug.WriteLine($"  Image is null or empty: {string.IsNullOrWhiteSpace(_poi?.Image)}");
-            System.Diagnostics.Debug.WriteLine($"  Description: {_poi?.Description?.Substring(0, Math.Min(50, _poi.Description?.Length ?? 0))}...");
-            System.Diagnostics.Debug.WriteLine($"[PoiDetailPage] =====================");
-
-            // bind dữ liệu sang UI
-            BindingContext = _poi;
+            _ = TrackInteractionAsync(_poi.Id, "view");
         }
+    }
 
-      private async void OnPlayAudioClicked(object sender, EventArgs e)
+    private async void OnPlayAudioClicked(object sender, EventArgs e)
     {
         if (_poi == null || string.IsNullOrWhiteSpace(_poi.Description) || _audioService == null)
             return;
@@ -70,13 +70,9 @@ public partial class PoiDetailPage : ContentPage
     // 🔥 HÀM GỌI API LƯU LÊN MONGODB
     private async Task TrackInteractionAsync(string poiId, string action)
     {
-        try {
-            using var client = new HttpClient();
-            string url = $"http://10.0.2.2:5188/api/poi/{poiId}/{action}";
-            var content = new StringContent("", System.Text.Encoding.UTF8, "application/json");
-            await client.PostAsync(url, content);
-        }
-        catch (Exception ex) {
-            System.Diagnostics.Debug.WriteLine($"[Tracking Error] {action}: {ex.Message}");
-        }
-    }}
+        using var client = new HttpClient();
+        string url = $"http://10.0.2.2:5188/api/poi/{poiId}/{action}";
+        var content = new StringContent("", System.Text.Encoding.UTF8, "application/json");
+        await client.PostAsync(url, content);
+    }
+}

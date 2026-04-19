@@ -181,12 +181,6 @@ else
     {
         if (sender is Button button && button.BindingContext is Poi selectedPoi)
         {
-            // 🔥 GỌI API GHI NHẬN LƯỢT TRUY CẬP (VIEW) CHẠY NGẦM
-            if (!string.IsNullOrEmpty(selectedPoi.Id))
-            {
-                _ = TrackInteractionAsync(selectedPoi.Id, "view");
-            }
-
             await Navigation.PushAsync(new PoiDetailPage(selectedPoi));
         }
     }

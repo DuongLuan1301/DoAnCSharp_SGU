@@ -133,11 +133,14 @@ public static class PoiEndpoints
         });
 
         // 6. DELETE POI (CÓ BẢO MẬT)
-        app.MapDelete("/admin/poi/{id}", async (string id, string? clientId, IMongoCollection<Poi> poiCollection, IWebHostEnvironment env) =>
+        app.MapDelete("/admin/poi/{id}", async (
+            string id,
+            string? clientId,
+            IMongoCollection<Poi> poiCollection,
+            IWebHostEnvironment env) =>
         {
             try
             {
-
                 DeleteResult result;
                 //Lấy POI trước để biết tên file ảnh
                 var poi = await poiCollection.Find(p => p.Id == id.Trim()).FirstOrDefaultAsync();
@@ -161,7 +164,7 @@ public static class PoiEndpoints
             catch (Exception ex) { return Results.BadRequest(new { message = "Lỗi hệ thống: " + ex.Message }); }
         });
 
-        // 🔥 7. API ĐẶC QUYỀN: CẤP QUYỀN (GÁN POI)
+        // 7. API ĐẶC QUYỀN: CẤP QUYỀN (GÁN POI)
         app.MapPut("/admin/poi/{id}/assign", async (string id, string clientId, IMongoCollection<Poi> poiCollection) =>
         {
             var update = Builders<Poi>.Update.Set(p => p.ClientId, clientId.Trim());
@@ -180,7 +183,6 @@ public static class PoiEndpoints
 
     private static async Task<string> Translate(string text, string target)
     {
-        Console.WriteLine($"🌐 Translating to {target}...");
         if (string.IsNullOrWhiteSpace(text)) return text;
 
         var url = $"https://translate.googleapis.com/translate_a/single" +
@@ -200,22 +202,15 @@ public static class PoiEndpoints
             //check structure an toàn
             if (json.RootElement.ValueKind != JsonValueKind.Array)
                 continue;
-
             var first = json.RootElement[0];
-
             if (first.ValueKind != JsonValueKind.Array || first.GetArrayLength() == 0)
                 continue;
-
             var inner = first[0];
-
             if (inner.ValueKind != JsonValueKind.Array || inner.GetArrayLength() == 0)
                 continue;
-
             var translated = inner[0].GetString();
-
             if (!string.IsNullOrWhiteSpace(translated))
                 return translated;
-
         }
         return text;
     }

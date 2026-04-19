@@ -40,7 +40,7 @@ public partial class QrPage : ContentPage
         try {
             var poi = await client.GetFromJsonAsync<Poi>(url);
             if (poi != null) {
-                // 🔥 GỌI API GHI NHẬN QUÉT QR CHẠY NGẦM
+                // GỌI API GHI NHẬN QUÉT QR CHẠY NGẦM
                 _ = TrackInteractionAsync(cleanId, "scan-qr");
 
                 await Navigation.PushAsync(new PoiDetailPage(poi));

@@ -1,7 +1,7 @@
 using MongoDB.Driver;
 using DoAnCSharp_Api.Models;
 
-namespace DoAnCSharp_Api.Endpoints 
+namespace DoAnCSharp_Api.Endpoints
 {
     public static class UserEndpoints
     {
@@ -15,10 +15,32 @@ namespace DoAnCSharp_Api.Endpoints
             });
 
             // 2. XÓA TÀI KHOẢN
-            app.MapDelete("/admin/users/{id}", async (string id, IMongoCollection<User> users) =>
+            app.MapDelete("/admin/users/{id}", async (
+                string id,
+                IMongoCollection<User> users,
+                IMongoCollection<Poi> poiCollection
+            ) =>
             {
-                await users.DeleteOneAsync(u => u.Id == id);
-                return Results.Ok();
+                // 1. Kiểm tra user có tồn tại không
+                var user = await users.Find(u => u.Id == id).FirstOrDefaultAsync();
+                if (user == null)
+                    return Results.BadRequest("Không tìm thấy user");
+
+                // 2. Kiểm tra user có đang sở hữu POI nào không
+                var user_Poi = await poiCollection.Find(p => p.ClientId == id).AnyAsync();
+
+                if (user_Poi)
+                {
+                    return Results.BadRequest("Không thể xóa: Khách đang sở hữu gian hàng");
+                }
+
+                // 3. Nếu không có POI → cho phép xóa
+                var result = await users.DeleteOneAsync(u => u.Id == id);
+
+                if (result.DeletedCount > 0)
+                    return Results.Ok(new { message = "Xóa thành công" });
+
+                return Results.BadRequest("Xóa thất bại");
             });
 
             // 3. CẬP NHẬT TÀI KHOẢN (Sửa thông tin)
