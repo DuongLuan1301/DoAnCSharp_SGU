@@ -163,71 +163,65 @@ public partial class HomePage : ContentPage
     // =====================================================
     private async Task GetLocationAsync()
     {
-        try
+
+        // 🔹 yêu cầu GPS với độ chính xác cao
+        var request = new GeolocationRequest(GeolocationAccuracy.High);
+
+        // 🔹 lấy tọa độ hiện tại
+        var location = await Geolocation.Default.GetLocationAsync(request);
+
+        if (location != null)
         {
-            // 🔹 yêu cầu GPS với độ chính xác cao
-            var request = new GeolocationRequest(GeolocationAccuracy.High);
+            double lat = location.Latitude;
+            double lon = location.Longitude;
 
-            // 🔹 lấy tọa độ hiện tại
-            var location = await Geolocation.Default.GetLocationAsync(request);
+            MainThread.BeginInvokeOnMainThread(() => { UpdateMapLocation(lat, lon); });
 
-            if (location != null)
+            // 🔥 REVERSE GEOCODING → từ tọa độ ra địa chỉ
+            var placemarks = await Geocoding.Default.GetPlacemarksAsync(lat, lon);
+
+            var place = placemarks?.FirstOrDefault();
+
+            string address = "Unknown";
+
+            if (place != null)
             {
-                double lat = location.Latitude;
-                double lon = location.Longitude;
+                // 🔹 lấy từng thành phần (có fallback)
+                string street = place.Thoroughfare ?? "";
 
-                MainThread.BeginInvokeOnMainThread(() => { UpdateMapLocation(lat, lon); });
+                // 🔥 phường (ưu tiên SubLocality → fallback FeatureName)
+                string ward =
+                    place.SubLocality ??      // thường là phường
+                    place.FeatureName ??
+                    "";
 
-                // 🔥 REVERSE GEOCODING → từ tọa độ ra địa chỉ
-                var placemarks = await Geocoding.Default.GetPlacemarksAsync(lat, lon);
+                // 🔥 thành phố
+                string city =
+                    place.AdminArea ??        // TP.HCM
+                    place.Locality ??         // fallback
+                    "";
 
-                var place = placemarks?.FirstOrDefault();
+                // 🔹 build address tránh trùng lặp
+                var parts = new List<string>();
 
-                string address = "Unknown";
+                if (!string.IsNullOrWhiteSpace(ward))
+                    parts.Add(ward);
 
-                if (place != null)
-                {
-                    // 🔹 lấy từng thành phần (có fallback)
-                    string street = place.Thoroughfare ?? "";
+                if (!string.IsNullOrWhiteSpace(street))
+                    parts.Add(street);
 
-                    // 🔥 phường (ưu tiên SubLocality → fallback FeatureName)
-                    string ward =
-                        place.SubLocality ??      // thường là phường
-                        place.FeatureName ??
-                        "";
+                if (!string.IsNullOrWhiteSpace(city))
+                    parts.Add(city);
 
-                    // 🔥 thành phố
-                    string city =
-                        place.AdminArea ??        // TP.HCM
-                        place.Locality ??         // fallback
-                        "";
-
-                    // 🔹 build address tránh trùng lặp
-                    var parts = new List<string>();
-
-                    if (!string.IsNullOrWhiteSpace(ward))
-                        parts.Add(ward);
-
-                    if (!string.IsNullOrWhiteSpace(street))
-                        parts.Add(street);
-
-                    if (!string.IsNullOrWhiteSpace(city))
-                        parts.Add(city);
-
-                    address = string.Join(", ", parts);
-                }
-                // 🔥 update UI phải chạy trên main thread
-                MainThread.BeginInvokeOnMainThread(() =>
-                {
-                    UpdateLocationUI(lat, lon, address);
-                });
+                address = string.Join(", ", parts);
             }
+            // 🔥 update UI phải chạy trên main thread
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                UpdateLocationUI(lat, lon, address);
+            });
         }
-        catch (Exception ex)
-        {
-            // 🔹 debug lỗi
-            Console.WriteLine($"GPS Error: {ex.Message}");
-        }
+
     }
 
     private void UpdateMapLocation(double lat, double lon)
