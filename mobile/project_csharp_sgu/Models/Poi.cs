@@ -36,7 +36,6 @@ public class Poi
 
     [JsonPropertyName("audioListens")]
     public int AudioListens { get; set; }
-
-    // Trường này tính toán tại Mobile nên không cần JsonPropertyName
     public string? Distance { get; set; }
+    public double DistanceValue { get; set; } // km
 }

@@ -7,6 +7,10 @@ using Mapsui.UI.Maui;
 using Mapsui.Layers;
 using Mapsui.Styles;
 using Mapsui.Projections;
+using System.Net.Http.Json;
+using project_csharp_sgu.Models;
+using MapsuiColor = Mapsui.Styles.Color;
+using MapsuiBrush = Mapsui.Styles.Brush;
 
 #nullable enable
 
@@ -17,7 +21,8 @@ public partial class HomePage : ContentPage
     // 🔹 dùng để dừng timer khi rời trang (tránh leak)
     private CancellationTokenSource _cts = new CancellationTokenSource();
     private bool isFirst = true;
-
+    private bool _mapInitialized = false;
+    private MemoryLayer? _poiLayer;
     public HomePage()
     {
         InitializeComponent();
@@ -36,17 +41,21 @@ public partial class HomePage : ContentPage
         base.OnAppearing();
 
         isFirst = true;
-
         LoadLanguage();
-        // 🔥 đảm bảo UI luôn đúng ngôn ngữ
 
-        InitMap();
+        InitMap(); // 🔥 load map ngay lập tức
 
-        await RequestLocationPermission();
-        // 🔥 xin quyền GPS
+        // 🔥 chạy nền, KHÔNG block UI
+        _ = Task.Run(async () =>
+        {
+            await LoadPoisToMap();
+        });
 
-        StartLocationTracking();
-        // 🔥 bắt đầu lấy GPS mỗi 10 giây
+        _ = Task.Run(async () =>
+        {
+            await RequestLocationPermission();
+            StartLocationTracking();
+        });
     }
 
     // 🔹 khi rời trang → dừng GPS
@@ -60,14 +69,56 @@ public partial class HomePage : ContentPage
 
     private void InitMap()
     {
+        if (_mapInitialized) return;
+
         var map = new Mapsui.Map();
-
-        // load map từ OpenStreetMap
         map.Layers.Add(OpenStreetMap.CreateTileLayer());
-
         MyMap.Map = map;
-    }
 
+        _mapInitialized = true;
+    }
+    private async Task<List<Poi>> GetPoisAsync()
+    {
+        using var client = new HttpClient();
+
+        var pois = await client.GetFromJsonAsync<List<Poi>>(
+            "http://10.0.2.2:5188/admin/poi"
+        );
+
+        return pois ?? new List<Poi>();
+    }
+    private async Task LoadPoisToMap()
+    {
+        if (MyMap?.Map == null) return;
+
+        var pois = await GetPoisAsync();
+
+        var features = new List<IFeature>();
+
+        foreach (var poi in pois)
+        {
+            var (x, y) = SphericalMercator.FromLonLat(poi.Lng, poi.Lat);
+
+            var feature = new PointFeature(new MPoint(x, y));
+
+            // style marker cho POI
+            feature.Styles.Add(new SymbolStyle
+            {
+                SymbolScale = 0.6,
+                Fill = new Mapsui.Styles.Brush(MapsuiColor.FromArgb(255, 255, 87, 34)),
+                Outline = new Pen(MapsuiColor.Black, 1)
+            });
+
+            features.Add(feature);
+        }
+
+        _poiLayer = new MemoryLayer
+        {
+            Features = features
+        };
+
+        MyMap.Map.Layers.Add(_poiLayer);
+    }
     // =====================================================
     // 🔥 1. XIN QUYỀN GPS
     // =====================================================
@@ -90,13 +141,13 @@ public partial class HomePage : ContentPage
     }
 
     // =====================================================
-    // 🔥 2. TIMER LẤY GPS MỖI 10 GIÂY
+    // 🔥 2. TIMER LẤY GPS MỖI 20 GIÂY
     // =====================================================
     private void StartLocationTracking()
     {
         _cts = new CancellationTokenSource();
 
-        Dispatcher.StartTimer(TimeSpan.FromSeconds(10), () =>
+        Dispatcher.StartTimer(TimeSpan.FromSeconds(20), () =>
         {
             // 🔹 gọi hàm async (không await trực tiếp)
             _ = GetLocationAsync();
@@ -199,13 +250,15 @@ public partial class HomePage : ContentPage
             MyMap.Map.Navigator.CenterOn(point);
         }
 
-        // ===== giữ nguyên phần marker của bạn =====
+        // ===== phần marker của user location =====
         var feature = new PointFeature(point)
         {
-            Styles = new[]
-            {
-            new SymbolStyle { SymbolScale = 0.8 }
-        }
+            Styles = new[]{new SymbolStyle{
+                SymbolScale = 0.6,
+                Fill = new MapsuiBrush(MapsuiColor.FromArgb(255, 33, 150, 243)),
+            Outline = new Pen(MapsuiColor.Black, 1)
+            }
+            }
         };
 
         var layer = new MemoryLayer
@@ -214,7 +267,7 @@ public partial class HomePage : ContentPage
         };
 
         var oldLayers = MyMap.Map.Layers
-            .Where(l => l is MemoryLayer)
+            .Where(l => l is MemoryLayer && l != _poiLayer)
             .ToList();
 
         foreach (var l in oldLayers)

@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b67ecdf3-58e0-4f2e-adb3-18aa07124a7e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Endpoints/PoiEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Endpoints/PoiEndpoints.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Endpoints/UserEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Endpoints/UserEndpoints.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/HomePage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/HomePage.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_admin/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web_admin/add.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_admin/client.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web_admin/client.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_admin/css/add.css" beforeDir="false" afterPath="$PROJECT_DIR$/../web_admin/css/add.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../web_admin/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web_admin/edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_admin/js/add.js" beforeDir="false" afterPath="$PROJECT_DIR$/../web_admin/js/add.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_admin/js/client.js" beforeDir="false" afterPath="$PROJECT_DIR$/../web_admin/js/client.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../webclient/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../webclient/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../webclient/js/add.js" beforeDir="false" afterPath="$PROJECT_DIR$/../webclient/js/add.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
