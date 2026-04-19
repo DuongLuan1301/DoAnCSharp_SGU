@@ -1,21 +1,38 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+    const BASE_URL = "http://127.0.0.1:5188";;
+
     // =====================
     // MAP
     // =====================
+    let marker;
     const map = L.map('map').setView([10.7769, 106.7009], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap'
     }).addTo(map);
 
-    let marker;
-
     map.on('click', async (e) => {
-        const { lat, lng } = e.latlng;
+        const lat = e.latlng.lat.toFixed(6);
+        const lng = e.latlng.lng.toFixed(6);
 
-        document.getElementById("lat").value = lat.toFixed(6);
-        document.getElementById("lng").value = lng.toFixed(6);
+        // =====================
+        // CHECK TRÙNG
+        // =====================
+        const isExist = existingLocations.some(loc =>
+            loc.lat === lat && loc.lng === lng
+        );
+
+        if (isExist) {
+            alert("Vị trí này đã có gian hàng!");
+            return;
+        }
+
+        // =====================
+        // SET VALUE
+        // =====================
+        document.getElementById("lat").value = lat;
+        document.getElementById("lng").value = lng;
 
         if (marker) map.removeLayer(marker);
         marker = L.marker([lat, lng]).addTo(map);
@@ -30,7 +47,37 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("address").value = data.display_name;
         }
     });
+    // =====================
+    // LOAD EXISTING POI
+    // =====================
+    let existingMarkers = [];
+    let existingLocations = []; // lưu lat/lng
 
+    async function loadExistingPOI() {
+        const res = await fetch(`${BASE_URL}/admin/poi`);
+        const data = await res.json();
+
+        data.forEach(poi => {
+            const lat = poi.lat;
+            const lng = poi.lng;
+
+            // lưu lại để check trùng
+            existingLocations.push({
+                lat: lat.toFixed(6),
+                lng: lng.toFixed(6)
+            });
+
+            // tạo marker màu khác (ví dụ đỏ)
+            const m = L.marker([lat, lng])
+                .addTo(map)
+                .bindPopup(`<b>${poi.name}</b>`);
+
+            existingMarkers.push(m);
+        });
+    }
+
+    // gọi khi load
+    loadExistingPOI();
     // =====================
     // IMAGE
     // =====================
@@ -48,15 +95,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // =====================
-    // SUBMIT
+    // SUBMIT BUTTON
     // =====================
-    const form = document.getElementById("poiForm");
+    const submitBtn = document.getElementById("submitBtn");
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+    submitBtn.addEventListener("click", async () => {
 
-        console.log("SUBMIT START");
-
+        // ===== GET DATA =====
         const name = document.getElementById("name").value.trim();
         const address = document.getElementById("address").value.trim();
         const lat = document.getElementById("lat").value.trim();
@@ -68,45 +113,57 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // ==========================================
-        // 🔥 KIỂM TRA ĐĂNG NHẬP VÀ LẤY CLIENT ID
-        // ==========================================
-        const currentClientId = localStorage.getItem("clientId");
-        if (!currentClientId) {
-            alert("Lỗi phiên đăng nhập. Vui lòng đăng nhập lại!");
-            window.location.href = "loginclient.html";
+        const clientId = localStorage.getItem("clientId");
+        if (!clientId) {
+            alert("Chưa đăng nhập");
             return;
         }
 
-        // UPLOAD IMAGE
+        // =====================
+        // STEP 1: UPLOAD IMAGE
+        // =====================
+
         const formData = new FormData();
         formData.append("file", selectedFile);
 
-        const uploadRes = await fetch("http://127.0.0.1:5188/upload-image", {
+        let uploadRes;
+        uploadRes = await fetch(`${BASE_URL}/upload-image`, {
             method: "POST",
             body: formData
         });
 
-        const uploadData = await uploadRes.json();
 
-        // CREATE POI
+        const uploadText = await uploadRes.text();
+        console.log("UPLOAD RAW:", uploadText);
+
+        if (!uploadRes.ok) {
+            alert("Upload lỗi: " + uploadText);
+            return;
+        }
+
+        let uploadData;
+        try {
+            uploadData = JSON.parse(uploadText);
+        } catch {
+            alert("Upload response không phải JSON");
+            return;
+        }
+        // =====================
+        // STEP 2: CREATE POI
+        // =====================
         const poi = {
-            clientId: currentClientId, // 🔥 GẮN CHỦ SỞ HỮU VÀO ĐÂY ĐỂ ĐẨY LÊN DATABASE
+            clientId,
             name,
             address,
             lat: parseFloat(lat),
             lng: parseFloat(lng),
             localizations: [
-                { lang: "vi", description: desc },
-                { lang: "en", description: desc },
-                { lang: "ja", description: desc },
-                { lang: "zh", description: desc }
+                { lang: "vi", description: desc }
             ],
             image: uploadData.fileName
         };
-
-        // SEND POI
-        const res = await fetch("http://127.0.0.1:5188/admin/poi", {
+        let res;
+        res = await fetch(`${BASE_URL}/admin/poi`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -114,15 +171,9 @@ document.addEventListener("DOMContentLoaded", () => {
             body: JSON.stringify(poi)
         });
 
-        if (!res.ok) {
-            const err = await res.text();
-            throw new Error(err);
-        }
-
-        alert("Added successfully!");
-        setTimeout(() => {
-            window.location.href = "index.html";
-        }, 200);
+        const text = await res.text();
+        window.location.href = "index.html";
 
     });
+
 });

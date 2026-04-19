@@ -18,7 +18,7 @@ public static class AuthEndpoints
             var user = new User
             {
                 Name = dto.Name, Email = dto.Email, Phone = dto.Phone,
-                Password = hash, Status = "active"
+                Password = hash, Status = "active" //default
             };
             await users.InsertOneAsync(user);
             return Results.Ok(new { message = "Đăng ký thành công" });

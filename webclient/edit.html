@@ -4,33 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Khu Phố Ẩm Thực - Quản Lý Gian Hàng</title>
+    <title>Chỉnh sửa gian hàng</title>
 
-    <!-- Liên kết tới file CSS trong thư mục css -->
+    <!-- CSS hệ thống -->
     <link rel="stylesheet" href="css/client.css">
-</head>
-<style>
-    /* Nút quay về trang */
-    .btn-back {
-        background: #7f8c8d;
-        color: white;
-        border: none;
-        padding: 10px 16px;
-        border-radius: 6px;
-        font-size: 1rem;
-        margin-right: 10px;
-        cursor: pointer;
-        transition: 0.2s;
-    }
+    <link rel="stylesheet" href="css/add.css">
 
-    .btn-back:hover {
-        background: #5f6a6a;
-    }
-</style>
+    <!-- Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
 
 <body>
 
-    <!-- Sidebar -->
+    <!-- Sidebar (GIỮ NGUYÊN) -->
     <aside class="sidebar">
         <div class="sidebar-header">
             FoodStreet
@@ -44,7 +30,8 @@
                 </svg>
                 Thống Kê
             </li>
-            <li id="menu-edit" class="active">
+
+            <li id="menu-edit" onclick="window.location.href='list.html'" class="active">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
@@ -52,6 +39,7 @@
                 </svg>
                 Gian Hàng
             </li>
+
             <li id="menu-add" onclick="window.location.href='add.html'">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4">
@@ -59,6 +47,7 @@
                 </svg>
                 Đăng ký Gian Hàng
             </li>
+
             <li style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1);">
                 <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -70,77 +59,74 @@
         </ul>
     </aside>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <header class="topbar">
-            <div id="topbar-title" class="topbar-title">Cập nhật gian hàng</div>
-            <div class="user-profile">
-                <span>Xin chào</span>
-                <span>Nguyễn Văn A</span>
-            </div>
-        </header>
+    <!-- MAIN (GIỮ NGUYÊN) -->
+    <main class="main-content add-layout">
 
-        <div class="content-area">
-            <!-- SECTION 2: CẬP NHẬT GIAN HÀNG -->
-            <section id="section-edit" class="section active">
-                <div class="panel-card">
-                    <div class="section-header">
-                        <h2>Chỉnh Sửa Thông Tin Gian Hàng</h2>
+        <!-- FORM (GIỮ NGUYÊN) -->
+        <form id="poiForm" class="form-panel">
+
+            <h2>Chỉnh sửa gian hàng</h2>
+
+            <div class="form">
+                <div class="form-group">
+                    <label>Tên gian hàng</label>
+                    <input type="text" id="name">
+                </div>
+
+                <div class="form-group">
+                    <label>Địa chỉ</label>
+                    <input type="text" id="address">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Vĩ độ</label>
+                        <input type="text" id="lat" readonly>
                     </div>
 
-                    <form id="stall-form" onsubmit="saveStoreData(event)">
-                        <div class="form-row">
-                            <div class="form-group flex-2">
-                                <label class="form-label">Tên gian hàng</label>
-                                <input type="text" id="store-name" class="form-input" value="Bún bò Huế" required>
-                            </div>
-                            <div class="form-group flex-1">
-                                <label class="form-label">File Ảnh</label>
-                                <input type="text" id="store-image" class="form-input" value="bunbohue.jpg" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Địa chỉ</label>
-                            <input type="text" id="store-address" class="form-input" value="123 Nguyễn Huệ, Hồ Chí Minh"
-                                required>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label class="form-label">Vĩ độ</label>
-                                <input type="number" step="any" id="store-lat" class="form-input" value="10.7551245"
-                                    required>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Kinh độ</label>
-                                <input type="number" step="any" id="store-lng" class="form-input" value="106.696809"
-                                    required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Mô tả gian hàng (Tiếng Việt)</label>
-                            <textarea id="desc-vi" class="form-input" placeholder="Nhập mô tả tiếng Việt..."
-                                required>Bún bò Huế là một trong những món ăn đặc trưng nổi tiếng của miền Trung Việt Nam. Nước dùng được hầm từ xương bò và giò heo, kết hợp với mắm ruốc tạo nên hương vị đậm đà khó quên.</textarea>
-                            <p class="form-note">* Hệ thống sẽ tự động dịch sang Anh, Nhật, Trung sau khi bạn lưu.</p>
-                        </div>
-
-                        <div class="form-footer">
-                            <button type="button" class="btn-back" onclick="window.location.href='list.html'">
-                                Quay về danh sách
-                            </button>
-                            <button type="submit" class="btn-submit">Cập Nhật</button>
-                        </div>
-                    </form>
+                    <div class="form-group">
+                        <label>Kinh độ</label>
+                        <input type="text" id="lng" readonly>
+                    </div>
                 </div>
-            </section>
-        </div>
+
+                <div class="form-group">
+                    <label>Mô tả</label>
+                    <textarea id="desc"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>Hình ảnh</label>
+
+                    <label class="upload-box">
+                        Chọn ảnh
+                        <input type="file" id="fileInput" hidden>
+                    </label>
+
+                    <div class="file-info" id="fileName"></div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn cancel" onclick="window.location.href='list.html'">
+                        Hủy
+                    </button>
+                    <button type="button" id="submitBtn" class="btn submit">
+                        Cập nhật gian hàng
+                    </button>
+                </div>
+            </div>
+        </form>
     </main>
 
-    <!-- Liên kết tới file JS trong thư mục js -->
-    <script src="js/store.js"></script>
-    <script src="js/logout.js"></script>
-</body>
+    <!-- MAP (GIỮ NGUYÊN) -->
+    <div class="map-panel">
+        <div id="map"></div>
+    </div>
 
+    <!-- JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="js/edit.js"></script>
+    <script src="js/logout.js"></script>
+
+</body>
 </html>

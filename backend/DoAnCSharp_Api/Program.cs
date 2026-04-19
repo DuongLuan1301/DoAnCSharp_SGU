@@ -1,7 +1,7 @@
 using MongoDB.Driver;
 using DoAnCSharp_Api.Models;
 using MongoDB.Bson;
-using DoAnCSharp_Api.Endpoints; // Khai báo thư mục chứa Endpoints
+using DoAnCSharp_Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddOpenApi();
@@ -11,7 +11,10 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll", policy =>
     {
-        policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        policy
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
     });
 });
 
@@ -33,13 +36,13 @@ builder.Services.AddScoped<IMongoCollection<User>>(sp =>
 
 // 3. Build App
 var app = builder.Build();
+app.UseCors("AllowAll");
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
 
-// 4. Đăng ký Middleware
-app.UseCors("AllowAll");
+// 4. Đăng ký Middleware;
 app.UseStaticFiles(new StaticFileOptions
 {
     OnPrepareResponse = ctx =>
@@ -55,8 +58,8 @@ app.MapMobileEndpoints();
 app.MapPoiEndpoints();
 app.MapUploadEndpoints();
 app.MapAuthEndpoints();
-app.MapTrackingEndpoints(); 
-app.MapUserEndpoints(); // Giữ lại dòng này để web Admin load được User
+app.MapTrackingEndpoints();
+app.MapUserEndpoints();
 
 // 6. Chạy Server
 app.Run("http://0.0.0.0:5188");

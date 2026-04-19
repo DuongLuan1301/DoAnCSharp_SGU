@@ -5,7 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b67ecdf3-58e0-4f2e-adb3-18aa07124a7e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Endpoints/Auth/AuthEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Endpoints/Auth/AuthEndpoints.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Endpoints/PoiEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Endpoints/PoiEndpoints.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Endpoints/UploadEndpoints.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Endpoints/UploadEndpoints.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Models/UserRegisterDto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Models/UserRegisterDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/wwwroot/images/592f4d46-b071-4edc-8331-b1256d876633.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/wwwroot/images/7aed85ee-fb0f-485b-a05d-e6f4d649be21.webp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/wwwroot/images/c56165e6-b512-42d4-a9c4-1f14f712e715.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/DoAnCSharp_Api/wwwroot/images/f993d99a-41b0-4978-858a-e8bac4acafd7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webclient/add.html" beforeDir="false" afterPath="$PROJECT_DIR$/../webclient/add.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webclient/css/store.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webclient/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/../webclient/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webclient/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../webclient/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webclient/js/add.js" beforeDir="false" afterPath="$PROJECT_DIR$/../webclient/js/add.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webclient/js/loginclient.js" beforeDir="false" afterPath="$PROJECT_DIR$/../webclient/js/loginclient.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webclient/js/store.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webclient/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/../webclient/list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webclient/store.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

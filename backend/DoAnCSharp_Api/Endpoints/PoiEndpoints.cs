@@ -81,15 +81,29 @@ public static class PoiEndpoints
         app.MapPost("/admin/poi", async (Poi poi, IMongoCollection<Poi> poiCollection) =>
         {
             var viDesc = poi.Localizations?.FirstOrDefault(l => l.Lang == "vi")?.Description;
-            if (string.IsNullOrEmpty(viDesc)) return Results.BadRequest("Vietnamese description required");
+            if (string.IsNullOrEmpty(viDesc))
+                return Results.BadRequest("Vietnamese description required");
 
-            var en = await Translate(viDesc, "en"); var ja = await Translate(viDesc, "ja"); var zh = await Translate(viDesc, "zh");
+            string en = viDesc, ja = viDesc, zh = viDesc;
+
+            en = await Translate(viDesc, "en");
+            ja = await Translate(viDesc, "ja");
+            zh = await Translate(viDesc, "zh");
+
 
             poi.Localizations = new List<Localization> {
-                new() { Lang = "vi", Description = viDesc }, new() { Lang = "en", Description = en }, new() { Lang = "ja", Description = ja }, new() { Lang = "zh", Description = zh }
+            new() { Lang = "vi", Description = viDesc },
+            new() { Lang = "en", Description = en },
+            new() { Lang = "ja", Description = ja },
+            new() { Lang = "zh", Description = zh }
             };
+
             await poiCollection.InsertOneAsync(poi);
-            return Results.Ok();
+
+            Console.WriteLine("✅ INSERT DONE");
+
+            return Results.Ok(new { message = "success" });
+
         });
 
         // 5. UPDATE POI (CÓ BẢO MẬT)
@@ -119,7 +133,7 @@ public static class PoiEndpoints
         });
 
         // 6. DELETE POI (CÓ BẢO MẬT)
-        app.MapDelete("/admin/poi/{id}", async (string id, string? clientId, IMongoCollection<Poi> poiCollection,    IWebHostEnvironment env) =>
+        app.MapDelete("/admin/poi/{id}", async (string id, string? clientId, IMongoCollection<Poi> poiCollection, IWebHostEnvironment env) =>
         {
             try
             {
@@ -159,22 +173,49 @@ public static class PoiEndpoints
     }
 
     // AUTO TRANSLATE HÀM
-    private static readonly HttpClient _http = new HttpClient() { Timeout = TimeSpan.FromSeconds(10) };
+    private static readonly HttpClient _http = new HttpClient()
+    {
+        Timeout = TimeSpan.FromSeconds(3)
+    };
+
     private static async Task<string> Translate(string text, string target)
     {
+        Console.WriteLine($"🌐 Translating to {target}...");
         if (string.IsNullOrWhiteSpace(text)) return text;
-        var url = $"https://translate.googleapis.com/translate_a/single?client=gtx&sl=vi&tl={target}&dt=t&q={Uri.EscapeDataString(text)}";
+
+        var url = $"https://translate.googleapis.com/translate_a/single" +
+                  $"?client=gtx&sl=vi&tl={target}&dt=t&q={Uri.EscapeDataString(text)}";
+
         for (int attempt = 0; attempt < 3; attempt++)
         {
-            try
-            {
-                var res = await _http.GetStringAsync(url);
-                if (string.IsNullOrWhiteSpace(res) || res.StartsWith("<")) continue;
-                var json = JsonDocument.Parse(res);
-                var translated = json.RootElement[0][0][0].GetString();
-                if (!string.IsNullOrWhiteSpace(translated)) return translated;
-            }
-            catch { await Task.Delay(300 * (attempt + 1)); }
+
+            var res = await _http.GetStringAsync(url);
+
+            //check response rác
+            if (string.IsNullOrWhiteSpace(res) || res.StartsWith("<"))
+                continue;
+
+            using var json = JsonDocument.Parse(res);
+
+            //check structure an toàn
+            if (json.RootElement.ValueKind != JsonValueKind.Array)
+                continue;
+
+            var first = json.RootElement[0];
+
+            if (first.ValueKind != JsonValueKind.Array || first.GetArrayLength() == 0)
+                continue;
+
+            var inner = first[0];
+
+            if (inner.ValueKind != JsonValueKind.Array || inner.GetArrayLength() == 0)
+                continue;
+
+            var translated = inner[0].GetString();
+
+            if (!string.IsNullOrWhiteSpace(translated))
+                return translated;
+
         }
         return text;
     }

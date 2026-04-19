@@ -4,14 +4,20 @@ public static class UploadEndpoints
     {
         app.MapPost("/upload-image", async (HttpRequest request) =>
         {
-            var file = request.Form.Files[0];
+            if (!request.HasFormContentType)
+                return Results.BadRequest("Invalid form");
+
+            var form = await request.ReadFormAsync();
+            var file = form.Files.FirstOrDefault();
 
             if (file == null || file.Length == 0)
                 return Results.BadRequest("No file");
 
-            var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+            var folder = Path.Combine("wwwroot", "images");
+            Directory.CreateDirectory(folder);
 
-            var path = Path.Combine("wwwroot/images", fileName);
+            var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
+            var path = Path.Combine(folder, fileName);
 
             using var stream = new FileStream(path, FileMode.Create);
             await file.CopyToAsync(stream);
