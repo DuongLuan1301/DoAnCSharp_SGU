@@ -23,7 +23,7 @@ public static class MobileEndpoints
                 p.Address,
                 // Chống lỗi nếu Database bị mất ảnh
                 image = string.IsNullOrWhiteSpace(p.Image) ? "" : 
-                        p.Image.StartsWith("http") ? p.Image : $"http://10.0.2.2:5188/images/{p.Image}",
+                        p.Image.StartsWith("http") ? p.Image : $"http://192.168.31.34:5188/images/{p.Image}",
                 p.Lat,
                 p.Lng,
                 Description = p.Localizations?

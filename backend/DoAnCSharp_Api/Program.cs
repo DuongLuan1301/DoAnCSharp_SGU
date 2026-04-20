@@ -45,10 +45,8 @@ if (app.Environment.IsDevelopment())
 // 4. Đăng ký Middleware;
 app.UseStaticFiles(new StaticFileOptions
 {
-    OnPrepareResponse = ctx =>
-    {
-        ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=3600");
-    }
+    ServeUnknownFileTypes = true,
+    DefaultContentType = "application/octet-stream"
 });
 
 // ==========================================

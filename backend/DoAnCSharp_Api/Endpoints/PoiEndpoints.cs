@@ -6,7 +6,7 @@ public static class PoiEndpoints
 {
     public static void MapPoiEndpoints(this WebApplication app)
     {
-        string baseUrl = "http://10.0.2.2:5188";
+        string baseUrl = "http://192.168.31.34:5188";
 
         // 1. GET ALL POIs
         app.MapGet("/admin/poi", async (IMongoCollection<Poi> poiCollection) =>

@@ -35,7 +35,7 @@ public partial class QrPage : ContentPage
     {
         using var client = new HttpClient();
         string cleanId = id.Trim();
-        string url = $"http://10.0.2.2:5188/api/poi/{cleanId}?lang={AppState.CurrentLanguage}";
+        string url = $"http://192.168.31.34:5188/api/poi/{cleanId}?lang={AppState.CurrentLanguage}";
 
         try {
             var poi = await client.GetFromJsonAsync<Poi>(url);
@@ -60,7 +60,7 @@ public partial class QrPage : ContentPage
     {
         try {
             using var client = new HttpClient();
-            string url = $"http://10.0.2.2:5188/api/poi/{poiId}/{action}";
+            string url = $"http://192.168.31.34:5188/api/poi/{poiId}/{action}";
             var content = new StringContent("", System.Text.Encoding.UTF8, "application/json");
             await client.PostAsync(url, content);
         }

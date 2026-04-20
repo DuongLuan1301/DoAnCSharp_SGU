@@ -82,7 +82,7 @@ public partial class HomePage : ContentPage
         using var client = new HttpClient();
 
         var pois = await client.GetFromJsonAsync<List<Poi>>(
-            "http://10.0.2.2:5188/admin/poi"
+            "http://192.168.31.34:5188/admin/poi"
         );
 
         return pois ?? new List<Poi>();

@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b67ecdf3-58e0-4f2e-adb3-18aa07124a7e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/HomePage.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../mobile/project_csharp_sgu/Pages/HomePage.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../web_admin/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/../web_admin/edit.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

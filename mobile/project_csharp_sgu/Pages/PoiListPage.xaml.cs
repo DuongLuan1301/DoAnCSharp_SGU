@@ -75,7 +75,7 @@ public partial class PoiListPage : ContentPage
         using var client = new HttpClient();
 
         // Tách Base URL ra để dùng chung
-        string baseUrl = "http://10.0.2.2:5188";
+        string baseUrl = "http://192.168.31.34:5188";
         string url = $"{baseUrl}/api/poi?lang={lang}";
 
         try
