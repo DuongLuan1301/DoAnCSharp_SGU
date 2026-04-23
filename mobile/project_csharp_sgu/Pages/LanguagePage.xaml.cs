@@ -10,6 +10,9 @@ public partial class LanguagePage : ContentPage
     public LanguagePage()
     {
         InitializeComponent(); // 🔹 load UI từ XAML
+
+        // 🔥 KÍCH HOẠT NHỊP TIM ONLINE
+        project_csharp_sgu.Services.HeartbeatService.StartHeartbeat();
     }
 
     //Hàm này được gọi khi user bấm vào 1 button ngôn ngữ

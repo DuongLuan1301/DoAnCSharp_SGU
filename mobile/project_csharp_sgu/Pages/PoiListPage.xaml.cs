@@ -47,6 +47,9 @@ public partial class PoiListPage : ContentPage
     {
         base.OnAppearing();
 
+        // 🔥 KÍCH HOẠT NHỊP TIM ONLINE
+        project_csharp_sgu.Services.HeartbeatService.StartHeartbeat();
+
         // Hiển thị trạng thái loading
         Pois.Clear();
         Pois.Add(new Poi { Name = "Đang tìm gian hàng gần..." });
@@ -74,9 +77,8 @@ public partial class PoiListPage : ContentPage
     {
         using var client = new HttpClient();
 
-        // Tách Base URL ra để dùng chung
-        string baseUrl = "http://192.168.31.34:5188";
-        string url = $"{baseUrl}/api/poi?lang={lang}";
+        // Xóa dòng baseUrl cũ, gọi trực tiếp từ file Constants
+        string url = $"{Constants.BaseApiUrl}/api/poi?lang={lang}";
 
         try
         {
@@ -169,7 +171,7 @@ public partial class PoiListPage : ContentPage
         try
         {
             using var client = new HttpClient();
-            string url = $"http://10.0.2.2:5188/api/poi/{poiId}/{action}";
+            string url = $"{Constants.BaseApiUrl}/api/poi/{poiId}/{action}";
             var content = new StringContent("", System.Text.Encoding.UTF8, "application/json");
             await client.PostAsync(url, content);
         }

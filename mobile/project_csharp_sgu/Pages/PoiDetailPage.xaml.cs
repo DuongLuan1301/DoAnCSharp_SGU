@@ -29,9 +29,13 @@ public partial class PoiDetailPage : ContentPage
         // bind dữ liệu sang UI
         BindingContext = _poi;
     }
+    
     protected override void OnAppearing()
     {
         base.OnAppearing();
+
+        // 🔥 KÍCH HOẠT NHỊP TIM ONLINE
+        project_csharp_sgu.Services.HeartbeatService.StartHeartbeat();
 
         if (_poi != null && !string.IsNullOrEmpty(_poi.Id))
         {
@@ -71,7 +75,7 @@ public partial class PoiDetailPage : ContentPage
     private async Task TrackInteractionAsync(string poiId, string action)
     {
         using var client = new HttpClient();
-        string url = $"http://192.168.31.34:5188/api/poi/{poiId}/{action}";
+        string url = $"{Constants.BaseApiUrl}/api/poi/{poiId}/{action}";
         var content = new StringContent("", System.Text.Encoding.UTF8, "application/json");
         await client.PostAsync(url, content);
     }

@@ -23,6 +23,8 @@ public partial class HomePage : ContentPage
     private bool isFirst = true;
     private bool _mapInitialized = false;
     private MemoryLayer? _poiLayer;
+    
+
     public HomePage()
     {
         InitializeComponent();
@@ -40,6 +42,9 @@ public partial class HomePage : ContentPage
     {
         base.OnAppearing();
 
+        // 🔥 KÍCH HOẠT NHỊP TIM ONLINE
+        project_csharp_sgu.Services.HeartbeatService.StartHeartbeat();
+
         isFirst = true;
         LoadLanguage();
 
@@ -56,16 +61,7 @@ public partial class HomePage : ContentPage
             await RequestLocationPermission();
             StartLocationTracking();
         });
-    }
-
-    // 🔹 khi rời trang → dừng GPS
-    protected override void OnDisappearing()
-    {
-        base.OnDisappearing();
-
-        _cts?.Cancel();
-        // 🔥 dừng timer → tránh chạy ngầm
-    }
+    } // Đã sửa lỗi dư dấu } ở đây
 
     private void InitMap()
     {
@@ -77,16 +73,18 @@ public partial class HomePage : ContentPage
 
         _mapInitialized = true;
     }
+    
     private async Task<List<Poi>> GetPoisAsync()
     {
         using var client = new HttpClient();
 
         var pois = await client.GetFromJsonAsync<List<Poi>>(
-            "http://192.168.31.34:5188/admin/poi"
+            $"{Constants.BaseApiUrl}/admin/poi"
         );
 
         return pois ?? new List<Poi>();
     }
+    
     private async Task LoadPoisToMap()
     {
         if (MyMap?.Map == null) return;
@@ -119,6 +117,7 @@ public partial class HomePage : ContentPage
 
         MyMap.Map.Layers.Add(_poiLayer);
     }
+    
     // =====================================================
     // 🔥 1. XIN QUYỀN GPS
     // =====================================================
@@ -271,6 +270,7 @@ public partial class HomePage : ContentPage
 
         MyMap.Refresh();
     }
+    
     // =====================================================
     // 🔥 4. UPDATE UI THEO NGÔN NGỮ
     // =====================================================

@@ -6,7 +6,6 @@ public static class PoiEndpoints
 {
     public static void MapPoiEndpoints(this WebApplication app)
     {
-        string baseUrl = "http://192.168.31.34:5188";
 
         // 1. GET ALL POIs
         app.MapGet("/admin/poi", async (IMongoCollection<Poi> poiCollection) =>
@@ -51,10 +50,17 @@ public static class PoiEndpoints
         });
 
         // 3. GET CHI TIẾT 1 POI
-        app.MapGet("/api/poi/{id}", async (string id, IMongoCollection<Poi> poiCollection, string lang = "vi") =>
+        app.MapGet("/api/poi/{id}", async (
+            HttpRequest request, // 🔥 THÊM DÒNG NÀY
+            string id, 
+            IMongoCollection<Poi> poiCollection, 
+            string lang = "vi") =>
         {
             try
             {
+                // 🔥 TỰ ĐỘNG LẤY BASE URL
+                var baseUrl = $"{request.Scheme}://{request.Host}"; 
+
                 var p = await poiCollection.Find(poi => poi.Id == id.Trim()).FirstOrDefaultAsync();
                 if (p == null) return Results.NotFound();
 
@@ -65,6 +71,7 @@ public static class PoiEndpoints
                     if (loc != null && !string.IsNullOrWhiteSpace(loc.Description)) desc = loc.Description;
                 }
 
+                // 🔥 ĐỔI THÀNH DÙNG baseUrl ĐỘNG
                 string imgUrl = $"{baseUrl}/images/default.jpg?v={DateTime.Now.Ticks}";
                 if (!string.IsNullOrWhiteSpace(p.Image))
                 {
