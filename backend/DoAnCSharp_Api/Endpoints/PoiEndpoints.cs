@@ -113,7 +113,7 @@ public static class PoiEndpoints
 
         });
 
-        // 5. UPDATE POI (CÓ BẢO MẬT)
+       // 5. UPDATE POI (CÓ BẢO MẬT)
         app.MapPut("/api/poi/{id}", async (string id, Poi updatedPoi, IMongoCollection<Poi> poiCollection) =>
         {
             try
@@ -133,12 +133,32 @@ public static class PoiEndpoints
 
                 if (string.IsNullOrEmpty(updatedPoi.ClientId)) updatedPoi.ClientId = oldPoi.ClientId;
 
+                // =========================================================
+                // 🔥 THÊM TÍNH NĂNG AUTO-TRANSLATE KHI EDIT
+                // =========================================================
+                var viDesc = updatedPoi.Localizations?.FirstOrDefault(l => l.Lang == "vi")?.Description;
+                if (!string.IsNullOrEmpty(viDesc))
+                {
+                    // Tự động gọi Google Dịch cho 3 ngôn ngữ còn lại
+                    string en = await Translate(viDesc, "en");
+                    string ja = await Translate(viDesc, "ja");
+                    string zh = await Translate(viDesc, "zh");
+
+                    // Ghi đè lại mảng Localizations để chuẩn bị lưu xuống DB
+                    updatedPoi.Localizations = new List<Localization> {
+                        new() { Lang = "vi", Description = viDesc },
+                        new() { Lang = "en", Description = en },
+                        new() { Lang = "ja", Description = ja },
+                        new() { Lang = "zh", Description = zh }
+                    };
+                }
+                // =========================================================
+
                 var result = await poiCollection.ReplaceOneAsync(p => p.Id == id, updatedPoi);
                 return Results.Ok(new { message = "Cập nhật thành công" });
             }
             catch (Exception ex) { return Results.BadRequest(ex.Message); }
         });
-
         // 6. DELETE POI (CÓ BẢO MẬT)
         app.MapDelete("/admin/poi/{id}", async (
             string id,
